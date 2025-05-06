@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+.teacher-section {
+  background: white;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Quicksand', cursive;
+}
+
+.teacher-section h2 {
+  color: #7B6ADA;
+  font-size: 36px;
+  margin-bottom: 90px;
+  font-weight: bold;
+}
+
+.teachers-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 53px;
+  padding: 20px;
+}
+
+.teacher-card {
+  position: relative;
+  height: 230px;
+  width: 250px;
+  background: #F1F0FE;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.teacher-image {
+  position: absolute;
+  top: -60px;
+  left: 65px;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.teacher-title {
+  color: #6f42c1;
+  font-size: 18px;
+  margin: 65px 0 5px 0;
+  font-weight: 400;
+}
+
+.teacher-name {
+  font-size: 20px;
+    margin: 15px 0;
+    font-weight: 800;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-link {
+  color: #7B6ADA;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.social-link:hover {
+  color: #4a2d8a;
+}
+
+@media (max-width: 768px) {
+  .teachers-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .teacher-card {
+    width: 80%;
+  }
+}
