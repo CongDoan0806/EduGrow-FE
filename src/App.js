@@ -1,4 +1,5 @@
 import './App.css';
+import LearningJounal from './pages/students/learning_journal/LearningJournal';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
