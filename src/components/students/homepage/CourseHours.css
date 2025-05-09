@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.stats-section {
+  display: flex;
+}
+
+.stats-section .stat-box {
+  display: flex;
+  position: relative;
+  background-color: #7b6ada;
+  color: white;
+  border-top-right-radius: 150px;
+  border-bottom-right-radius: 150px;
+  padding: 40px 70px 60px;
+  gap: 120px;
+  overflow: hidden;
+}
+
+.stats-section .stat-box::before,
+.stats-section .stat-box::after {
+  content: "";
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.stats-section .stat-box::before {
+  width: 130px;
+  height: 130px;
+  top: -87px;
+  left: 2px;
+}
+
+.stats-section .stat-box::after {
+  width: 170px;
+  height: 136px;
+  top: -73px;
+  left: -20px;
+}
+
+.stat-box .circle-right-1,
+.stat-box .circle-right-2 {
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.stat-box .circle-right-1 {
+  width: 150px;
+  height: 150px;
+  bottom: -120px;
+  right: 110px; 
+}
+
+.stat-box .circle-right-2 {
+  width: 180px;
+  height: 180px;
+  bottom: -130px;
+  right: 95px; 
+}
+
+.stat-box .stat-item {
+  text-align: center;
+}
+
+.stat-box .stat-item h2 {
+  font-size: 50px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.stat-box .stat-item p {
+  font-size: 20px;
+}

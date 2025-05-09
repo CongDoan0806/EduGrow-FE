@@ -1,13 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import CourseList from './components/students/homepage/CourseList'
-import HeroSection from './components/students/homepage/HeroSection';
+import Homepage from './pages/students/homepage/Homepage';
 function App() {
   return (
     <div >
-     {/* <CourseList/> */}
-     <HeroSection/>
+    <Homepage/>
+
     </div>
   );
 }
