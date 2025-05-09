@@ -1,0 +1,41 @@
+.sidebar {
+    width: 300px;
+    height: 100vh;
+    background-color: #F1F2F7;
+    color: #94969A;
+    
+}
+.sidebar h4{
+    color: #7B6ADA;
+    font-family: 'Calistoga', cursive;
+}
+
+.header {
+    height: 60px;
+}
+.nav-link {
+    font-size: 14px;
+    color: gray;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-item:hover{
+    background-color: #707FDD;
+    border-radius: 10px;
+    color:#7B6ADA;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    gap: 1px;
+}
+.position-relative{
+    width:500px;
+}
+.layout-sitebar{
+    margin-left: 30px;
+}
+.mt-section, .menu-sitebar{
+    margin-top: 30px;
+}
