@@ -1,17 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
-import React from 'react';
-import Homepage from './pages/students/homepage/Homepage';
-import StudentSidebar from './layouts/sidebars/StudentSidebar';
-import TeacherSidebar from './layouts/sidebars/TeacherSidebar';
-function App() {
-  return (
-    <div >
-    {/* <Homepage/> */}
-    <StudentSidebar/>
-    {/* <TeacherSidebar/> */}
+import LearningJounal from './pages/students/learning_journal/LearningJournal';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import routes from './routes';
 
-    </div>
+function App() {
+  const showMain = (routes) => {
+    let result = null;
+    if (routes.length > 0) {
+      result = routes.map((route, index) => {
+        return (
+          <Route key={index} path={route.path} exact={route.exact} element={<route.main />} />
+        );
+      });
+    }
+    return result;
+  };
+
+  return (
+    <Router>
+      <ToastContainer />
+      <Routes>
+        {showMain(routes)}
+      </Routes>
+    </Router>
   );
 }
 

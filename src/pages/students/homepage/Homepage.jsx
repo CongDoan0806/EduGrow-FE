@@ -1,15 +1,21 @@
-import CourseHours from "../../../components/students/homepage/CourseHours"
-import CourseList from "../../../components/students/homepage/CourseList"
-import HeroSection from "../../../components/students/homepage/HeroSection"
-import './Homepage.css'
-export default function Homepage() {
+import React from 'react';
+import TeacherList from '../../../components/students/homepage/TeacherList';
+import TodayGoals from '../../../components/students/homepage/TodayGoals';
+import './Homepage.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const Homepage = () => {
   return (
-      <main className="homepage">
-        <div className="homepage-sections">
-            <HeroSection />
-            <CourseList />
-            <CourseHours />
-        </div>
-    </main>
-  )
-}
+    <div>
+      <section className="my-5">
+        <TodayGoals />
+      </section>
+      
+      <section className="my-5">
+        <TeacherList />
+      </section>
+    </div>
+  );
+};
+
+export default Homepage;
