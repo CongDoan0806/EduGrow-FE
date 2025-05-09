@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Profile</title>
+  <style>
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .student-profile-container {
+    max-width: 900px;
+    margin: 0; /* bỏ căn giữa */
+     float: right;
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .profile-section,
+  .password-section {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+  }
+
+  .profile-content {
+    display: flex;
+    gap: 20px;
+  }
+
+  .profile-form {
+    flex: 0 0 60%;
+  }
+
+  .profile-image-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    background-color: #7e74f1;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+  }
+
+  .btn:hover {
+    background-color: #695dcf;
+  }
+
+  .password-row {
+    display: flex;
+    gap: 20px;
+  }
+
+  .half-width {
+    flex: 1;
+  }
+
+  .password-input-wrapper {
+    position: relative;
+  }
+
+  .toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+  }
+
+  .toggle-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+</style>
+
+</head>
+<body>
+  <div class="student-profile-container">
+      <div class="student-profile-container">
+    <!-- Profile Info Section -->
+    <section class="profile-section">
+      <h2 class="section-title">My Profile</h2>
+      <div class="profile-content">
+        <div class="profile-form">
+          <label class="form-label">User name</label>
+          <input type="text" class="form-input" value="ToNga" />
+
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" value="kimhanxd.2004@gmail.com" />
+
+          <label class="form-label">Phone Number</label>
+          <input type="text" class="form-input" value="0338552215" />
+
+          <button class="btn save-btn">Save Changes</button>
+        </div>
+
+      <div class="profile-image-section">
+        <img id="profileImage" src="https://file.hstatic.net/200000017614/file/nhung-loai-hoa-dep-nhat-hoa-cam-tu-cau_55ff3687eeb64e92bd678735ef94a48b.jpg" alt="Profile" class="profile-image" />
+        
+        <!-- Label để click chọn ảnh -->
+        <label for="imageUpload" class="btn image-btn" style="cursor: pointer;">Choose Image</label>
+        
+        <!-- Input file ẩn -->
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="previewImage(event)" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Password Change Section -->
+  </div>
+    <section class="password-section">
+      <h2 class="section-title">Change Password</h2>
+
+      <div class="form-group">
+        <label class="form-label">Current Password</label>
+        <input type="password" class="form-input" placeholder="Password" />
+      </div>
+
+      <div class="password-row">
+        <div class="form-group half-width">
+          <label class="form-label">New Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" class="form-input password-field" placeholder="Password" />
+            <span class="toggle-icon" onclick="togglePassword(this)">
+              <!-- Eye SVG -->
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7S3.732 16.057 2.458 12z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group half-width">
+          <label class="form-label">Confirm Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" class="form-input password-field" placeholder="Password" />
+            <span class="toggle-icon" onclick="togglePassword(this)">
+              <!-- Eye SVG -->
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7S3.732 16.057 2.458 12z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn">Change Password</button>
+    </section>
+  </div>
+
+  <script>
+    function togglePassword(icon) {
+      const input = icon.parentElement.querySelector('input');
+      const svg = icon.querySelector('svg');
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        svg.style.opacity = 0.5;
+      } else {
+        input.type = 'password';
+        svg.style.opacity = 1;
+      }
+    }
+  </script>
+</body>
+</html>

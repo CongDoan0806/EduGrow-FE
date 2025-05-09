@@ -1,0 +1,32 @@
+.container-fluid{
+    background-color: #7B6ADA;
+    cursor: pointer;
+}
+.custom-navbar {
+    background-color: #7B6ADA;
+    padding: 0.8rem 1.5rem;
+}
+.navbar-brand{
+    font-family: 'Calistoga', cursive;
+    color: white;
+}
+.custom-navbar .nav-link {
+    color: red;
+    transition: 0.3s;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #dfff;
+    text-decoration: underline;
+}
+.rounded-circle{
+    border: 3px solid green;
+    object-fit:cover;
+}
+
+.form-input {
+    border-radius: 100px;
+    width: 100%;
+    height: 35px;
+
+}
