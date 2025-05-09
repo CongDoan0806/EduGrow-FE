@@ -1,8 +1,8 @@
 import CourseHours from "../../../components/students/homepage/CourseHours"
 import CourseList from "../../../components/students/homepage/CourseList"
 import HeroSection from "../../../components/students/homepage/HeroSection"
-// import TeacherList from '../../../components/students/homepage/TeacherList';
-// import TodayGoals from '../../../components/students/homepage/TodayGoals';
+import TeacherList from '../../../components/students/homepage/TeacherList';
+import TodayGoals from '../../../components/students/homepage/TodayGoals';
 import './Homepage.css';
 
 const Homepage = () => {
@@ -12,9 +12,9 @@ const Homepage = () => {
         <HeroSection />
       </section>
 
-      {/* <section className="my-5">
+      <section className="my-5">
         <TodayGoals />
-      </section> */}
+      </section>
 
       <section className="my-5">
         <CourseList />
@@ -24,9 +24,9 @@ const Homepage = () => {
         <CourseHours />
       </section>
       
-      {/* <section className="my-5">
+      <section className="my-5">
         <TeacherList />
-      </section> */}
+      </section>
     </div>
   );
 };
