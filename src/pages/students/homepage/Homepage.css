@@ -1,5 +1,247 @@
-.homepage-sections {
+/* Hero Section */
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.hero-section {
+  background-color: #7B6ADA;
+  color: white;
+  padding: 100px 40px;
+  border-bottom-right-radius: 120px;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  margin-bottom: 70px;
+}
+
+.hero-section .hero-content {
+  max-width: 800px;
+  margin-left: 100px;
+
+}
+
+.hero-content .hero-title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: 'Calistoga', cursive;
+
+}
+
+.hero-content .hero-subtitle {
+  font-family: 'Calistoga', cursive;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.hero-content .hero-divider {
+    border: 1px solid white;
+    width: 100%;
+    max-width: 280px; 
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+  
+
+.hero-content .hero-description {
+  font-size: 16px;
+  font-family: 'Quicksand', sans-serif;
+  color: #e0dff2;
+}
+
+.hero-section .hero-decor {
+  position: absolute;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.hero-section .hero-decor-bottom-left-1 {
+  bottom: -147px;
+  left: -55px;
+  width: 240px;
+  height: 240px;
+}
+
+.hero-section .hero-decor-bottom-left-2 {
+  bottom: -134px;
+  left: -80px;
+  width: 240px;
+  height: 240px;
+}
+
+.hero-section .hero-decor-bottom-right-1 {
+  bottom: -138px;
+  right: 31px;
+  width: 240px;
+  height: 240px;
+}
+
+.hero-section .hero-decor-bottom-right-2 {
+  bottom: -125px;
+  right: 50px;
+  width: 200px;
+  height: 200px;
+}
+
+/* Course List */
+  .course-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 100px;
+  }
+  
+  .course-section .course-list {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    flex-wrap: wrap;
+  }
+  
+  .course-list .course-card {
+    position: relative;
+    background-color: #F1F0FE;
+    width: 260px;
+    padding: 80px 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+  
+  .course-list .course-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .course-card .icon-circle {
+    position: absolute;
+    top: -82px;
+    left: 95%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    background-color: #7B6ADA;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .course-card .icon-circle img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .course-list .course-content {
+    margin-top: -40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .course-content .course-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #111;
+    padding: 0 10px;
+  }
+  
+  .course-content .course-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  
+  .course-content .explore-btn {
+    background-color: white;
+    color: #7B6ADA;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100px;
+  }
+  
+  .course-content .explore-btn:hover {
+    background-color: #ece9ff;
+  }
+  
+/* Course Hours */
+.stats-section {
   display: flex;
-  flex-direction: column;
-  gap: 50px;
+  margin-top: 70px;
+}
+
+.stats-section .stat-box {
+  display: flex;
+  position: relative;
+  background-color: #7b6ada;
+  color: white;
+  border-top-right-radius: 150px;
+  border-bottom-right-radius: 150px;
+  padding: 40px 70px 60px;
+  gap: 120px;
+  overflow: hidden;
+}
+
+.stats-section .stat-box::before,
+.stats-section .stat-box::after {
+  content: "";
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.stats-section .stat-box::before {
+  width: 130px;
+  height: 130px;
+  top: -87px;
+  left: 2px;
+}
+
+.stats-section .stat-box::after {
+  width: 170px;
+  height: 136px;
+  top: -73px;
+  left: -20px;
+}
+
+.stat-box .circle-right-1,
+.stat-box .circle-right-2 {
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.stat-box .circle-right-1 {
+  width: 150px;
+  height: 150px;
+  bottom: -120px;
+  right: 110px; 
+}
+
+.stat-box .circle-right-2 {
+  width: 180px;
+  height: 180px;
+  bottom: -130px;
+  right: 95px; 
+}
+
+.stat-box .stat-item {
+  text-align: center;
+}
+
+.stat-box .stat-item h2 {
+  font-size: 50px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.stat-box .stat-item p {
+  font-size: 20px;
 }

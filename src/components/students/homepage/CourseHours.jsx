@@ -1,4 +1,3 @@
-import './CourseHours.css';
 
 const stats = ['20+', '12+', '08+', '25+'];
 
