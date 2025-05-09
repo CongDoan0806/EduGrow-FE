@@ -1,6 +1,7 @@
 import React from 'react';
 import TeacherList from '../../../components/students/homepage/TeacherList';
 import TodayGoals from '../../../components/students/homepage/TodayGoals';
+import './Homepage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Homepage = () => {

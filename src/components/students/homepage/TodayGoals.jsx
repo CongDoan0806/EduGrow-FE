@@ -1,5 +1,4 @@
 import React from 'react';
-import './TodayGoals.css';
 
 const TodaysGoal = () => {
   return (

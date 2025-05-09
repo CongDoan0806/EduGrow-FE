@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import './TeacherList.css';
 
 const TeacherList = () => {
   const [teachers, setTeachers] = useState([]);
