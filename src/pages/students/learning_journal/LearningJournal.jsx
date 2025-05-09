@@ -78,42 +78,6 @@ function LearningJounal () {
                                     </div>
                                 </div>
                             </div>
-                            <div className="comment-item">
-                                <div className='modal-title'>
-                                    <div className="comment-header">
-                                        <img src="/assets/images/avta.png" alt="Avatar" className="comment-avatar" />
-                                        <div className='comment-title'>
-                                            <div className='comment-info'>
-                                                <span className="comment-user">Talbony student</span>
-                                                <span className="comment-role">student</span>
-                                            </div>
-                                            <span className="comment-time">6:00AM</span>
-                                        </div>
-                                    </div>
-                                    <p className="comment-text"><span className='tag'>@Thuy Trang </span>Could you give me some feedback on this part, please?</p>
-                                </div>
-                                <div className="comment-input-container">
-                                    <div className="comment-input-wrapper">
-                                        <img src="/assets/images/avta.png" alt="Avatar" className="comment-avatar" />
-                                        <input
-                                        type="text"
-                                        placeholder="Write a comment"
-                                        className="comment-input"
-                                        />
-                                        <button className="send-btn" disabled>
-                                        <svg
-                                            width="20"
-                                            height="20"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#000" />
-                                        </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
