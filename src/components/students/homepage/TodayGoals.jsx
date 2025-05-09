@@ -7,16 +7,20 @@ const TodaysGoal = () => {
       
       <div className="todays-goal-subcontainer">
         <div className="todays-goal-background">
-            {/* <p>Well, there are no classes today. <br /> Take a break and don’t forget to review your learning progress!</p>
-            <button>Check Calendar</button> */}
+            <div className="content-todays-goal">
+              <p>Well, there are no classes today. <br /> Take a break and don’t forget to review <br /> your learning progress!</p>
+              <button>Check Calendar</button>
+            </div>
         </div>
 
         <div className="img-todays-goal">
-            {/* <img src="./assets/images/pandaAtTodayGoals.png" alt="img-panda"></img> */}
+            <img src="./assets/images/pandaAtTodayGoals.png" alt="img-panda"></img>
         </div>
 
-        <div></div>
-        <div></div>
+        <div class="outer-arc">
+          <div class="inner-arc"></div>
+        </div>
+
       </div>
     </div>
   );

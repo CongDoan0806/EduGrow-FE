@@ -105,20 +105,49 @@
 .todays-goal-title {
   color: #7B6ADA;
   font-size: 36px;
-  margin-bottom: 90px;
+  margin-bottom: 30px;
   font-weight: bold;
 }
 
 .todays-goal-subcontainer {
   position: relative;
   width: 100%;
+  height: 300px;
+  padding: 25px 0;
+  margin-bottom: 50px;
 }
 
 .todays-goal-background {
   position: absolute;
   right: 0;
-  height: 250px;
+  height: 300px;
   background: #F1F0FE;
   width: 70%;
-  border-radius: 10px 0 0 10px;
+  border-radius: 150px 0 0 150px;
+}
+
+.content-todays-goal {
+  margin: 65px 0 0 150px;
+}
+
+.todays-goal-background p {
+  color: #7B6ADA;
+  font-size: 20px;
+  margin-bottom: 35px;
+}
+
+.todays-goal-background button {
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  color: #7B6ADA;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.img-todays-goal {
+  position: absolute;
+  right: 9%;
 }
