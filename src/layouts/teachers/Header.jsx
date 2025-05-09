@@ -4,19 +4,19 @@ import './Header.css';
 const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
-            <div className="container-fluid">
-                <a className="navbar-brand text-white fw-bold fs-4">EduGrow</a>
-                <div className="d-flex ms-auto align-items-center gap-3">
+            <div className="container">
+                <a className="navbar-brand text-white fw-bold fs-2">EduGrow</a>
+                <div className="d-flex ms-auto align-items-center gap-2">
                     <form className="position-relative">
                         <input
                             type="search"
-                            className="form-control ps-5 form-input"
+                            className="form-control ps-2 form-input"
                             placeholder="Search"
                             aria-label="Search"
                         />
-                        <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-2 text-secondary"></i>
+                        <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                     </form>
-                    <div className="d-flex align-items-center profile">
+                    <div v className="d-flex align-items-center profile">
                         <img
                             src="https://2.bp.blogspot.com/-DRJHYLurSSo/WezG8RReDuI/AAAAAAAAAXs/WiTd7NhjR1EATU0ZZtpBxn9qnFQTakc5QCLcBGAs/s1600/avt-cute-11.jpg"
                             alt="avatar"

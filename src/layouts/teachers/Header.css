@@ -7,7 +7,8 @@
     padding: 0.8rem 1.5rem;
 }
 .navbar-brand{
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Calistoga', cursive;
+    color: white;
 }
 .custom-navbar .nav-link {
     color: red;
@@ -22,6 +23,10 @@
     border: 3px solid green;
     object-fit:cover;
 }
-.profile{
-    padding-left: 50px;
+
+.form-input {
+    border-radius: 100px;
+    width: 100%;
+    height: 35px;
+
 }

@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../student/Header.css';
+import './Header.css';
 const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
-            <div className="container-fluid d-flex justify-content-between align-items-center">
-                <a className="navbar-brand text-white fw-bold fs-4">EduGrow</a>
+            <div className="container d-flex justify-content-between align-items-center">
+                <a className="navbar-brand text-white fw-bold fs-3">EduGrow</a>
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                     <ul className="navbar-nav gap-4">
                         <li className="nav-item">

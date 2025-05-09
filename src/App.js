@@ -1,9 +1,10 @@
 import './App.css';
-import Header from './layouts/teacher/Header';
+import HeaderSidebar from './layouts/admins/Header';
+import Header from './layouts/teachers/Header';
 
 function App() {
   return (
-    <Header></Header>
+    <HeaderSidebar></HeaderSidebar>
   );
 }
 
