@@ -53,7 +53,7 @@ const HeaderSidebar = () => {
             </div>
 
             <div className="header flex-grow-1 d-flex justify-content-between align-items-center px-4">
-                <form className="position-relative">
+                <form className="position-relative form-search-admin">
                     <input
                         type="search"
                         className="form-control ps-4 form-input"
