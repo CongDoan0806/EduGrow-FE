@@ -188,14 +188,14 @@
 /* Thêm quy tắc cho cột Date */
 .self-study-table th:first-child,
 .self-study-table td:first-child {
-  width: 60px; 
+  width: 80px; 
   white-space: nowrap;
 }
 
 /* Thêm quy tắc cho cột Skills/Module */
 .self-study-table th:nth-child(2),
 .self-study-table td:nth-child(2) {
-  width: 117px; 
+  width: 140px; 
 }
 
 /* Add button */
@@ -246,6 +246,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  border: none;
+  padding: 0;
 }
 
 .modal-title {
@@ -299,7 +301,7 @@
 .comment-title{
   display: flex;
   flex-direction: row;
-  gap: 90px;
+  gap: 40px;
 }
 
 .comment-info{

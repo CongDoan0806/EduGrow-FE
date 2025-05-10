@@ -2,9 +2,10 @@ import './LearningJournal.css';
 import JournalInfoPanel from '../../../components/students/learning_journal/JournalInfoPanel';
 import InClassTable from '../../../components/students/learning_journal/InClassTable';
 import SelfStudyTable from '../../../components/students/learning_journal/SelfStudyTable';
+import Header from '../../../layouts/students/Header';
 import { useState } from 'react';
 
-function LearningJounal () {
+function LearningJournal () {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -18,7 +19,9 @@ function LearningJounal () {
 
     return (
         <div>
-            <div className='header' style={{ background: '#7B6ADA', height: '60px' }}>Hearder</div>
+            <div>
+                <Header></Header>
+            </div>
             <div className='content'>
                 <section className='journal-info-panel'>
                     <JournalInfoPanel onNeedReviewClick={openModal}></JournalInfoPanel>
@@ -85,4 +88,4 @@ function LearningJounal () {
         </div>
     );
 }
-export default LearningJounal;
+export default LearningJournal;
