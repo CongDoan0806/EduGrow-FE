@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './HeroSection.css';
 import axios from "axios";
 export default function HeroSection() {
   const [userName, setUserName] = useState('');
