@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import './UpdateProfile.css';
 
 const UpdateProfile = () => {
   const [profile, setProfile] = useState({
@@ -26,9 +25,13 @@ const UpdateProfile = () => {
           phone: '0123456789',
           avatar: data.icon,
         });
+      })
+      .catch(err => {
+        console.error('Error fetching profile data:', err);
       });
   }, []);
 
+  // Define the handleInputChange function
   const handleInputChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
@@ -106,9 +109,7 @@ const UpdateProfile = () => {
             <label className="form-label">New Password</label>
             <div className="password-input-wrapper">
               <input type="password" name="new" className="form-input" value={passwords.new} onChange={handlePasswordChange} />
-              <span className="toggle-icon" onClick={togglePassword}>
-                👁
-              </span>
+              <span className="toggle-icon" onClick={togglePassword}>👁</span>
             </div>
           </div>
 
@@ -116,9 +117,7 @@ const UpdateProfile = () => {
             <label className="form-label">Confirm Password</label>
             <div className="password-input-wrapper">
               <input type="password" name="confirm" className="form-input" value={passwords.confirm} onChange={handlePasswordChange} />
-              <span className="toggle-icon" onClick={togglePassword}>
-                👁
-              </span>
+              <span className="toggle-icon" onClick={togglePassword}>👁</span>
             </div>
           </div>
         </div>
