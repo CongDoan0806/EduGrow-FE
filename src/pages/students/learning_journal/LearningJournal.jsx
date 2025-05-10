@@ -18,7 +18,7 @@ function LearningJounal () {
 
     return (
         <div>
-            <div className='header' style={{ background: '#7B6ADA', height: '60px' }}>Hearder</div>
+            {/* <div className='header' style={{ background: '#7B6ADA', height: '60px' }}>Hearder</div> */}
             <div className='content'>
                 <section className='journal-info-panel'>
                     <JournalInfoPanel onNeedReviewClick={openModal}></JournalInfoPanel>

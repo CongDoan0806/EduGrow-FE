@@ -1,10 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
+import { useNavigate, Link } from 'react-router-dom';
+
 const Header = () => {
+  const navigate = useNavigate(); 
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container d-flex justify-content-between align-items-center">
-                <a className="navbar-brand text-white fw-bold fs-3">EduGrow</a>
+                <a className="navbar-brand text-white fw-bold fs-3" onClick={() => handleNavigate('/student/homePage')}>EduGrow</a>
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                     <ul className="navbar-nav gap-4">
                         <li className="nav-item">
@@ -17,7 +24,7 @@ const Header = () => {
                             <a className="nav-link text-white">Set Goals</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white">Learning Journal</a>
+                            <a className="nav-link text-white" onClick={() => handleNavigate('/student/journal')}>Learning Journal</a>
                         </li>
                     </ul>
                 </div>

@@ -6,7 +6,7 @@ export default function LoginForm({
   onSubmit
 }) {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="login-form">
       <div className="mb-2 text-start position-relative">
         <input
           type="email"
