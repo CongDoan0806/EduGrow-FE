@@ -9,6 +9,7 @@ function LearningJournal () {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
+     console.log("isModalOpen:", isModalOpen); // 👈 Thêm dòng này
 
     // Đóng modal khi nhấp ra ngoài
     const handleOutsideClick = (e) => {
@@ -36,8 +37,8 @@ function LearningJournal () {
 
             {/* Modal */}
             {isModalOpen && (
-                <div className="modal" onClick={handleOutsideClick}>
-                    <div className="modal-content">
+                <div className="modal-frm" onClick={handleOutsideClick}>
+                    <div className="modal-frm-content">
                         <div className="modal-header">
                             <h2 className='modal-title'>Comment</h2>
                             <span className="close-modal-btn" onClick={() => setIsModalOpen(false)}>×</span>
