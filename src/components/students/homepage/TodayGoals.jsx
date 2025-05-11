@@ -6,9 +6,21 @@ const TodaysGoal = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Gọi API để lấy danh sách goals từ database
-    axios.get('http://localhost:8000/api/goals')
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      console.error('Token không tồn tại, vui lòng đăng nhập lại');
+      setLoading(false);
+      return;
+    }
+  
+    axios.get('http://localhost:8000/api/goals', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then(response => {
+        console.log('Dữ liệu nhận được:', response.data);
         setGoals(response.data);
         setLoading(false);
       })
