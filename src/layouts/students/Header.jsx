@@ -29,7 +29,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="d-flex align-items-center profile">
-                    <img src="https://2.bp.blogspot.com/-DRJHYLurSSo/WezG8RReDuI/AAAAAAAAAXs/WiTd7NhjR1EATU0ZZtpBxn9qnFQTakc5QCLcBGAs/s1600/avt-cute-11.jpg" alt="avatar" className="rounded-circle me-2" style={{ width: '50px', height: '50px' }} />
+                    <a href="profile"><img src="https://2.bp.blogspot.com/-DRJHYLurSSo/WezG8RReDuI/AAAAAAAAAXs/WiTd7NhjR1EATU0ZZtpBxn9qnFQTakc5QCLcBGAs/s1600/avt-cute-11.jpg" alt="avatar" className="rounded-circle me-2" style={{ width: '50px', height: '50px' }} /></a>
                     <span className="text-white fw-medium">To Nga</span>
                 </div>
             </div>
