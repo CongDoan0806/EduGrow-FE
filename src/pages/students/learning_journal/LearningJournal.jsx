@@ -1,7 +1,7 @@
 import './LearningJournal.css';
-import JournalInfoPanel from '../../../components/students/learning_journal/JournalInfoPanel';
-import InClassTable from '../../../components/students/learning_journal/InClassTable';
-import SelfStudyTable from '../../../components/students/learning_journal/SelfStudyTable';
+import JournalInfoPanel from '../../../components/students/JournalInfoPanel';
+import InClassTable from '../../../components/students/InClassTable';
+import SelfStudyTable from '../../../components/students/SelfStudyTable';
 import Header from '../../../layouts/students/Header';
 import { useState } from 'react';
 
