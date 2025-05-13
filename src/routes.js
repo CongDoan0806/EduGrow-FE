@@ -31,7 +31,8 @@ function AppRoutes() {
 
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
-        <Route path="/teacher/homePage" element={<h1>Teacher</h1>} />
+        <Route path="/teacher/homePage" element={<h1>helo</h1>} />
+        <Route path="/teacher/journals/:studentId" element={<LearningJounal />} />
       </Route>
 
     </Routes>
