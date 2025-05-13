@@ -1,6 +1,6 @@
 import React from 'react';
 import UpdateProfile from '../../../components/students/UpdateProfile';
-import StudentSidebar from '../../../layouts/sidebars/StudentSidebar';
+import StudentSidebar from '../../../components/students/StudentSidebar';
 import './StudentProfile.css';
 export default function StudentProfile() {
   return (

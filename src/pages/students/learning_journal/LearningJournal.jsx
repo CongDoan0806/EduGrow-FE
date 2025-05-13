@@ -2,7 +2,7 @@ import './LearningJournal.css';
 import JournalInfoPanel from '../../../components/students/JournalInfoPanel';
 import InClassTable from '../../../components/students/InClassTable';
 import SelfStudyTable from '../../../components/students/SelfStudyTable';
-import Header from '../../../layouts/students/Header';
+import Header from '../../../components/students/Header';
 import { useState } from 'react';
 
 function LearningJournal () {
