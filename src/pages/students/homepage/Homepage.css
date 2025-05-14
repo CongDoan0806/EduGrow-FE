@@ -150,28 +150,40 @@
 
 .todays-goal-list {
   display: flex;
-  justify-content: space-between;
-  width: 60%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 80%;
+  margin-bottom: 20px;
 }
 
 .todays-goal-item {
-  width: 160px;
-  height: 110px;
+  min-width: 160px;
+  max-width: 170px;
+  min-height: 110px;
+  height: auto;
   padding: 20px;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .time-goal {
   color: #7B6ADA;
   font-size: 15px;
+  margin-bottom: 10px;
 }
 
 .content-goal {
   color: #7B6ADA;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 /* Hero Section */
 body {
