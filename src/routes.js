@@ -8,6 +8,7 @@ import StudentLayout from "./layouts/students/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import AdminLayout from "./layouts/admins/AdminLayout.jsx";
 import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
+import ListStudent from "./pages/admins/listManager/ListManager.jsx";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ function AppRoutes() {
       {/* admin layout */}
       <Route element={<AdminLayout/>}>
         <Route path="/admin/dashboard" element={<h1>Admin</h1>} />
+        <Route path="/admin/liststudent" element={<ListStudent/>}/>
       </Route>
 
        {/*teacher layout  */}

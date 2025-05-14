@@ -1,62 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 
-const HeaderSidebar = () => {
+const Header = () => {
     return (
         <div className="d-flex">
-
-            <div className="sidebar d-flex flex-column p-3">
-                <div className="layout-sitebar">
-                    <div>
-                    <h4 className=" mb-4">EduGrow</h4>
-                    </div>
-                    <div>
-                        <ul className="nav nav-pills flex-column">
-                            <div className='menu-sitebar'>
-                                <li>MENU</li>
-                                <li className="nav-item mb-2 dashboard">
-                                    <i class="bi bi-file-bar-graph"></i>
-                                    <a href="#" className="nav-link ">Dashboard</a>
-                                </li>
-                                <li className="nav-item mb-2 active-tab">
-                                    <i class="bi bi-person-circle"></i>
-                                    <a href="#" className="nav-link ">User management</a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <i class="bi bi-menu-up"></i>
-                                    <a href="#" className="nav-link ">Class management</a>
-                                </li>
-                            </div>
-                            
-                            <div className='mt-section'>
-                                <li>OTHERS</li>
-                                <li className="nav-item mb-2">
-                                    <i class="bi bi-gear-fill"></i>
-                                    <a href="#" className="nav-link ">Settings</a>
-                                </li>
-                                <li className="nav-item">
-                                    <i class="bi bi-person-circle"></i>
-                                    <a href="#" className="nav-link ">Accounts</a>
-                                </li>
-                                <li className="nav-item">
-                                    <i class="bi bi-info-square-fill"></i>
-                                    <a href="#" className="nav-link ">Help</a>
-                                </li>
-                            </div>
-                            
-                        </ul>
-                    </div>
-                </div>
-                
-                
-                
-            </div>
-
-            <div className="header flex-grow-1 d-flex justify-content-between align-items-center px-4">
+            <div className="header_admin flex-grow-1 d-flex justify-content-between align-items-center px-2">
                 <form className="position-relative form-search-admin">
                     <input
                         type="search"
-                        className="form-control ps-4 form-input"
+                        className="form-control ps-3 form-input"
                         placeholder="Search"
                         aria-label="Search"
                     />
@@ -72,4 +24,4 @@ const HeaderSidebar = () => {
     );
 };
 
-export default HeaderSidebar;
+export default Header;
