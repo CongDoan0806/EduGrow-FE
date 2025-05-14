@@ -12,6 +12,7 @@ export default function StudentProfile() {
 
       <div style={{ flex: 1, padding: '20px' }}>
         <UpdateProfile />
+        <ChangePassword />
       </div>
     </div>
   );
