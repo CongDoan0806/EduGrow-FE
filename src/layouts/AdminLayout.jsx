@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import Header from './Header';
+import Header from '../components/admins/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SideBar from './SideBar'; 
+import SideBar from '../components/admins/SideBar'; 
 import './AdminLayout.css';
 function AdminLayout() {
     return (
