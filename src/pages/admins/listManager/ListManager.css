@@ -1,0 +1,167 @@
+
+.user-management {
+    padding: 30px;
+    border-radius: 12px;
+    margin: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header-left h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.add_button {
+    background-color: #7B6ADA;
+    color: white;
+    width: 100px;
+    height: 50px;
+    padding: 10px 25px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.add_button:hover {
+    background-color: #5a4ef0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+th {
+    background-color: #F1F0FE;
+    font-weight: 600;
+    color: #2d3748;
+    font-weight: bold;
+
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #DEE2E6;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.update-btn {
+    background: #F1F0FE;
+    border: none;
+    color: #7B6ADA;
+    padding: 6px 14px;
+    margin-right: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.update-btn:hover {
+    background:  #5a4ef0;
+    color: white;
+}
+
+.delete-btn {
+    background: #7B6ADA;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background: #5a4ef0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.pagination span {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.pagination span:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.tabs-container {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    background: #f0f0ff;
+    border-radius: 999px;
+    padding: 3px;
+    overflow: hidden;
+}
+
+.tab {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 999px;
+    font-weight: 500;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.highlight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    width:50%;
+    background: #7B6ADA;
+    border-radius: 999px;
+    z-index: 1;
+    transition: left 0.3s ease;
+    }
+
+.tab.active {
+    color: white;
+}
+.arrow{
+    border:none;
+}
