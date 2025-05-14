@@ -187,6 +187,7 @@ body {
   overflow: hidden;
   min-height: 200px;
   margin-bottom: 70px;
+  margin-top:-48px;
 }
 
 .hero-section .hero-content {
@@ -357,7 +358,7 @@ body {
   color: white;
   border-top-right-radius: 150px;
   border-bottom-right-radius: 150px;
-  padding: 40px 70px 60px;
+  padding: 80px 70px 60px;
   gap: 120px;
   overflow: hidden;
 }
