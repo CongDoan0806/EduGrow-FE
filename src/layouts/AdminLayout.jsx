@@ -3,7 +3,6 @@ import Header from './Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SideBar from './SideBar'; 
 import './AdminLayout.css';
-
 function AdminLayout() {
     return (
         <div className="admin-layout">

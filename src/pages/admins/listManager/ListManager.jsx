@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './ListManager.css';
-import ListTeacher from '../../../components/admin/ListTeacher';
-import ListStudent from '../../../components/admin/ListStudent';
+import ListTeacher from '../../../components/admins/ListTeacher';
+import ListStudent from '../../../components/admins/ListStudent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ListManager = () => {
