@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const CourseList = () => {
+export default function CourseList() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    axios.get("https://6809104e1f1a52874cdbc8bb.mockapi.io/apiCamera/Product")
+    axios.get("http://127.0.0.1:8000/api/student/subjects")
       .then((res) => {
-        setCourses(res.data);
+        if (res.data && Array.isArray(res.data.subjects)) {
+          setCourses(res.data.subjects); 
+        } else {
+          console.error("API response does not contain a valid 'subjects' array:", res.data);
+          setCourses([]); 
+        }
       })
       .catch((err) => {
         console.error("Lỗi khi gọi API:", err);
@@ -20,10 +24,10 @@ const CourseList = () => {
         {courses.map((course, index) => (
           <div className="course-card" key={index}>
             <div className="icon-circle">
-              <img src={course.icon} alt={`${course.title} Icon`} />
+              <img src={course.img} alt={`${course.name} Icon`} />
             </div>
             <div className="course-content">
-              <div className="course-title">{course.title}</div>
+              <div className="course-title">{course.name}</div>
               <div className="course-description">{course.description}</div>
               <button className="explore-btn">Explore</button>
             </div>
@@ -33,5 +37,3 @@ const CourseList = () => {
     </section>
   );
 };
-
-export default CourseList;

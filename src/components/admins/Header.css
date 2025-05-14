@@ -1,0 +1,17 @@
+
+.header_admin {
+    height: 100%;
+    margin-top: 10px;
+}
+.nav-link {
+    font-size: 14px;
+    color: gray;
+    font-family: 'Poppins', sans-serif;
+}
+input{
+    width:500px;
+}
+
+.form-search-admin{
+    width:500px;
+}

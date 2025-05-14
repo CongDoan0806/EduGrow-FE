@@ -1,8 +1,7 @@
 import React from 'react';
-import UpdateProfile from '../../../components/students/profile/UpdateProfile';
-import StudentSidebar from '../../../layouts/sidebars/StudentSidebar';
-import './StudentProfile.css'; // Import your CSS file for styling
-import ChangePassword from '../../../components/students/profile/ChangePassword';
+import UpdateProfile from '../../../components/students/UpdateProfile';
+import StudentSidebar from '../../../components/students/StudentSidebar';
+import './StudentProfile.css';
 export default function StudentProfile() {
   return (
     <div style={{ display: 'flex' }}>
