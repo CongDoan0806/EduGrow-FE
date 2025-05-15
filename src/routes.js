@@ -4,11 +4,11 @@ import Login from "./pages/login/Login";
 import StudentProfile from "./pages/students/profile/StudentProfile.jsx";
 import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
 import { Route, Routes } from "react-router-dom";
-import StudentLayout from "./layouts/students/StudentLayout.jsx";
+import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
-import AdminLayout from "./layouts/admins/AdminLayout.jsx";
-import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
-
+import ListStudent from "./pages/admins/listManager/ListManager.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import TeacherLayout from "./layouts/TeacherLayout.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -27,6 +27,7 @@ function AppRoutes() {
       {/* admin layout */}
       <Route element={<AdminLayout/>}>
         <Route path="/admin/dashboard" element={<h1>Admin</h1>} />
+        <Route path="/admin/liststudent" element={<ListStudent/>}/>
       </Route>
 
        {/*teacher layout  */}

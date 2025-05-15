@@ -1,6 +1,4 @@
  body {
-    margin: 0;
-    padding: 20px;
     font-family: 'Quicksand', sans-serif;
   }
 
@@ -112,3 +110,49 @@
     width: 20px;
     height: 20px;
   }
+
+   .loading-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          z-index: 1000;
+        }
+
+        .loading-spinner {
+          border: 4px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          border-top: 4px solid white;
+          width: 40px;
+          height: 40px;
+          animation: spin 1s linear infinite;
+          margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .profile-image-placeholder {
+          width: 150px;
+          height: 150px;
+          border: 2px dashed #ccc;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #666;
+          margin-bottom: 10px;
+        }
+
+        .success-message {
+          color: green;
+          margin-bottom: 20px;
+        }
