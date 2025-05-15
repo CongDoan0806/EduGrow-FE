@@ -8,6 +8,8 @@ import StudentLayout from "./layouts/students/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import AdminLayout from "./layouts/admins/AdminLayout.jsx";
 import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
+import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
+import Home from "./pages/teachers/home.jsx";
 
 function AppRoutes() {
   return (
@@ -31,8 +33,8 @@ function AppRoutes() {
 
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
-        <Route path="/teacher/homePage" element={<h1>helo</h1>} />
-        <Route path="/teacher/journals/:studentId" element={<LearningJounal />} />
+        <Route path="/teacher/homePage" element={<Home/>} />
+        <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
       </Route>
 
     </Routes>
