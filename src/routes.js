@@ -3,6 +3,7 @@ import Homepage from "./pages/students/homepage/Homepage";
 import Login from "./pages/login/Login";
 import StudentProfile from "./pages/students/profile/StudentProfile.jsx";
 import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
+import SetGoals from "./pages/students/set_goals/SetGoals.jsx";
 import { Route, Routes } from "react-router-dom";
 import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
@@ -17,6 +18,7 @@ function AppRoutes() {
         <Route path="/student/homePage" element={<Homepage />} />
         <Route path="/student/profile" element={<StudentProfile />} />
         <Route path="/student/journal" element={<LearningJounal />} />
+        <Route path="/student/setgoals" element={<SetGoals/>} />
       </Route>
 
       {/* User layout */}
