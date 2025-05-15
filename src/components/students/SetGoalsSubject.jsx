@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import GoalForm from './GoalForm';
 
 const SetGoalsSubject = () => {
   const [goals, setGoals] = useState([
@@ -79,12 +80,12 @@ const SetGoalsSubject = () => {
     <div className="set-goals-container">
       <div className="semester-header">
         <h2>Semester 1 Goals</h2>
-        <button 
+        {/* <button 
           className="add-goal-button" 
           onClick={() => setShowAddForm(true)}
         >
           <FaPlus />
-        </button>
+        </button> */}
       </div>
 
       <div className="subject-selector">
@@ -129,76 +130,19 @@ const SetGoalsSubject = () => {
         </button>
       </div>
 
-      {showAddForm && (
-        <div className="add-goal-modal">
-          <div className="add-goal-form">
-            <h3>Thêm mục tiêu mới cho {selectedSubject}</h3>
-            
-            <div className="form-group">
-              <label>Mục tiêu:</label>
-              <textarea 
-                name="goal" 
-                value={newGoal.goal}
-                onChange={handleInputChange}
-                placeholder="Nhập mục tiêu của bạn"
-              />
-            </div>
-            
-            <div className="form-group">
-              <label>Phần thưởng:</label>
-              <input 
-                type="text" 
-                name="reward" 
-                value={newGoal.reward}
-                onChange={handleInputChange}
-                placeholder="Phần thưởng khi đạt được mục tiêu"
-              />
-            </div>
-            
-            <div className="form-group">
-              <label>Trạng thái:</label>
-              <select 
-                name="status" 
-                value={newGoal.status}
-                onChange={handleInputChange}
-              >
-                <option value="Not Started">Not Started</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Done">Done</option>
-              </select>
-            </div>
-            
-            <div className="form-group">
-              <label>Phản ánh:</label>
-              <textarea 
-                name="reflection" 
-                value={newGoal.reflection}
-                onChange={handleInputChange}
-                placeholder="Nhập phản ánh của bạn (nếu có)"
-              />
-            </div>
-            
-            <div className="form-actions">
-              <button 
-                className="cancel-button"
-                onClick={() => setShowAddForm(false)}
-              >
-                Hủy
-              </button>
-              <button 
-                className="save-button"
-                onClick={handleAddGoal}
-              >
-                Lưu
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Sử dụng component GoalForm thay vì render trực tiếp */}
+      <GoalForm 
+        showAddForm={showAddForm}
+        setShowAddForm={setShowAddForm}
+        newGoal={newGoal}
+        handleInputChange={handleInputChange}
+        handleAddGoal={handleAddGoal}
+        selectedSubject={selectedSubject}
+      />
 
       <div className="add-goal-floating">
         <button 
-          className="add-goal-button-mobile" 
+          className="add-goal-button-mobile"
           onClick={() => setShowAddForm(true)}
         >
           <FaPlus />
