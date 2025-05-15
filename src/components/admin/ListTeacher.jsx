@@ -72,7 +72,7 @@ const Listteacher = () => {
                             <td>{teacher.teacher_id}</td>
                             <td>{teacher.name}</td>
                             <td>{teacher.email}</td>
-                            <td>{teacher.created_at}</td>
+                            <td>{teacher.created_at?.split('T')[0]}</td>
                             <td>
                                 <button className="update-btn">Update</button>
                                 <button className="delete-btn">Delete</button>

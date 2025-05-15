@@ -9,6 +9,7 @@ import AuthLayout from "./layouts/AuthLayout.jsx";
 import AdminLayout from "./layouts/admins/AdminLayout.jsx";
 import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
 import ListStudent from "./pages/admins/listManager/ListManager.jsx";
+import AddUserModal from "./components/admin/addUserModal.jsx";
 
 function AppRoutes() {
   return (
@@ -35,7 +36,6 @@ function AppRoutes() {
       <Route element={<TeacherLayout/>}>
         <Route path="/teacher/homePage" element={<h1>Teacher</h1>} />
       </Route>
-
     </Routes>
   );
 }

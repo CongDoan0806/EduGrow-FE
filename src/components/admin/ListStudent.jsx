@@ -74,7 +74,7 @@ const ListStudent = () => {
                             <td>{student.name}</td>
                             <td>{student.email}</td>
                             <td>{student.class_name}</td>
-                            <td>{student.created_at}</td>
+                            <td>{student.created_at?.split('T')[0]}</td>
                             <td>
                                 <button className="update-btn">Update</button>
                                 <button className="delete-btn">Delete</button>
