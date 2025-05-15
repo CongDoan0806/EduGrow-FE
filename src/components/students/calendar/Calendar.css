@@ -1,17 +1,15 @@
-/* Wrapper chứa cả sidebar và main calendar */
+/* =================== LAYOUT =================== */
 .calendar-wrapper {
   display: flex;
 }
 
-/* Sidebar bên trái */
-.sidebar {
+.calendar-sidebar {
   width: 270px;
   padding: 20px;
   border-right: 1px solid #e0e0e0;
   background-color: #fafafa;
 }
 
-/* Nút "Create" */
 .create-btn {
   width: 100%;
   padding: 12px;
@@ -30,24 +28,20 @@
   background-color: #8c79c0;
 }
 
-/* Lịch chính bên phải */
-.main-calendar {
+.calendar-main {
   flex: 1;
   padding: 20px;
 }
 
-/* ---------------------- FULLCALENDAR CUSTOM ---------------------- */
-
-/* 🎯 Tiêu đề tháng (center title của FullCalendar) */
+/* =================== FULLCALENDAR GLOBAL =================== */
 .fc .fc-toolbar-title {
-  font-size: 20px;         /* 👈 Chữ nhỏ lại */
+  font-size: 20px;
   font-weight: 500;
-  color: #000000;          /* 👈 Màu đen */
+  color: #000000;
 }
 
-/* 🎯 Tùy chỉnh các nút như prev, next, today */
 .fc .fc-button {
-  background-color: #7B6ADA;    /* 👈 Màu tím chuẩn */
+  background-color: #7B6ADA;
   border: none;
   color: white;
   padding: 5px 12px;
@@ -57,24 +51,20 @@
   font-weight: 500;
 }
 
-/* 🎯 Nút hover */
 .fc .fc-button:hover {
-  background-color: #847ac0;   /* 👈 Tím nhạt hơn khi hover */
+  background-color: #847ac0;
 }
 
-/* 🎯 Đảm bảo nút "today" cùng style */
 .fc .fc-button.fc-today-button {
-  background-color: #7B6ADA;   /* 👈 Áp dụng màu tím */
+  background-color: #7B6ADA;
   color: white;
 }
 
-/* Số ngày trong mini calendar */
 .fc .fc-daygrid-day-number {
   color: #333;
   font-size: 14px;
 }
 
-/* Sự kiện trong mini calendar */
 .fc .fc-daygrid-event {
   font-size: 12px;
   padding: 2px 4px;
@@ -82,7 +72,6 @@
   border-radius: 4px;
 }
 
-/* 🎯 Highlight ngày hiện tại */
 .fc-daygrid-day.fc-day-today {
   background-color: #7B6ADA;
   border-radius: 50%;
@@ -90,18 +79,199 @@
   color: white;
 }
 
-/* 🎯 Làm mini calendar nhỏ gọn hơn */
 .fc .fc-scrollgrid-sync-table {
   font-size: 12px;
 }
 
-/* 🎯 Cải thiện vùng sự kiện trong ngày */
-.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
-  border-radius: 5px;
-  padding: 5px;
-}
-
-/* 🎯 Giữ màu nút bên cạnh nhau nhất quán */
 .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
   background-color: #7B6ADA;
+}
+
+/* =================== MINI CALENDAR CUSTOM =================== */
+.mini-calendar .fc-col-header-cell-cushion {
+  color: #7B6ADA;
+  font-weight: 600;
+}
+.mini-calendar .fc-event-time {
+  display: none;
+}
+
+.mini-calendar .fc-daygrid-day-events {
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap !important;
+  padding: 0 !important;
+  margin-top: 3px !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.mini-calendar .fc-daygrid-event {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: currentColor !important;
+  color: transparent !important;
+  overflow: hidden !important;
+  text-indent: -9999px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.mini-calendar .fc-daygrid-day.fc-day-today {
+  background-color: transparent !important;
+  font-weight: bold;
+  color: #7B6ADA;
+}
+
+/* =================== WEEKLY CALENDAR =================== */
+.weekly-calendar .fc-col-header-cell-cushion {
+  color: #000000;
+  font-weight: 600;
+}
+
+.weekly-calendar .fc-daygrid-body-natural .fc-daygrid-day-events {
+  border-radius: 5px;
+  padding: 0px;
+}
+
+.fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 2px 4px;
+    color: #7B6ADA;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    margin-bottom: -1em;
+    text-decoration: none;
+}
+.fc-v-event .fc-event-title {
+    bottom: 0px;
+    max-height: 100%;
+    overflow: hidden;
+    top: 0px;
+    color: #8c79c0;
+}
+
+.fc-timegrid-event .fc-event-time {
+    font-size: var(--fc-small-font-size);
+    margin-bottom: 1px;
+    white-space: nowrap;
+    color: #8c79c0;
+
+}
+.fc .fc-daygrid-day-number {
+    color: gray;
+    font-size: 14px;
+    text-decoration: none; 
+    font-weight: 600;
+}
+
+.fc .fc-timegrid-axis-cushion, .fc .fc-timegrid-slot-label-cushion {
+    padding: 0px 4px;
+    color: #7B6ADA;
+    font-size: 14px;
+}
+/* ---------------------------------------------- */
+.event-form {
+  background: #fff;
+  padding: 20px 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  border: 1px solid #ccc; /* chỉ có border ngoài */
+  width: 280px;
+  font-family: Arial, sans-serif;
+}
+
+.event-form h3 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-weight: 600;
+  font-size: 20px;
+  color: #7B6ADA;
+
+
+}
+
+.event-form p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.event-form label {
+  display: block;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.event-form input[type="text"] {
+  width: 100%;
+  padding: 0px 10px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid #ccc; /* nhẹ nhàng dưới input */
+  outline: none;
+}
+
+.event-form input[type="text"]:focus {
+  border-color: #7B6ADA;
+}
+
+.event-form .form-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-form button {
+  background-color: #7B6ADA;
+  color: white;
+  border: none;
+  padding: 4px 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.event-form button:hover {
+  background-color: #732ecc;
+}
+
+.color-picker {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.color-circle.selected {
+  border: 3px solid #000;
+}
+
+.form-buttons {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.form-buttons button {
+  padding: 6px 12px;
+  cursor: pointer;
 }

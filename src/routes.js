@@ -9,7 +9,7 @@ import AuthLayout from "./layouts/AuthLayout.jsx";
 import AdminLayout from "./layouts/admins/AdminLayout.jsx";
 import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
 import Calendar from "./components/students/calendar/Calendar.jsx";
-
+import EvenForm from "./components/students/calendar/EventForm.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -19,6 +19,7 @@ function AppRoutes() {
         <Route path="/student/profile" element={<StudentProfile />} />
         <Route path="/student/journal" element={<LearningJounal />} />
         <Route path="/student/calendar" element={<Calendar />} />
+        <Route path="/student/form" element={<EvenForm />} />
       </Route>
 
       {/* User layout */}
