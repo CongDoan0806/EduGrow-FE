@@ -1,0 +1,107 @@
+/* Wrapper chứa cả sidebar và main calendar */
+.calendar-wrapper {
+  display: flex;
+}
+
+/* Sidebar bên trái */
+.sidebar {
+  width: 270px;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+/* Nút "Create" */
+.create-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #7B6ADA;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.create-btn:hover {
+  background-color: #8c79c0;
+}
+
+/* Lịch chính bên phải */
+.main-calendar {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ---------------------- FULLCALENDAR CUSTOM ---------------------- */
+
+/* 🎯 Tiêu đề tháng (center title của FullCalendar) */
+.fc .fc-toolbar-title {
+  font-size: 20px;         /* 👈 Chữ nhỏ lại */
+  font-weight: 500;
+  color: #000000;          /* 👈 Màu đen */
+}
+
+/* 🎯 Tùy chỉnh các nút như prev, next, today */
+.fc .fc-button {
+  background-color: #7B6ADA;    /* 👈 Màu tím chuẩn */
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin: 0 5px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* 🎯 Nút hover */
+.fc .fc-button:hover {
+  background-color: #847ac0;   /* 👈 Tím nhạt hơn khi hover */
+}
+
+/* 🎯 Đảm bảo nút "today" cùng style */
+.fc .fc-button.fc-today-button {
+  background-color: #7B6ADA;   /* 👈 Áp dụng màu tím */
+  color: white;
+}
+
+/* Số ngày trong mini calendar */
+.fc .fc-daygrid-day-number {
+  color: #333;
+  font-size: 14px;
+}
+
+/* Sự kiện trong mini calendar */
+.fc .fc-daygrid-event {
+  font-size: 12px;
+  padding: 2px 4px;
+  margin: 2px 0;
+  border-radius: 4px;
+}
+
+/* 🎯 Highlight ngày hiện tại */
+.fc-daygrid-day.fc-day-today {
+  background-color: #7B6ADA;
+  border-radius: 50%;
+  font-weight: bold;
+  color: white;
+}
+
+/* 🎯 Làm mini calendar nhỏ gọn hơn */
+.fc .fc-scrollgrid-sync-table {
+  font-size: 12px;
+}
+
+/* 🎯 Cải thiện vùng sự kiện trong ngày */
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* 🎯 Giữ màu nút bên cạnh nhau nhất quán */
+.fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+  background-color: #7B6ADA;
+}
