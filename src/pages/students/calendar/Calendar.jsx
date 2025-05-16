@@ -202,3 +202,4 @@ const addEvent = async (newEvent) => {
 };
 
 export default Calendar;
+

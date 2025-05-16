@@ -1,3 +1,41 @@
+/* Giảm margin/padding ở phần header */
+.fc .fc-scrollgrid-section-header {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.fc .fc-col-header {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  height: auto !important;
+}
+
+.fc .fc-timegrid-col {
+  border-left: 1px solid #ccc !important;
+}
+
+.fc-timeGridWeek-view .fc-daygrid {
+  display: none !important;
+}
+
+.fc .fc-timegrid {
+  border-top: none !important;
+}
+.fc .fc-scroller-harness {
+  top: 0 !important;
+  margin-top: -23px !important;
+  padding-top: 0 !important;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid var(--fc-border-color);
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}
 .calendar-wrapper {
   display: flex;
 }
@@ -269,4 +307,8 @@
 .custom-button:hover {
   background-color: #5e51c4;
   opacity: 0.9;
+}
+
+.calendar-main {
+  height: calc(100vh - 40px);
 }
