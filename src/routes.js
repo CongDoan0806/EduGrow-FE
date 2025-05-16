@@ -6,7 +6,9 @@ import LearningJounal from "./pages/students/learning_journal/LearningJournal.js
 import { Route, Routes } from "react-router-dom";
 import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
+import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
 import ListStudent from "./pages/admins/listManager/ListManager.jsx";
+import AddUserModal from "./components/admin/addUserModal.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import TeacherLayout from "./layouts/TeacherLayout.jsx";
 function AppRoutes() {
@@ -32,10 +34,8 @@ function AppRoutes() {
 
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
-        <Route path="/teacher/homePage" element={<h1>helo</h1>} />
-        <Route path="/teacher/journals/:studentId" element={<LearningJounal />} />
+        <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
       </Route>
-
     </Routes>
   );
 }

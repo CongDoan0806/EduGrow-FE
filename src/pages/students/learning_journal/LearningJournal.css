@@ -355,4 +355,6 @@
   cursor: pointer;
   padding: 0;
 }
-
+.tag-content-journal{
+  padding-left: 40px !important;
+}
