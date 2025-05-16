@@ -1,7 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
+     const [user, setUser] = useState(null);
+    
+      useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        setUser(storedUser);
+      }, []);
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container">
@@ -16,14 +23,14 @@ const Header = () => {
                         />
                         <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
                     </form>
-                    <div v className="d-flex align-items-center profile">
+                    <div className="d-flex align-items-center profile">
                         <img
-                            src="https://2.bp.blogspot.com/-DRJHYLurSSo/WezG8RReDuI/AAAAAAAAAXs/WiTd7NhjR1EATU0ZZtpBxn9qnFQTakc5QCLcBGAs/s1600/avt-cute-11.jpg"
+                            src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'} 
                             alt="avatar"
-                            className="rounded-circle"
+                            className="rounded-circle me-2"
                             style={{ width: '50px', height: '50px' }}
                         />
-                        <span className="text-white fw-medium ms-2">To Nga</span>
+                        <span className="text-white fw-medium">{user?.name || 'Guest'}</span>
                     </div>
                 </div>
             </div>

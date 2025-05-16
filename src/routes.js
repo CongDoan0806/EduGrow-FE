@@ -4,13 +4,13 @@ import Login from "./pages/login/Login";
 import StudentProfile from "./pages/students/profile/StudentProfile.jsx";
 import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
 import { Route, Routes } from "react-router-dom";
-import StudentLayout from "./layouts/students/StudentLayout.jsx";
+import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
-import AdminLayout from "./layouts/admins/AdminLayout.jsx";
-import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
+import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
 import ListStudent from "./pages/admins/listManager/ListManager.jsx";
 import AddUserModal from "./components/admin/addUserModal.jsx";
-
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import TeacherLayout from "./layouts/TeacherLayout.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -34,7 +34,7 @@ function AppRoutes() {
 
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
-        <Route path="/teacher/homePage" element={<h1>Teacher</h1>} />
+        <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
       </Route>
     </Routes>
   );
