@@ -8,7 +8,7 @@ import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
 import ListStudent from "./pages/admins/listManager/ListManager.jsx";
-import AddUserModal from "./components/admin/addUserModal.jsx";
+import AddUserModal from "./components/admins/AddUserModal.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import TeacherLayout from "./layouts/TeacherLayout.jsx";
 function AppRoutes() {
