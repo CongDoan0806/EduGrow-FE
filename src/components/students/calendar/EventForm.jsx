@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const presetColors = [
   { name: 'Blue', value: '#cfe9ff' },
@@ -12,6 +12,19 @@ const presetColors = [
 const EventForm = ({ datetime, onAdd, onCancel }) => {
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState(presetColors[0].value);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    // Chỉ khởi tạo màu mặc định 1 lần
+    if (!initialized.current) {
+      setSelectedColor(presetColors[0].value);
+      initialized.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('🔍 Current selected color:', selectedColor);
+  }, [selectedColor]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,17 +32,17 @@ const EventForm = ({ datetime, onAdd, onCancel }) => {
 
     const newEvent = {
       title,
-      start: datetime.start.toISOString(),
-      end: datetime.end.toISOString(),
-      backgroundColor: selectedColor,
-      textColor: '#004080',
+      start: new Date(datetime.start).toISOString(),
+      end: new Date(datetime.end).toISOString(),
+      color: selectedColor,
     };
 
+    console.log('📤 Submitting new event:', newEvent);
     onAdd(newEvent);
   };
 
-  const startDate = datetime.start instanceof Date ? datetime.start : new Date(datetime.start);
-  const endDate = datetime.end instanceof Date ? datetime.end : new Date(datetime.end);
+  const startDate = new Date(datetime.start);
+  const endDate = new Date(datetime.end);
 
   return (
     <div className="event-form">
@@ -48,24 +61,32 @@ const EventForm = ({ datetime, onAdd, onCancel }) => {
           />
         </div>
 
-        <div>
+        <div style={{ marginTop: 10 }}>
           <label>Choose Color:</label>
-          <div className="color-picker">
+          <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
             {presetColors.map((color) => (
               <div
                 key={color.value}
-                onClick={() => setSelectedColor(color.value)}
-                className={`color-circle ${selectedColor === color.value ? 'selected' : ''}`}
+                onClick={() => {
+                  setSelectedColor(color.value);
+                }}
                 title={color.name}
-                style={{ backgroundColor: color.value }}
+                style={{
+                  backgroundColor: color.value,
+                  width: 24,
+                  height: 24,
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  border: selectedColor === color.value ? '3px solid #000' : '1px solid #ccc',
+                }}
               />
             ))}
           </div>
         </div>
 
-        <div className="form-buttons">
+        <div className="form-buttons" style={{ marginTop: 16 }}>
           <button type="button" onClick={onCancel}>Cancel</button>
-           <button type="submit">Add</button>
+          <button type="submit">Add</button>
         </div>
       </form>
     </div>

@@ -86,6 +86,14 @@
 .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
   background-color: #7B6ADA;
 }
+/* Con trỏ cho các vùng có thể click hoặc chọn */
+.fc-timegrid-slot,
+.fc-timegrid-bg,
+.fc-timegrid-axis,
+.fc-daygrid-day,
+.fc-event {
+  cursor: pointer;
+}
 
 /* =================== MINI CALENDAR CUSTOM =================== */
 .mini-calendar .fc-col-header-cell-cushion {
@@ -96,37 +104,6 @@
   display: none;
 }
 
-.mini-calendar .fc-daygrid-day-events {
-  display: flex !important;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 4px;
-  flex-wrap: nowrap !important;
-  padding: 0 !important;
-  margin-top: 3px !important;
-  background: transparent !important;
-  border-radius: 0 !important;
-}
-
-.mini-calendar .fc-daygrid-event {
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 50% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background-color: currentColor !important;
-  color: transparent !important;
-  overflow: hidden !important;
-  text-indent: -9999px !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.mini-calendar .fc-daygrid-day.fc-day-today {
-  background-color: transparent !important;
-  font-weight: bold;
-  color: #7B6ADA;
-}
 
 /* =================== WEEKLY CALENDAR =================== */
 .weekly-calendar .fc-col-header-cell-cushion {
@@ -274,4 +251,26 @@
 .form-buttons button {
   padding: 6px 12px;
   cursor: pointer;
+}
+
+/* ------------------------------------------------------------------ */
+.custom-button {
+  background-color: #7B6ADA;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Nút Cancel có margin phải */
+.cancel-button {
+  margin-right: 8px;
+}
+
+/* Hover chung cho cả 2 nút */
+.custom-button:hover {
+  background-color: #5e51c4;
+  opacity: 0.9;
 }

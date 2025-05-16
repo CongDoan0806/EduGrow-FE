@@ -1,7 +1,8 @@
-import React from 'react';
 import './Calendar.css';
 
 const DeleteEvent = ({ eventInfo, onConfirm, onCancel, position }) => {
+  if (!eventInfo || !position) return null;
+
   return (
     <div
       className="delete-modal"
@@ -15,37 +16,30 @@ const DeleteEvent = ({ eventInfo, onConfirm, onCancel, position }) => {
         borderRadius: '8px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
         zIndex: 10000,
-        width: 240,
+        width: 260,
+        maxWidth: '90vw', // tránh tràn màn hình nhỏ
       }}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-event-title"
     >
-      <p>
+      <p id="delete-event-title" style={{ marginBottom: '12px' }}>
         Do you want to delete event: <strong>{eventInfo.title}</strong>?
       </p>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <button
           onClick={onCancel}
-          style={{
-            marginRight: 8,
-            backgroundColor: '#f0f0f0',
-            color: '#000',
-            padding: '6px 12px',
-            borderRadius: 4,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="custom-button cancel-button"
+          tabIndex={0}
+          type="button"
         >
           Cancel
         </button>
         <button
-          onClick={onConfirm}
-          style={{
-            backgroundColor: '#ff4d4f',
-            color: '#fff',
-            padding: '6px 12px',
-            borderRadius: 4,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          onClick={() => onConfirm(eventInfo)}
+          className="custom-button delete-button"
+          tabIndex={0}
+          type="button"
         >
           Delete
         </button>
