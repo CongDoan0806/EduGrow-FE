@@ -2,14 +2,16 @@ import React from "react";
 import Homepage from "./pages/students/homepage/Homepage";
 import Login from "./pages/login/Login";
 import StudentProfile from "./pages/students/profile/StudentProfile.jsx";
-import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
+// import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
 import { Route, Routes } from "react-router-dom";
-import StudentLayout from "./layouts/students/StudentLayout.jsx";
+import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
-import AdminLayout from "./layouts/admins/AdminLayout.jsx";
-import TeacherLayout from "./layouts/teachers/TeacherLayout.jsx";
-import Calendar from "./components/students/calendar/Calendar.jsx";
-import EvenForm from "./components/students/calendar/EventForm.jsx";
+// import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
+// import ListStudent from "./pages/admins/listManager/ListManager.jsx";
+// import AddUserModal from "./components/admin/addUserModal.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import TeacherLayout from "./layouts/TeacherLayout.jsx";
+import Calendar from "./pages/students/calendar/Calendar.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -17,9 +19,8 @@ function AppRoutes() {
       <Route element={<StudentLayout />}>
         <Route path="/student/homePage" element={<Homepage />} />
         <Route path="/student/profile" element={<StudentProfile />} />
-        <Route path="/student/journal" element={<LearningJounal />} />
+        {/* <Route path="/student/journal" element={<LearningJounal />} /> */}
         <Route path="/student/calendar" element={<Calendar />} />
-        <Route path="/student/form" element={<EvenForm />} />
       </Route>
 
       {/* User layout */}
@@ -30,13 +31,13 @@ function AppRoutes() {
       {/* admin layout */}
       <Route element={<AdminLayout/>}>
         <Route path="/admin/dashboard" element={<h1>Admin</h1>} />
+        {/* <Route path="/admin/liststudent" element={<ListStudent/>}/> */}
       </Route>
 
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
-        <Route path="/teacher/homePage" element={<h1>Teacher</h1>} />
+        {/* <Route path="/teacher/journals/:studentId" element={<StudentJournal />} /> */}
       </Route>
-
     </Routes>
   );
 }

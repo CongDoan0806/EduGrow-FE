@@ -1,5 +1,3 @@
-import './Calendar.css';
-
 const DeleteEvent = ({ eventInfo, onConfirm, onCancel, position }) => {
   if (!eventInfo || !position) return null;
 

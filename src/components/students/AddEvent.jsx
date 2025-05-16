@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const presetColors = [
   { name: 'Blue', value: '#cfe9ff' },
@@ -9,7 +9,7 @@ const presetColors = [
   { name: 'Yellow', value: '#ffffcc' }
 ];
 
-const EventForm = ({ datetime, onAdd, onCancel }) => {
+const AddEvent = ({ datetime, onAdd, onCancel }) => {
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState(presetColors[0].value);
   const initialized = useRef(false);
@@ -93,4 +93,4 @@ const EventForm = ({ datetime, onAdd, onCancel }) => {
   );
 };
 
-export default EventForm;
+export default AddEvent;

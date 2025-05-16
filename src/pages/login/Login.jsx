@@ -36,7 +36,7 @@ export default function Login() {
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
       localStorage.setItem('user', JSON.stringify(user));
-  
+      console.log('Login successful:', response.data);
       if (role === 'student') {
         navigate('/student/homePage');
       } else if (role === 'teacher') {

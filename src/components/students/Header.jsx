@@ -1,10 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 import { useNavigate, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
   const navigate = useNavigate(); 
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    setUser(storedUser);
+  }, []);
+  console.log('user:', user);
   const handleNavigate = (path) => {
     navigate(path);
   };
@@ -18,7 +26,7 @@ const Header = () => {
                             <a className="nav-link text-white active">Overview</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white">Study Plan</a>
+                            <a className="nav-link text-white"onClick={() => handleNavigate('/student/calendar')}>Study Plan</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text-white">Set Goals</a>
@@ -29,8 +37,13 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="d-flex align-items-center profile">
-                    <a href="profile"><img src="https://2.bp.blogspot.com/-DRJHYLurSSo/WezG8RReDuI/AAAAAAAAAXs/WiTd7NhjR1EATU0ZZtpBxn9qnFQTakc5QCLcBGAs/s1600/avt-cute-11.jpg" alt="avatar" className="rounded-circle me-2" style={{ width: '50px', height: '50px' }} /></a>
-                    <span className="text-white fw-medium">To Nga</span>
+                    <img
+                        src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'} 
+                        alt="avatar"
+                        className="rounded-circle me-2"
+                        style={{ width: '50px', height: '50px' }}
+                    />
+                    <span className="text-white fw-medium">{user?.name || 'Guest'}</span>
                 </div>
             </div>
         </nav>

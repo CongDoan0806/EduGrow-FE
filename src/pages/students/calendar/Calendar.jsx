@@ -4,9 +4,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import axios from 'axios';
-import EventForm from './EventForm';
-import DeleteEvent from './DeleteEvent';
 import './Calendar.css';
+import AddEvent from '../../../components/students/AddEvent';
+import DeleteEvent from '../../../components/students/DeleteEvent';
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
@@ -33,9 +33,6 @@ const Calendar = () => {
       end: `${e.date}T${e.end_time}`,
       backgroundColor: e.color || '#cfe9ff',
     }));
-
-
-
 
       setEvents(formatted);
     } catch (err) {
@@ -99,8 +96,6 @@ const addEvent = async (newEvent) => {
     console.error('Failed to add event:', error);
   }
 };
-
-
 
   const cancelAdd = () => setSelectedRange(null);
 
@@ -185,7 +180,7 @@ const addEvent = async (newEvent) => {
               width: 200,
             }}
           >
-            <EventForm
+            <AddEvent
               datetime={selectedRange}
               onAdd={addEvent}
               onCancel={cancelAdd}
