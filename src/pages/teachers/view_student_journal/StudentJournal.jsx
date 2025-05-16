@@ -1,5 +1,5 @@
 import '../../students/learning_journal/LearningJournal.css';
-import JournalInfoPanel from '../../../components/students/learning_journal/JournalInfoPanel';
+import JournalInfoPanel from '../../../components/students/JournalInfoPanel';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
