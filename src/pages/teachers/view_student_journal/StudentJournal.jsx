@@ -1,5 +1,5 @@
 import '../../students/learning_journal/LearningJournal.css';
-import JournalInfoPanel from '../../../components/students/learning_journal/JournalInfoPanel';
+import JournalInfoPanelTeacher from '../../../components/students/JournalInfoPanelTeacher';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -52,7 +52,7 @@ function StudentJournal () {
     const fetchJournalDataByWeek = async (weekNumber) => {
         setLoading(true);
         try {
-        const res = await axios.get(`/api/teacher/learning-journal/${studentId}`, {
+        const res = await axios.get(`/api/teachers/learning-journal/${studentId}`, {
             params: { week_number: weekNumber },
             headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -217,7 +217,7 @@ function StudentJournal () {
         <div>
             <div className='content'>
                 <section className='journal-info-panel'>
-                   <JournalInfoPanel 
+                   <JournalInfoPanelTeacher 
                         weekNumber={weekNumber}
                         journalDate={journalDate}
                         onNeedReviewClick={openModal} 

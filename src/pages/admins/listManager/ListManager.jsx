@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './ListManager.css';
-import AddUserModal from '../../../components/admin/addUserModal';
+import AddUserModal from '../../../components/admins/AddUserForm';
 import ListTeacher from '../../../components/admins/ListTeacher';
 import ListStudent from '../../../components/admins/ListStudent';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -37,13 +37,13 @@ const ListManager = () => {
                             className={`tab ${activeTab === 'student' ? 'active' : ''}`} 
                             onClick={() => setActiveTab('student')}
                         >
-                            student
+                            Student
                         </button>
                         <button 
                             className={`tab ${activeTab === 'teacher' ? 'active' : ''}`} 
                             onClick={() => setActiveTab('teacher')}
                         >
-                            teacher
+                            Teacher
                         </button>
                     </div>
                 </div>

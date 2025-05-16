@@ -14,8 +14,9 @@ const Header = () => {
   }, []);
   console.log('user:', user);
   const handleNavigate = (path) => {
-    navigate(path);
-  };
+        navigate(path);
+    };
+    
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container d-flex justify-content-between align-items-center">
@@ -32,7 +33,7 @@ const Header = () => {
                             <a className="nav-link text-white">Set Goals</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white" onClick={() => handleNavigate('/student/journal')}>Learning Journal</a>
+                            <a className="nav-link text-white" onClick={() => handleNavigate('/learning-journal/week1')}>Learning Journal</a>
                         </li>
                     </ul>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './addUserModal.css';
+import './AddUserModal.css';
 
 const AddUserModal = ({ isOpen, onClose, role }) => {
     const [formData, setFormData] = useState({
@@ -9,6 +9,7 @@ const AddUserModal = ({ isOpen, onClose, role }) => {
         password: '',
         role: role || 'student',
         class_name:'',
+        subject:'',
     });
 
     const [loading, setLoading] = useState(false);
@@ -55,7 +56,8 @@ const AddUserModal = ({ isOpen, onClose, role }) => {
             email:'',
             phone:'',
             password: '',
-            role: role||'student'
+            role: role||'student',
+            subject:'',
         });
         onClose();
         } catch (err) {
@@ -132,17 +134,18 @@ const AddUserModal = ({ isOpen, onClose, role }) => {
                     />
                 </label>
             )}
+            {formData.role ==='teacher'&&(
+                <label>
+                    Add subject
+                    <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    />
+                </label>
+            )}
             
-
-            <label>
-                Add subject
-                <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                />
-            </label>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <div className="modal-buttons">
                 <button type="submit" disabled={loading} className="save-button">
