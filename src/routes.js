@@ -16,7 +16,8 @@ function AppRoutes() {
       <Route element={<StudentLayout />}>
         <Route path="/student/homePage" element={<Homepage />} />
         <Route path="/student/profile" element={<StudentProfile />} />
-        <Route path="/student/journal" element={<LearningJounal />} />
+        {/* <Route path="/student/journal" element={<LearningJounal />} /> */}
+        <Route path="/learning-journal/:weekId" element={<LearningJounal />} />
       </Route>
 
       {/* User layout */}

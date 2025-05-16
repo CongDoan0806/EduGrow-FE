@@ -30,13 +30,11 @@ export default function Login() {
       }, {
         withCredentials: true
       });
-  
       const { token, role, user } = response.data;
   
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
       localStorage.setItem('user', JSON.stringify(user));
-  
       if (role === 'student') {
         navigate('/student/homePage');
       } else if (role === 'teacher') {
