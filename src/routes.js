@@ -7,9 +7,12 @@ import SetGoals from "./pages/students/set_goals/SetGoals.jsx";
 import { Route, Routes } from "react-router-dom";
 import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
+import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
 import ListStudent from "./pages/admins/listManager/ListManager.jsx";
+import AddUserModal from "./components/admins/AddUserForm.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import TeacherLayout from "./layouts/TeacherLayout.jsx";
+import Calendar from "./pages/students/calendar/Calendar.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -19,6 +22,8 @@ function AppRoutes() {
         <Route path="/student/profile" element={<StudentProfile />} />
         <Route path="/student/journal" element={<LearningJounal />} />
         <Route path="/student/setgoals" element={<SetGoals/>} />
+        <Route path="/student/calendar" element={<Calendar />} />
+        <Route path="/learning-journal/:weekId" element={<LearningJounal />} />
       </Route>
 
       {/* User layout */}
@@ -34,9 +39,8 @@ function AppRoutes() {
 
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
-        <Route path="/teacher/homePage" element={<h1>Teacher</h1>} />
+        <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
       </Route>
-
     </Routes>
   );
 }

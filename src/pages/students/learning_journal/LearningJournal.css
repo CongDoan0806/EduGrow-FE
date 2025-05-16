@@ -139,6 +139,33 @@
   background-color: #f1f1f1;
 }
 
+input[type="date"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  font-family: 'Quicksand';
+  color: #333;
+}
+
+input[type="date"]:focus,
+input[type="text"]:focus,
+select:focus {
+  background: #e6e6fa;
+  border-radius: 4px;
+}
+
+.error {
+  color: #e53e3e;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
 /* SelfStudyTable */
 .title-self-study {
   text-align: center;
@@ -146,6 +173,7 @@
   font-weight: bold;
   font-family: 'Quicksand';
   text-align: left;
+  font-size: 24px;
 }
 
 .table-wrapper {
@@ -183,19 +211,6 @@
 
 .self-study-table tr:hover {
   background-color: #f1f1f1; 
-}
-
-/* Thêm quy tắc cho cột Date */
-.self-study-table th:first-child,
-.self-study-table td:first-child {
-  width: 80px; 
-  white-space: nowrap;
-}
-
-/* Thêm quy tắc cho cột Skills/Module */
-.self-study-table th:nth-child(2),
-.self-study-table td:nth-child(2) {
-  width: 140px; 
 }
 
 /* Add button */
@@ -355,4 +370,6 @@
   cursor: pointer;
   padding: 0;
 }
-
+.tag-content-journal{
+  padding-left: 40px !important;
+}

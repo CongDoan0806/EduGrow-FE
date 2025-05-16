@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './ListManager.css';
+import AddUserModal from '../../../components/admins/AddUserForm';
 import ListTeacher from '../../../components/admins/ListTeacher';
 import ListStudent from '../../../components/admins/ListStudent';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,17 +9,18 @@ const ListManager = () => {
     const [activeTab, setActiveTab] = useState('student');
     const [studentPage, setStudentPage] = useState(1);
     const [teacherPage, setTeacherPage] = useState(1);
+    const [showModal, setShowModal] = useState(false);
     const itemsPerPage = 5;
 
     const studentData = Array.from({ length: 20 }, (_, i) => ({ name: `Student ${i + 1}` }));
     const teacherData = Array.from({ length: 12 }, (_, i) => ({ name: `Teacher ${i + 1}` }));
 
     const handleAddClick = () => {
-        if (activeTab === 'student') {
-            console.log("ADD Student");
-        } else {
-            console.log("ADD Teacher");
-        }
+        setShowModal(true);
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
     };
 
     return (
@@ -35,18 +37,19 @@ const ListManager = () => {
                             className={`tab ${activeTab === 'student' ? 'active' : ''}`} 
                             onClick={() => setActiveTab('student')}
                         >
-                            student
+                            Student
                         </button>
                         <button 
                             className={`tab ${activeTab === 'teacher' ? 'active' : ''}`} 
                             onClick={() => setActiveTab('teacher')}
                         >
-                            teacher
+                            Teacher
                         </button>
                     </div>
                 </div>
                 <button className="add_button" onClick={handleAddClick}>Add</button>
             </div>
+
             {activeTab === 'student' ? (
                 <ListStudent 
                     currentPage={studentPage}
@@ -62,7 +65,14 @@ const ListManager = () => {
                     data={teacherData}
                 />
             )}
+
+            <AddUserModal 
+                isOpen={showModal} 
+                onClose={handleModalClose} 
+                role={activeTab} 
+            />
         </div>
     );
 };
+
 export default ListManager;
