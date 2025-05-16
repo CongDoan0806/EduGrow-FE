@@ -52,7 +52,7 @@ function StudentJournal () {
     const fetchJournalDataByWeek = async (weekNumber) => {
         setLoading(true);
         try {
-        const res = await axios.get(`/api/teacher/learning-journal/${studentId}`, {
+        const res = await axios.get(`/api/teachers/learning-journal/${studentId}`, {
             params: { week_number: weekNumber },
             headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
