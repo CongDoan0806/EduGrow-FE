@@ -27,7 +27,7 @@ const Header = () => {
                             <a className="nav-link text-white active">Overview</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white">Study Plan</a>
+                            <a className="nav-link text-white"onClick={() => handleNavigate('/student/calendar')}>Study Plan</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text-white">Set Goals</a>
