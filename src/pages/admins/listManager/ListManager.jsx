@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './ListManager.css';
-import AddUserModal from '../../../components/admins/AddUserModal';
+import AddUserModal from '../../../components/admins/AddUserForm';
 import ListTeacher from '../../../components/admins/ListTeacher';
 import ListStudent from '../../../components/admins/ListStudent';
 import 'bootstrap/dist/css/bootstrap.min.css';
