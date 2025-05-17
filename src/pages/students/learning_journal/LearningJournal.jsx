@@ -250,7 +250,7 @@ function LearningJournal() {
     return (
         <div>
             <div className='content'>
-                <ToastContainer />
+                {/* <ToastContainer /> */}
                 <section className='journal-info-panel'>
                     <JournalInfoPanel 
                         weekNumber={weekNumber}

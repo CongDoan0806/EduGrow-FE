@@ -56,7 +56,7 @@ const Header = () => {
                             <a className="nav-link text-white" onClick={() => handleNavigate('/student/setgoals')}>Set Goals</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white" onClick={() => handleNavigate('/student/journal')}>Learning Journal</a>
+                            <a className="nav-link text-white" onClick={() => handleNavigate('/learning-journal/week1')}>Learning Journal</a>
                         </li>
                     </ul>
                 </div>
