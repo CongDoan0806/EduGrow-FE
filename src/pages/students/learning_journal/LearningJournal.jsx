@@ -239,7 +239,6 @@ function LearningJournal() {
                 } else {
                     toast.error(error.message || 'Unexpected error');
                 }
-
                 console.error(error);
             }
         }
