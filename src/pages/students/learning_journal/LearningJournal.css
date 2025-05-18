@@ -243,43 +243,75 @@ select:focus {
 }
 
 .modal-frm-content {
-  background-color: #7B6ADA; 
+  background-color: #7B6ADA;
   padding: 20px;
-  width: 400px; 
-  border-radius: 15px; 
+  width: 400px;
+  border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: fixed; 
-  top: 170px; 
-  right: 50px; 
-  height: calc(100vh - 230px); /* Chiều cao từ vị trí top đến hết màn hình (100vh - top - padding) */
-  overflow-y: auto;
+  position: fixed;
+  top: 170px;
+  right: 50px;
+  height: calc(100vh - 230px);
+  overflow: hidden; 
   font-family: 'Quicksand';
+  display: flex;
+  flex-direction: column;
 }
 
+/* Giữ header cố định khi scroll */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
   padding: 0;
+  position: sticky;
+  top: 0;
+  background-color: #7B6ADA;
+  z-index: 2;
+  margin-top: 20px;
 }
 
 .modal-title {
   font-size: 24px;
   font-weight: bold;
-  color: #fff; 
-  margin: 0 auto;
+  color: #fff;
+  margin: 0;
+}
+
+.subject-select {
+  width: 150px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-left: auto;
 }
 
 .close-modal-btn {
+  position: absolute;
+  top: -48px; 
+  right: 0;
   cursor: pointer;
   font-size: 40px;
   font-weight: bold;
-  color: #fff; 
+  color: #fff;
 }
 
 .comment-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px; 
   margin-bottom: 15px;
+}
+
+.comment-list::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+.comment-list {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .comment-item {
@@ -288,10 +320,6 @@ select:focus {
   padding: 10px;
   margin-bottom: 10px;
   position: relative;
-}
-
-.comment-container{
-  margin: 23px 0;
 }
 
 .modal-content {
@@ -315,7 +343,7 @@ select:focus {
 .comment-title{
   display: flex;
   flex-direction: row;
-  gap: 100px;
+  gap: 20px;
 }
 
 .comment-info{
@@ -370,6 +398,33 @@ select:focus {
   cursor: pointer;
   padding: 0;
 }
-.tag-content-journal{
-  padding-left: 40px !important;
+
+.mentions {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.mentions__input {
+  border: none;
+  outline: none;
+  min-height: 60px;
+  line-height: 22px;
+}
+
+.mentions__suggestions__list {
+  background-color: white;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 10;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.mentions__suggestions__item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.mentions__suggestions__item--focused {
+  background-color: #f0f0f0;
 }
