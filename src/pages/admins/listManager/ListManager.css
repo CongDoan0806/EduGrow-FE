@@ -6,27 +6,27 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.header {
+.user-management .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 30px;
 }
 
-.header-left {
+.header .header-left {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.header-left h2 {
+.header .header-left h2 {
     margin: 0;
     font-size: 22px;
     font-weight: 600;
     color: #2c3e50;
 }
 
-.add_button {
+.header .add_button {
     background-color: #7B6ADA;
     color: white;
     width: 100px;
@@ -40,18 +40,18 @@
     transition: background 0.3s;
 }
 
-.add_button:hover {
+.header .add_button:hover {
     background-color: #5a4ef0;
 }
 
-table {
+.user-management table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 25px;
     font-size: 14px;
 }
 
-th {
+.user-management th {
     background-color: #F1F0FE;
     font-weight: 600;
     color: #2d3748;
@@ -59,13 +59,13 @@ th {
 
 }
 
-th, td {
+.user-management th, td {
     padding: 12px;
     text-align: center;
     border-bottom: 1px solid #DEE2E6;
 }
 
-tr:nth-child(even) {
+.user-management tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 .update-btn {

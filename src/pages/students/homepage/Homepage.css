@@ -282,14 +282,14 @@ body {
   .course-section .course-list {
     display: flex;
     justify-content: center;
-    gap: 90px;
+    gap: 120px;
     flex-wrap: wrap;
   }
   
   .course-list .course-card {
     position: relative;
     background-color: #F1F0FE;
-    width: 260px;
+    width: 300px;
     padding: 80px 20px 30px;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
