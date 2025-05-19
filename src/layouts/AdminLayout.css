@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9fb;
+    /* background-color: #f9f9fb; */
 } 
 .admin-layout {
     display: flex;
