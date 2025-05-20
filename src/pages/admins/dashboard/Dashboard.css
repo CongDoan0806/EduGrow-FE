@@ -1,0 +1,44 @@
+/* Wrapper bố cục toàn trang */
+.admin-wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar cố định bên trái */
+.admin-sidebar {
+  width: 240px;
+  background-color: #f8f9fc;
+  border-right: 1px solid #e2e8f0;
+}
+
+/* Phần bên phải của dashboard */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background-color: #f8f9fc;
+}
+
+/* Topbar nằm trên cùng */
+.admin-header {
+  height: 64px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Container chứa dashboard nội dung */
+.admin-dashboard {
+  padding: 2rem;
+  background-color: #f8f9fc;
+  flex: 1;
+  overflow-y: auto;
+}
