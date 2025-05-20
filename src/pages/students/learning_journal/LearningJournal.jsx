@@ -32,7 +32,7 @@ function LearningJournal() {
     const weekNumber = parseInt(weekId?.replace('week', ''), 10) || 1;
 
      // Sửa dependency đúng chỉ là weekNumber (sửa lỗi loop)
-    useEffect(() => {
+    useEffect(() => {   
         fetchStartAndEndDate();
         fetchLearningJournal();
     }, [weekNumber]);

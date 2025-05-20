@@ -60,7 +60,7 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
-                 <div className="d-flex align-items-center profile" onClick={() => handleNavigate('/student/profile')}>
+                  <div className="d-flex align-items-center profile" onClick={() => handleNavigate('/student/profile')}>
                   <img
                     src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
                     alt="avatar"

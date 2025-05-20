@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './AddUserModal.css';
+import './addUserModal.css';
 
 const AddUserModal = ({ isOpen, onClose, role }) => {
     const [formData, setFormData] = useState({
