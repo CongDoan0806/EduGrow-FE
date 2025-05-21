@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -13,12 +13,13 @@ const Calendar = () => {
   const [selectedRange, setSelectedRange] = useState(null);
   const [formPosition, setFormPosition] = useState(null);
   const [deleteInfo, setDeleteInfo] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date()); // 👈 ngày hiện tại
+  const calendarRef = useRef(null); // 👈 ref điều khiển lịch chính
 
   const getAuthHeader = () => ({
     Authorization: `Bearer ${localStorage.getItem('token')}`,
   });
 
-  // Lấy danh sách sự kiện từ backend
   const fetchEvents = async () => {
     try {
       const res = await axios.get('http://localhost:8000/api/study-plans', {
@@ -26,13 +27,13 @@ const Calendar = () => {
         withCredentials: true,
       });
 
-   const formatted = res.data.map((e) => ({
-      id: String(e.id),
-      title: e.title,
-      start: `${e.date}T${e.start_time}`,
-      end: `${e.date}T${e.end_time}`,
-      backgroundColor: e.color || '#cfe9ff',
-    }));
+      const formatted = res.data.map((e) => ({
+        id: String(e.id),
+        title: e.title,
+        start: `${e.date}T${e.start_time}`,
+        end: `${e.date}T${e.end_time}`,
+        backgroundColor: e.color || '#cfe9ff',
+      }));
 
       setEvents(formatted);
     } catch (err) {
@@ -44,7 +45,6 @@ const Calendar = () => {
     fetchEvents();
   }, []);
 
-  // Khi chọn vùng thời gian để tạo event
   const handleSelect = (selectInfo) => {
     const { jsEvent } = selectInfo;
     setDeleteInfo(null);
@@ -52,54 +52,59 @@ const Calendar = () => {
     setSelectedRange({ start: selectInfo.start, end: selectInfo.end });
   };
 
-  // Khi click vào ngày trên mini calendar
   const handleDateClick = (arg) => {
     setDeleteInfo(null);
     setFormPosition({ x: arg.jsEvent.pageX, y: arg.jsEvent.pageY });
     setSelectedRange({ start: arg.date, end: arg.date });
+    setCurrentDate(arg.date); // 👈 cập nhật ngày đang xem
+
+    // 👇 cuộn lịch chính sang ngày vừa chọn
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+      calendarApi.gotoDate(arg.date);
+    }
   };
 
-const addEvent = async (newEvent) => {
-  try {
-    const startDate = new Date(newEvent.start);
-    const endDate = new Date(newEvent.end);
+  const addEvent = async (newEvent) => {
+    try {
+      const startDate = new Date(newEvent.start);
+      const endDate = new Date(newEvent.end);
 
-    const date = startDate.toISOString().split('T')[0];
-    const start_time = startDate.toTimeString().split(' ')[0];
-    const end_time = endDate.toTimeString().split(' ')[0];
+      const date = startDate.toISOString().split('T')[0];
+      const start_time = startDate.toTimeString().split(' ')[0];
+      const end_time = endDate.toTimeString().split(' ')[0];
 
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const day_of_week = days[startDate.getDay()];
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const day_of_week = days[startDate.getDay()];
 
-    const payload = {
-      title: newEvent.title,
-      day_of_week,
-      date,
-      start_time,
-      end_time,
-      color: newEvent.color, // ✅ Sử dụng đúng color từ EventForm
-    };
-    console.log('Sending payload:', payload); // THÊM DÒNG NÀY
+      const payload = {
+        title: newEvent.title,
+        day_of_week,
+        date,
+        start_time,
+        end_time,
+        color: newEvent.color,
+      };
 
+      console.log('Sending payload:', payload);
 
-    await axios.post('http://localhost:8000/api/study-plans', payload, {
-      headers: {
-        ...getAuthHeader(),
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    });
+      await axios.post('http://localhost:8000/api/study-plans', payload, {
+        headers: {
+          ...getAuthHeader(),
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
 
-    await fetchEvents();
-    setSelectedRange(null);
-  } catch (error) {
-    console.error('Failed to add event:', error);
-  }
-};
+      await fetchEvents();
+      setSelectedRange(null);
+    } catch (error) {
+      console.error('Failed to add event:', error);
+    }
+  };
 
   const cancelAdd = () => setSelectedRange(null);
 
-  // Khi click vào sự kiện để xóa
   const handleEventClick = (clickInfo) => {
     const { jsEvent, event } = clickInfo;
     setSelectedRange(null);
@@ -110,7 +115,6 @@ const addEvent = async (newEvent) => {
     });
   };
 
-  // Xác nhận xóa sự kiện
   const confirmDelete = async (eventInfo) => {
     const id = String(eventInfo.id);
     try {
@@ -133,13 +137,13 @@ const addEvent = async (newEvent) => {
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
-          initialDate="2025-05-15"
           headerToolbar={{
             left: 'title',
             right: 'prev,next',
           }}
           height="auto"
           selectable={true}
+          events={events}
           dateClick={handleDateClick}
           dayHeaderFormat={{ weekday: 'narrow' }}
           className="mini-calendar"
@@ -148,9 +152,10 @@ const addEvent = async (newEvent) => {
 
       <div className="calendar-main">
         <FullCalendar
+          ref={calendarRef} // 👈 thêm ref để điều khiển lịch
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="timeGridWeek"
-          initialDate="2025-05-15"
+          initialDate={currentDate} // 👈 bắt đầu từ ngày hiện tại
           headerToolbar={{
             start: 'prev,today,next',
             center: 'title',

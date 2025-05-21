@@ -158,8 +158,7 @@
   background: #fff;
   padding: 20px 24px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-  border: 1px solid #ccc; /* chỉ có border ngoài */
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);border: 1px solid #ccc; /* chỉ có border ngoài */
   width: 280px;
   font-family: Arial, sans-serif;
 }

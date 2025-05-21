@@ -1,10 +1,9 @@
 .profile-card {
   background-color: #f1f0fe;
   width: 320px;
-  height: 550px;
+  height: 705px;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   margin: 20px 0 0 30px;
 }
 
@@ -15,8 +14,8 @@
 }
 
 .user-info .avatar {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   margin-right: 12px;
   object-fit: cover;
@@ -25,12 +24,12 @@
 
 .info-text .name {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0;
 }
 
 .info-text .email {
-  font-size: 12px;
+  font-size: 14px;
   color: #555;
   margin-top: 2px;
 }
@@ -42,11 +41,11 @@
   padding: 10px 12px;
   margin-bottom: 10px;
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #B3B3B3;
   font-size: 14px;
   cursor: pointer;
   color: #555;
-  background-color: #fff;
+  background-color: #f1f0fe;
   transition: 0.3s ease;
 }
 

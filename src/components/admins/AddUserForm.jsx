@@ -70,7 +70,7 @@ const AddUserModal = ({ isOpen, onClose, role }) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Update User</h2>
+            <h2>Add User</h2>
             <form onSubmit={handleSubmit}>
             <label>
                 Name
