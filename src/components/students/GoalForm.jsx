@@ -17,8 +17,8 @@ const GoalForm = ({
           <div className="form-group">
             <label>Mục tiêu:</label>
             <textarea 
-              name="goal" 
-              value={newGoal.goal}
+              name="content" 
+              value={newGoal.content}
               onChange={handleInputChange}
               placeholder="Nhập mục tiêu của bạn"
             />
