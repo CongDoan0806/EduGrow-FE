@@ -1,0 +1,116 @@
+.class-management-item {
+  width: 300px;
+  height: 164px;
+  border-radius: 7%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.class-management-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.class-management-header h1{
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+}
+.class-item-image-container {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10% !important;
+  border-top-right-radius: 10% !important;
+  overflow: hidden;
+  padding-right: 0px !important;
+  background-color: #f2f3f5;
+}
+.class-item-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+.card-class-image {
+  position: absolute;
+  background-color: #f6f7f8;
+  width: 100%;
+  height: 100%;
+  border-radius: 7%;
+  border: 1px solid #cccccc54;
+}
+.class-card-back {
+  top: 23px;
+  left: 70px;
+  z-index: 1;
+}
+.class-card-middle {
+  top: 34px;
+  left: 50px;
+  z-index: 2;
+}
+.class-card-front {
+  top: 45px;
+  left: 34px;
+  z-index: 3;
+}
+.class-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7%;
+}
+
+.class-item-teacher .dropdown-toggle::after {
+  display: none !important;
+}
+
+.class-item-teacher img {
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+.class-item-teacher .class-teacher-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+
+.add-class-item {
+    width: 300px;
+    min-height: 344px;
+    border-radius: 12px;
+    background-color: #f8f9fa; 
+    border: 1px solid #dee2e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 7%;
+}
+
+.add-class-item:hover {
+    border-color: #a78bfa; 
+    box-shadow: 0 6px 12px rgba(167, 139, 250, 0.2);
+}
+
+.add-class-item span {
+    font-size: 70px;
+    color: #a78bfa; 
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(167, 139, 250, 0.15); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    padding-bottom: 12px !important;
+}
+
+.add-class-item:hover span {
+    background-color: #a78bfa;
+    color: #fff;
+    transform: scale(1.1); 
+}

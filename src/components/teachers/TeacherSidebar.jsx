@@ -17,7 +17,7 @@ export default function TeacherSidebar(){
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar-teacher">
       {sidebarItems.map(item => (
         <div
           key={item.id}
