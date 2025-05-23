@@ -37,6 +37,11 @@ const [message, setMessage] = useState('');
 
 // 
 
+
+    useEffect(() => {
+        fetchStartAndEndDate();
+        fetchLearningJournal();
+    }, [weekNumber]);
 const inClassRef = useRef();
 const selfStudyRef = useRef();
 const navigate = useNavigate();
@@ -181,7 +186,203 @@ if (selectedSubjectId && subjects.length > 0) {
 //     setLearningJournalId(null);
 //   }
 // }, [selectedSubjectId, subjects, learningJournals, weekNumber]);
+    const fetchStartAndEndDate = async () => {
+        console.log(`Fetching week dates for week ${weekNumber}`); 
+        try {
+            const response = await axios.get(`/api/learning-journal/week/${weekNumber}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            });
 
+
+            setStartDateFromWeekApi(response.data.start_date || null);
+            setEndDateFromWeekApi(response.data.end_date || null);
+        } catch (err) {
+            console.error('Failed to fetch start/end date:', err);
+            toast.error('Could not load week dates');
+        }
+    };
+
+    const fetchLearningJournal = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('/api/learning-journal', {
+                params: { week_number: weekNumber },
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+                
+            });
+
+            setInClassData(response.data.data?.in_class || []);
+            setSelfStudyData(response.data.data?.self_study || []);
+            setStartDate(response.data.data?.start_date || null);
+            setEndDate(response.data.data?.end_date || null);
+            setLoading(false);
+        } catch (err) {
+            toast.error('Failed to fetch learning journal data');
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+     const handleWeekChange = (change) => {
+        const newWeek = Math.max(1, Math.min(10, weekNumber + change));
+        navigate(`/learning-journal/week${newWeek}`);
+    };
+
+    const openModal = () => setIsModalOpen(true);
+
+    const handleOutsideClick = (e) => {
+        if (e.target.className === 'modal-frm') {
+            setIsModalOpen(false);
+        }
+    };
+
+    const validateNewRows = () => {
+        if (!startDate || !endDate) {
+            toast.error('Start date or end date is missing');
+            return false;
+        }
+
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        if (isNaN(start) || isNaN(end)) {
+            toast.error('Invalid start or end date');
+            return false;
+        }
+
+        const inClassRows = inClassRef.current.getNewRows();
+        const selfStudyRows = selfStudyRef.current.getNewRows();
+
+        if (inClassRows.length === 0 && selfStudyRows.length === 0) {
+            toast.error('Please add at least one row to save.');
+            return false;
+        }
+
+        for (let row of inClassRows) {
+            const inputDate = new Date(row.date);
+            if (isNaN(inputDate)) {
+                toast.error('Invalid date format in In Class');
+                return false;
+            }
+            if (inputDate < start || inputDate > end) {
+                toast.error(`In Class date must be between ${startDate} and ${endDate}`);
+                return false;
+            }
+            if (!row.skills_module || !row.my_lesson || !row.self_assessment || !row.my_difficulties || !row.my_plan) {
+                toast.error('All In Class fields are required');
+                return false;
+            }
+        }
+
+        for (let row of selfStudyRows) {
+            const inputDate = new Date(row.date);
+            if (isNaN(inputDate)) {
+                toast.error('Invalid date format in Self Study');
+                return false;
+            }
+            if (inputDate < start || inputDate > end) {
+                toast.error(`Self Study date must be between ${startDate} and ${endDate}`);
+                return false;
+            }
+            if (
+                !row.skills_module ||
+                !row.my_lesson ||
+                !row.time_allocation ||
+                !row.learning_resources ||
+                !row.learning_activities ||
+                !row.evaluation ||
+                !row.reinforcing ||
+                !row.notes
+            ) {
+                toast.error('All Self Study fields are required');
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    const handleSave = async () => {
+        if (!validateNewRows()) return;
+
+        const inClassRows = inClassRef.current.getNewRows();
+        const selfStudyRows = selfStudyRef.current.getNewRows();
+
+        const formattedInClassData = inClassRows.map((row) => ({
+            date: row.date,
+            skills_module: row.skills_module,
+            my_lesson: row.my_lesson,
+            self_assessment: row.self_assessment,
+            my_difficulties: row.my_difficulties,
+            my_plan: row.my_plan,
+            problem_solved: row.problem_solved === 'Yes',
+        }));
+
+        const formattedSelfStudyData = selfStudyRows.map((row) => ({
+            date: row.date,
+            skills_module: row.skills_module,
+            my_lesson: row.my_lesson,
+            time_allocation: row.time_allocation,
+            learning_resources: row.learning_resources,
+            learning_activities: row.learning_activities,
+            concentration: row.concentration === 'Yes',
+            plan_follow: row.plan_follow === 'Yes',
+            evaluation: row.evaluation,
+            reinforcing: row.reinforcing,
+            notes: row.notes,
+        }));
+
+        console.log('In Class Data to save:', formattedInClassData);
+        console.log('Self Study Data to save:', formattedSelfStudyData);
+
+        try {
+            const response = await axios.post(
+                `/api/learning-journal?week_number=${weekNumber}`,
+                {
+                    week_number: weekNumber,
+                    in_class: formattedInClassData.length > 0 ? formattedInClassData : [],
+                    self_study: formattedSelfStudyData.length > 0 ? formattedSelfStudyData : [],
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                }
+            );
+
+            console.log('Response from API:', response.data);
+
+            if (response.data.data) {
+                setInClassData(response.data.data.in_class || []);
+                setSelfStudyData(response.data.data.self_study || []);
+            } else {
+                console.log('No data returned, fetching again...');
+                await fetchLearningJournal();
+            }
+
+            console.log('Payload sent:', {
+                week_number: weekNumber,
+                in_class: formattedInClassData,
+                self_study: formattedSelfStudyData
+            });
+
+            inClassRef.current.clearNewRows();
+            selfStudyRef.current.clearNewRows();
+            toast.success('Data saved successfully');
+        } catch (error) {
+                if (error.response) {
+                    toast.error(error.response.data.message || 'Failed to save data');
+                } else if (error.request) {
+                    toast.error('No response from server');
+                } else {
+                    toast.error(error.message || 'Unexpected error');
+                }
+
+                console.error(error);
+        }
+    }
+
+    const fetchSubjectsAndComments = async () => {
 const fetchStartAndEndDate = async () => {
     console.log(`Fetching week dates for week ${weekNumber}`); 
     try {
@@ -607,6 +808,6 @@ return (
         )}
     </div>
 );
-}
+}}
 
 export default LearningJournal;
