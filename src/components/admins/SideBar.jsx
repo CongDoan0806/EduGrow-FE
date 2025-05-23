@@ -1,5 +1,6 @@
 import './SideBar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 const SideBar = () =>{
     return (
         <div className="sidebar d-flex flex-column p-3">
@@ -13,7 +14,7 @@ const SideBar = () =>{
                                 <li>MENU</li>
                                 <li className="nav-item mb-2 dashboard">
                                     <i class="bi bi-file-bar-graph"></i>
-                                    <a href="#" className="nav-link ">Dashboard</a>
+                                    <a href="/admin/dashboard" className="nav-link ">Dashboard</a>
                                 </li>
                                 <li className="nav-item mb-2 active-tab">
                                     <i class="bi bi-person-circle"></i>
@@ -21,7 +22,7 @@ const SideBar = () =>{
                                 </li>
                                 <li className="nav-item mb-2">
                                     <i class="bi bi-menu-up"></i>
-                                    <a href="#" className="nav-link ">Class management</a>
+                                    <Link to="/admin/class-management" className="nav-link ">Class management</Link>
                                 </li>
                             </div>
                             

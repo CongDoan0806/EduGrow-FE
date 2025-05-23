@@ -1,26 +1,9 @@
-import { addDays, format } from "date-fns";
+import { addDays, format, parseISO } from "date-fns";
+function JournalInfoPanelTeacher ({ onNeedReviewClick, onNextWeek, onPrevWeek, weekNumber, journalStartDate, journalEndDate }) {
+   console.log("onNeedReviewClick prop:", onNeedReviewClick); 
+   const formattedStartDate = journalStartDate ? format(parseISO(journalStartDate), "dd MMM") : "";
+  const formattedEndDate = journalEndDate ? format(parseISO(journalEndDate), "dd MMM") : "";
 
-function JournalInfoPanelTeacher ({ onNeedReviewClick, onNextWeek, onPrevWeek, weekNumber, journalDate }) {
-   console.log("onNeedReviewClick prop:", onNeedReviewClick); // Xem có undefined không
-  const safeParseDate = (str) => {
-  const isoString = str.replace(' ', 'T');
-  return new Date(isoString);
-};
-
-let formattedDate = '';
-let dateAfter7Days = '';
-
-if (journalDate) {
-  const parsedDate = safeParseDate(journalDate);
-
-  if (!isNaN(parsedDate)) {
-    formattedDate = format(parsedDate, 'dd MMM');
-    dateAfter7Days = format(addDays(parsedDate, 7), 'dd MMM');
-  } else {
-    formattedDate = 'Invalid date';
-    dateAfter7Days = '-';
-  }
-}
   return (
     <div className="journal-info-panel">
       <div className="header-journal">
@@ -33,18 +16,16 @@ if (journalDate) {
       </div>
       <div className="content-journal">
         <p class="time-journal">
-            {formattedDate}
+            {formattedStartDate}
             <span class="arrow-svg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="16" viewBox="0 0 60 16" fill="none">
                 <path d="M0 8H54M54 8L48 2M54 8L48 14" stroke="#BFBFBF" stroke-width="3" stroke-linecap="round"/>
                 </svg>
             </span>
-            {dateAfter7Days}
+            {formattedEndDate}
         </p>
 
         <div className="button-group">
-          <button className="button close-btn">Close</button>
-          <button className="button save-btn">Save</button>
           <button className="button review-btn" onClick={() => { console.log("Clicked"); onNeedReviewClick(); }}>Need review</button>
         </div>
       </div>
