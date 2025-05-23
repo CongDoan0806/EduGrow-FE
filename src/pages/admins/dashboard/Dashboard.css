@@ -1,44 +1,115 @@
-/* Wrapper bố cục toàn trang */
-.admin-wrapper {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
+/* AdminDashboar CSS */
+
+.dashboard-container {
+  padding: 2.5rem;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+  background-color: #f9fafb;
+  min-height: 100vh;
 }
 
-/* Sidebar cố định bên trái */
-.admin-sidebar {
-  width: 240px;
-  background-color: #f8f9fc;
-  border-right: 1px solid #e2e8f0;
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: #111827;
 }
 
-/* Phần bên phải của dashboard */
-.main-content {
-  flex: 1;
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.stat-value {
+  font-size: 28px;
+  color: #111827;
+}
+
+.dashboard-grid {
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  background-color: #f8f9fc;
+  gap: 2rem;
 }
 
-/* Topbar nằm trên cùng */
-.admin-header {
-  height: 64px;
+.chart-box {
   background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
 }
 
-/* Container chứa dashboard nội dung */
-.admin-dashboard {
-  padding: 2rem;
-  background-color: #f8f9fc;
-  flex: 1;
-  overflow-y: auto;
+.chart-box:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.chart-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1.5rem;
+  }
+
+  .dashboard-title {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 1rem;
+  }
+
+  .stat-title {
+    font-size: 14px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .chart-title {
+    font-size: 16px;
+  }
 }

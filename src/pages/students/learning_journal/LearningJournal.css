@@ -343,7 +343,7 @@ select:focus {
 .comment-title{
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
 }
 
 .comment-info{

@@ -1,6 +1,4 @@
 import React from 'react';
-// import Header from '../../../components/admins/Header';
-// import SideBar from '../../../components/admins/SideBar';
 import DashboardAdmin from '../../../components/admins/DashboardAdmin';
 import './Dashboard.css';
 

@@ -13,7 +13,7 @@ const SideBar = () =>{
                                 <li>MENU</li>
                                 <li className="nav-item mb-2 dashboard">
                                     <i class="bi bi-file-bar-graph"></i>
-                                    <a href="#" className="nav-link ">Dashboard</a>
+                                    <a href="/admin/dashboard" className="nav-link ">Dashboard</a>
                                 </li>
                                 <li className="nav-item mb-2 active-tab">
                                     <i class="bi bi-person-circle"></i>
