@@ -164,6 +164,7 @@
 }
 .arrow{
     border:none;
+
 }
 .modal-actions {
   display: flex;
@@ -205,3 +206,4 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+

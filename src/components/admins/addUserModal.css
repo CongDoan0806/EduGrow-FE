@@ -108,12 +108,12 @@ label input[readonly] {
   color: #555;
 }
 
-.button-group {
+/* .button-group {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 1.5rem;
-}
+} */
 
 .save-btn,
 .cancel-btn {
