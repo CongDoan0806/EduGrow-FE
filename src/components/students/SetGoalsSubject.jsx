@@ -12,11 +12,10 @@ const SetGoalsSubject = () => {
   const [error, setError] = useState(null);
   const [semesterGoal, setSemesterGoal] = useState(null);
   const [newGoal, setNewGoal] = useState({
-    subject: '',
-    goal: '',
+    content: '',
     reward: '',
     status: 'pending',
-    reflection: ''
+    reflect: null
   });
 
   // Lấy danh sách môn học khi component được mount
@@ -99,76 +98,83 @@ const SetGoalsSubject = () => {
   }
 };
 
-  const handleAddGoal = async () => {
-    if (newGoal.goal.trim() === '' || newGoal.reward.trim() === '') {
-      alert('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng');
-      return;
-    }
+const handleAddGoal = async () => {
+  if (newGoal.content.trim() === '' || newGoal.reward.trim() === '') {
+    alert('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng');
+    return;
+  }
 
-    try {
-      // Nếu đã có semester goal cho môn học này
-      if (semesterGoal) {
-        // Thêm nội dung mục tiêu mới
-        const response = await axios.post('/api/semester-goals/content', {
-          content: newGoal.goal,
-          reward: newGoal.reward,
-          status: 'pending',
-          sg_id: semesterGoal.sg_id
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        if (response.data.success) {
-          // Cập nhật lại danh sách mục tiêu
-          fetchSemesterGoals();
+  try {
+    // Nếu đã có semester goal cho môn học này
+    if (semesterGoal) {
+      // Thêm nội dung mục tiêu mới
+      const response = await axios.post('/api/semester-goals/content', {
+        content: newGoal.content,
+        reward: newGoal.reward,
+        status: 'pending', // Mặc định là "To do"
+        sg_id: semesterGoal.sg_id
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-      } else {
-        // Tạo semester goal mới nếu chưa có
-        const response = await axios.post('/api/semester-goals', {
-          subject_id: selectedSubject,
-          semester: 'Học kỳ 1 2024-2025', // Có thể thay đổi theo nhu cầu
-          deadline: new Date().toISOString().split('T')[0], // Ngày hiện tại
-          contents: [
-            {
-              content: newGoal.goal,
-              reward: newGoal.reward
-            }
-          ]
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-
-        if (response.data.success) {
-          // Cập nhật lại danh sách mục tiêu
-          fetchSemesterGoals();
-        }
-      }
-
-      // Reset form
-      setShowAddForm(false);
-      setNewGoal({
-        subject: selectedSubject,
-        goal: '',
-        reward: '',
-        status: 'pending',
-        reflection: ''
       });
-    } catch (err) {
-      console.error('Lỗi khi thêm mục tiêu:', err);
-      alert('Có lỗi xảy ra khi thêm mục tiêu. Vui lòng thử lại sau.');
+
+      if (response.data.success) {
+        // Cập nhật lại danh sách mục tiêu
+        fetchSemesterGoals();
+        // Reset form và đóng form
+        setNewGoal({
+          content: '',
+          reward: '',
+          status: 'pending',
+          reflect: null
+        });
+        setShowAddForm(false);
+      }
+    } else {
+      // Tạo semester goal mới nếu chưa có
+      const response = await axios.post('/api/semester-goals', {
+        subject_id: selectedSubject,
+        semester: 'Học kỳ 1 2024-2025', // Có thể thay đổi theo nhu cầu
+        deadline: new Date().toISOString().split('T')[0], // Ngày hiện tại
+        contents: [
+          {
+            content: newGoal.content,
+            reward: newGoal.reward,
+            status: 'pending' // Mặc định là "To do"
+          }
+        ]
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (response.data.success) {
+        // Cập nhật lại danh sách mục tiêu
+        fetchSemesterGoals();
+        // Reset form và đóng form
+        setNewGoal({
+          content: '',
+          reward: '',
+          status: 'pending',
+          reflect: null
+        });
+        setShowAddForm(false);
+      }
     }
-  };
+  } catch (error) {
+    console.error('Lỗi khi thêm mục tiêu:', error);
+    alert('Có lỗi xảy ra khi thêm mục tiêu. Vui lòng thử lại sau.');
+  }
+};
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewGoal({
-      ...newGoal,
+    setNewGoal(prev => ({
+      ...prev,
       [name]: value
-    });
+    }));
   };
 
   const handleSubjectChange = (e) => {
@@ -208,6 +214,18 @@ const SetGoalsSubject = () => {
   if (error) {
     return <div className="error">{error}</div>;
   }
+
+  // Thêm nút để hiển thị form thêm mục tiêu
+  const renderAddGoalButton = () => {
+    return (
+      <button 
+        className="add-goal-corner-button"
+        onClick={() => setShowAddForm(true)}
+      >
+        <FaPlus />
+      </button>
+    );
+  };
 
   return (
     <div className="set-goals-container">
@@ -267,12 +285,8 @@ const SetGoalsSubject = () => {
             )}
           </tbody>
         </table>
-        <button 
-          className="add-goal-corner-button" 
-          onClick={() => setShowAddForm(true)}
-        >
-          <FaPlus />
-        </button>
+        {/* Nút thêm mục tiêu */}
+        {renderAddGoalButton()}
       </div>
 
       <GoalForm 
@@ -283,15 +297,6 @@ const SetGoalsSubject = () => {
         handleAddGoal={handleAddGoal}
         selectedSubject={subjects.find(s => s.subject_id === selectedSubject)?.name || ''}
       />
-
-      <div className="add-goal-floating">
-        <button 
-          className="add-goal-button-mobile"
-          onClick={() => setShowAddForm(true)}
-        >
-          <FaPlus />
-        </button>
-      </div>
     </div>
   );
 };
