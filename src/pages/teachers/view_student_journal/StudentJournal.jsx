@@ -26,7 +26,8 @@ function StudentJournal () {
     const [selfJournals, setSelfJournals] = useState([]);
     const [loading, setLoading] = useState(false);
     const [tagData, setTagData] = useState([]);
-    const [journalDate, setJournalDate] = useState('');
+    const [journalStartDate, setJournalStartDate] = useState('');
+    const [journalEndDate, setJournalEndDate] = useState('');
     const fetchJournalData = async () => {
         setLoading(true);
         try {
@@ -39,7 +40,8 @@ function StudentJournal () {
             setClassJournals(res.data.class_journals || []);
             setSelfJournals(res.data.self_journals || []);
             setWeekNumber(res.data.class_journals[0]?.week_number || 1);
-            setJournalDate(res.data.class_journals[0]?.journal_created_at || '');
+            setJournalStartDate(res.data.class_journals[0]?.start_date || '');
+            setJournalEndDate(res.data.class_journals[0]?.end_date || '');
             fetchTagData(res.data.class_journals[0]?.learning_journal_id || 0); 
         } catch (error) {
             console.error('Lỗi khi lấy dữ liệu ban đầu:', error);
@@ -60,10 +62,13 @@ function StudentJournal () {
             withCredentials: true,
         });
         setClassJournals(res.data.class_journals || []);
+        console.log("classJournals:", res.data.class_journals);
         setSelfJournals(res.data.self_journals || []); 
         fetchTagData(res.data.class_journals[0]?.learning_journal_id || 0); 
-        setJournalDate(res.data.class_journals[0]?.journal_created_at || '');
-        console.log("weekNumber:", res.data.class_journals[0]?.journal_created_at);
+        console.log("tagData:", res.data.class_journals[0]?.learning_journal_id);
+        setJournalStartDate(res.data.class_journals[0]?.start_date || '');
+        setJournalEndDate(res.data.class_journals[0]?.end_date || '');
+        console.log("weekNumber:", res.data.class_journals[0]?.start_date);
         } catch (error) {
         console.error(`Lỗi khi lấy dữ liệu tuần ${weekNumber}:`, error);
         } finally {
@@ -100,6 +105,7 @@ function StudentJournal () {
     // lấy các cái comment 
     const fetchTagData = async (id) => {
         try {
+            console.log("id:", id);
             const res = await axios.get(`/api/teachers/learning-journals/${id}/tags`, {
                 headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -107,6 +113,7 @@ function StudentJournal () {
                 withCredentials: true,
             });
             setTagData(groupTags(res.data || []));
+            console.log("tagData:", res.data);
         } catch (error) {
             console.error('Lỗi khi lấy dữ liệu ban đầu:', error);
         }
@@ -219,7 +226,8 @@ function StudentJournal () {
                 <section className='journal-info-panel'>
                    <JournalInfoPanelTeacher 
                         weekNumber={weekNumber}
-                        journalDate={journalDate}
+                        journalStartDate={journalStartDate}
+                        journalEndDate={journalEndDate}
                         onNeedReviewClick={openModal} 
                         onNextWeek={handleNextWeek} 
                         onPrevWeek={handlePreviousWeek}
