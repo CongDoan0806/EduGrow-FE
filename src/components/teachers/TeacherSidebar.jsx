@@ -1,33 +1,27 @@
-import React, { useState } from 'react';  
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './TeacherSidebar.css';
 
-
-export default function TeacherSidebar(){
-  const [activeItem, setActiveItem] = useState('overview');
-
+export default function TeacherSidebar() {
   const sidebarItems = [
-    { id: 'overview', icon: 'fas fa-home', label: 'Overview' },
-    { id: 'list-students', icon: 'fas fa-user-graduate', label: 'List Students' },
-    { id: 'list-classes', icon: 'fas fa-chalkboard', label: 'List Classes' },
-    { id: 'recent-activities', icon: 'fas fa-clock', label: 'Recent Activities' }
+    { id: 'overview', icon: 'fas fa-home', label: 'Overview', to: '/teacher/homePage' },
+    { id: 'list-students', icon: 'fas fa-user-graduate', label: 'List Students', to: '/teacher/students' },
+    { id: 'list-classes', icon: 'fas fa-chalkboard', label: 'List Classes', to: '/teacher/classes' },
+    { id: 'recent-activities', icon: 'fas fa-clock', label: 'Recent Activities', to: '/teacher/tags' }
   ];
-
-  const handleItemClick = (id) => {
-    setActiveItem(id);
-  };
 
   return (
     <div className="sidebar">
       {sidebarItems.map(item => (
-        <div
+        <NavLink
           key={item.id}
-          className={`sidebar-item ${activeItem === item.id ? 'active' : ''}`}
-          onClick={() => handleItemClick(item.id)}
+          to={item.to}
+          className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
         >
           <i className={item.icon}></i>
           <span>{item.label}</span>
-        </div>
+        </NavLink>
       ))}
     </div>
   );
-};
+}

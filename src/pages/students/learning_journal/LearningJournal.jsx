@@ -334,7 +334,7 @@ function LearningJournal() {
 
         try {
             const response = await axios.post(
-               `/api/learning-journal?week_number=${weekNumber}`,
+                `/api/learning-journal?week_number=${weekNumber}`,
                 {
                     week_number: weekNumber,
                     in_class: formattedInClassData.length > 0 ? formattedInClassData : [],
