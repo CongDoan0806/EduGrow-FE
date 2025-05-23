@@ -3,6 +3,7 @@ import Homepage from "./pages/students/homepage/Homepage";
 import Login from "./pages/login/Login";
 import StudentProfile from "./pages/students/profile/StudentProfile.jsx";
 import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
+import SetGoals from "./pages/students/set_goals/SetGoals.jsx";
 import { Route, Routes } from "react-router-dom";
 import StudentLayout from "./layouts/StudentLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
@@ -13,6 +14,7 @@ import AdminLayout from "./layouts/AdminLayout.jsx";
 import TeacherLayout from "./layouts/TeacherLayout.jsx";
 import Calendar from "./pages/students/calendar/Calendar.jsx";
 import HomepageTeacher from "./pages/teachers/Homepage/HomepageTeacher.jsx";
+import ClassManagement from "./pages/admins/class_management/class_management.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -20,6 +22,8 @@ function AppRoutes() {
       <Route element={<StudentLayout />}>
         <Route path="/student/homePage" element={<Homepage />} />
         <Route path="/student/profile" element={<StudentProfile />} />
+        <Route path="/student/journal" element={<LearningJounal />} />
+        <Route path="/student/setgoals" element={<SetGoals/>} />
         <Route path="/student/calendar" element={<Calendar />} />
         <Route path="/learning-journal/:weekId" element={<LearningJounal />} />
       </Route>
@@ -33,6 +37,7 @@ function AppRoutes() {
       <Route element={<AdminLayout/>}>
         <Route path="/admin/dashboard" element={<h1>Admin</h1>} />
         <Route path="/admin/liststudent" element={<ListStudent/>}/>
+        <Route path="/admin/class-management" element={<ClassManagement/>}/>
       </Route>
 
        {/*teacher layout  */}
