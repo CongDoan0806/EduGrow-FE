@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format } from 'date-fns/format';
 export default function JournalClassItem({ journal }) {
     const { subject_name, my_lesson, self_assessment, difficulties, plan, isSolved, created_at } = journal;
 

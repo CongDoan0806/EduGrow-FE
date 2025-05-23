@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 import { useEffect, useState } from 'react';
+import Notifications from '../../pages/teachers/view_student_journal/Notification';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -27,7 +28,7 @@ const Header = () => {
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      navigate('/'); // quay về trang chủ
+      navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -84,3 +85,4 @@ const Header = () => {
 };
 
 export default Header;
+

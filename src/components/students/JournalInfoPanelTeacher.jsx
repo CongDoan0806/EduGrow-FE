@@ -26,8 +26,6 @@ function JournalInfoPanelTeacher ({ onNeedReviewClick, onNextWeek, onPrevWeek, w
         </p>
 
         <div className="button-group">
-          {/* <button className="button close-btn">Close</button>
-          <button className="button save-btn">Save</button> */}
           <button className="button review-btn" onClick={() => { console.log("Clicked"); onNeedReviewClick(); }}>Need review</button>
         </div>
       </div>

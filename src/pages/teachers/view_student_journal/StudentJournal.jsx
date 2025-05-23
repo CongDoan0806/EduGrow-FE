@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import JournalClassItem from '../../../components/teachers/JournalClassItem';
 import JournalSelfItem from '../../../components/teachers/JournalSelfItem';
 import { BounceLoader} from 'react-spinners';
-import { format } from 'date-fns';
+import { format } from 'date-fns/format';
 function StudentJournal () {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [commentTexts, setCommentTexts] = useState({});

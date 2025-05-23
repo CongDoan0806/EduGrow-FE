@@ -12,6 +12,7 @@
 .sidebar-teacher .sidebar-item {
   display: flex;
   align-items: center;
+  text-decoration: none;
   gap: 12px;
   padding: 10px 12px;
   border: 1px solid #c5aefc;
