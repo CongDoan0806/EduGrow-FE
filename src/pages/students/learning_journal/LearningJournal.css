@@ -341,9 +341,9 @@ margin-right: 10px;
 }
 
 .comment-title{
-display: flex;
-flex-direction: row;
-gap: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .comment-info{
