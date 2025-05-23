@@ -43,7 +43,7 @@ const GoalForm = ({
               onChange={handleInputChange}
               disabled
             >
-              <option value="pending">To do</option>
+              <option value="pending">In Progress</option>
               <option value="completed">Completed</option>
               <option value="failed">Failed</option>
             </select>

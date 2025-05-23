@@ -13,6 +13,7 @@ import AddUserModal from "./components/admins/AddUserForm.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import TeacherLayout from "./layouts/TeacherLayout.jsx";
 import Calendar from "./pages/students/calendar/Calendar.jsx";
+import Dashboard from "./pages/admins/dashboard/Dashboard.jsx";
 import HomepageTeacher from "./pages/teachers/Homepage/HomepageTeacher.jsx";
 import ClassManagement from "./pages/admins/class_management/class_management.jsx";
 function AppRoutes() {
@@ -35,7 +36,7 @@ function AppRoutes() {
 
       {/* admin layout */}
       <Route element={<AdminLayout/>}>
-        <Route path="/admin/dashboard" element={<h1>Admin</h1>} />
+        <Route path="/admin/dashboard" element={<Dashboard/>}/>
         <Route path="/admin/liststudent" element={<ListStudent/>}/>
         <Route path="/admin/class-management" element={<ClassManagement/>}/>
       </Route>
