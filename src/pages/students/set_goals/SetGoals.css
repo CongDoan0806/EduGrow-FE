@@ -16,8 +16,8 @@
   
   .semester-header h2 {
     color: #7B6ADA;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 700;
     text-align: center;
   }
   
@@ -38,6 +38,13 @@
   .add-goal-button:hover {
     background-color: #6952c7;
   }
+
+  .subject-selector-dropdown select {
+    padding: 0;
+    color: #6952c7;
+    font-size: 18px;
+    font-weight: 600;
+  }
   
   .subject-selector {
     display: flex;
@@ -46,17 +53,10 @@
     margin-bottom: 20px;
   }
   
-  .subject-selector h3 {
-    margin: 0;
-    color: #7B6ADA;
-    font-size: 24px;
-    font-weight: 700;
-  }
-  
   .deadline {
     margin: 0;
     color: #7B6ADA;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
   }
 
