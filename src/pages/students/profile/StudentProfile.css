@@ -138,43 +138,66 @@ body {
   height: 20px;
 }
 
+
 .loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  position: fixed; /* che phủ toàn màn hình */
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background-color: rgba(255, 255, 255, 0.8); /* nền trắng mờ */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
-  z-index: 1000;
+  z-index: 9999; /* luôn trên cùng */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .loading-spinner {
-  border: 4px solid rgba(255, 255, 255, 0.3);
+  width: 50px;
+  height: 50px;
+  border: 6px solid #ccc; /* màu xám nhạt */
+  border-top-color: #7b6ada; /* màu tím đậm */
   border-radius: 50%;
-  border-top: 4px solid white;
-  width: 40px;
-  height: 40px;
   animation: spin 1s linear infinite;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.profile-image-placeholder {
-  width: 150px;
-  height: 150px;
-  border: 2px dashed #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  margin-bottom: 10px;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.success-message {
-  color: green;
-  margin-bottom: 20px;
+.loading-overlay p {
+  font-size: 1.2rem;
+  color: #7b6ada;
+  font-weight: 600;
+}
+
+.Toastify__toast--success {
+  background: white !important;  /* xanh lá đẹp */
+  color: #7b6ada!important;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(89, 33, 112, 0.3);
+}
+
+.Toastify__toast--error {
+  background: #e74c3c !important; /* đỏ nổi bật */
+  color: white !important;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(231 76 60 / 0.3);
+}
+
+.Toastify__toast-body {
+  margin: 0;
+  padding: 8px 12px;
+}
+
+.Toastify__progress-bar {
+  background: #7b6ada !important; /* màu xanh nhẹ */
+  height: 5px !important;
+  border-radius: 5px;
 }
