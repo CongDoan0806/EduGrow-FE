@@ -20,7 +20,7 @@ const GoalForm = ({
               name="content" 
               value={newGoal.content}
               onChange={handleInputChange}
-              placeholder="Nhập mục tiêu của bạn"
+              placeholder="Enter your goal"
             />
           </div>
           
@@ -31,7 +31,7 @@ const GoalForm = ({
               name="reward" 
               value={newGoal.reward}
               onChange={handleInputChange}
-              placeholder="Phần thưởng khi đạt được mục tiêu"
+              placeholder="Reward for achieving the goal"
             />
           </div>
           
