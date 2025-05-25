@@ -125,11 +125,11 @@ const DashboardAdmin = () => {
           </div>
 
           <div className="chart-box">
-            <h4 className="chart-title">Class Activity</h4>
+            <h4 className="chart-title">Subject Activity</h4>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={stats.active_classes}
+                  data={stats.active_subjects}
                   dataKey="count"
                   nameKey="status"
                   cx="50%"
@@ -138,7 +138,7 @@ const DashboardAdmin = () => {
                   outerRadius={100}
                   label
                 >
-                  {stats.active_classes.map((entry, index) => (
+                  {stats.active_subjects.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
