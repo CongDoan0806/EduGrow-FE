@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaEdit } from 'react-icons/fa';
 import GoalForm from './GoalForm';
+import GoalEditForm from './GoalEditForm';
 import axios from 'axios';
 
 const SetGoalsSubject = () => {
@@ -12,6 +13,14 @@ const SetGoalsSubject = () => {
   const [error, setError] = useState(null);
   const [semesterGoal, setSemesterGoal] = useState(null);
   const [newGoal, setNewGoal] = useState({
+    content: '',
+    reward: '',
+    status: 'pending',
+    reflect: null
+  });
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editingGoal, setEditingGoal] = useState({
+    goal_id: null,
     content: '',
     reward: '',
     status: 'pending',
@@ -227,6 +236,62 @@ const handleAddGoal = async () => {
     );
   };
 
+  const handleEditGoal = (goal) => {
+    setEditingGoal({
+      goal_id: goal.id,
+      content: goal.goal,
+      reward: goal.reward,
+      status: goal.status,
+      reflect: goal.reflection === '---' ? '' : goal.reflection
+    });
+    setShowEditForm(true);
+  };
+  const handleEditInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingGoal(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleUpdateGoal = async () => {
+    if (editingGoal.content.trim() === '' || editingGoal.reward.trim() === '') {
+      alert('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng');
+      return;
+    }
+
+    // Kiểm tra nếu status là completed hoặc failed thì reflect không được để trống
+  if ((editingGoal.status === 'completed' || editingGoal.status === 'failed') && 
+      (!editingGoal.reflect || editingGoal.reflect.trim() === '')) {
+    const statusText = editingGoal.status === 'completed' ? 'hoàn thành' : 'thất bại';
+    alert(`Vui lòng điền phản hồi khi mục tiêu đã ${statusText}`);
+    return;
+    }
+
+    try {
+      const response = await axios.put(`/api/semester-goals/content/${editingGoal.goal_id}`, {
+        content: editingGoal.content,
+        reward: editingGoal.reward,
+        status: editingGoal.status,
+        reflect: editingGoal.reflect
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+  
+      if (response.data.success) {
+        // Cập nhật lại danh sách mục tiêu
+        fetchSemesterGoals();
+        // Đóng form
+        setShowEditForm(false);
+      }
+    } catch (error) {
+      console.error('Lỗi khi cập nhật mục tiêu:', error);
+      alert('Có lỗi xảy ra khi cập nhật mục tiêu. Vui lòng thử lại sau.');
+    }
+  };
+
   return (
     <div className="set-goals-container">
       <div className="semester-header">
@@ -259,6 +324,7 @@ const handleAddGoal = async () => {
               <th className="col-reward">Reward</th>
               <th className="col-status">Status</th>
               <th className="col-reflect">Reflect</th>
+              <th className="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -274,11 +340,19 @@ const handleAddGoal = async () => {
                     </span>
                   </td>
                   <td className="col-reflect">{goal.reflection}</td>
+                  <td className="col-actions">
+                    <button 
+                      className="edit-button"
+                      onClick={() => handleEditGoal(goal)}
+                    >
+                      <FaEdit />
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="no-goals">
+                <td colSpan="6" className="no-goals">
                   Chưa có mục tiêu nào cho môn học này. Hãy thêm mục tiêu mới!
                 </td>
               </tr>
@@ -296,6 +370,15 @@ const handleAddGoal = async () => {
         handleInputChange={handleInputChange}
         handleAddGoal={handleAddGoal}
         selectedSubject={subjects.find(s => s.subject_id === selectedSubject)?.name || ''}
+      />
+
+      {/* Form cập nhật mục tiêu */}
+      <GoalEditForm 
+        showEditForm={showEditForm}
+        setShowEditForm={setShowEditForm}
+        editingGoal={editingGoal}
+        handleInputChange={handleEditInputChange}
+        handleUpdateGoal={handleUpdateGoal}
       />
     </div>
   );
