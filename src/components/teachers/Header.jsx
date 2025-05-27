@@ -1,18 +1,26 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
-import { useEffect, useState } from 'react';
-import Notifications from '../../pages/teachers/view_student_journal/Notification';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Header = () => {
   const [user, setUser] = useState(null);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     setUser(storedUser);
+
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const getAuthHeader = () => ({
@@ -25,9 +33,9 @@ const Header = () => {
         headers: getAuthHeader(),
         withCredentials: true,
       });
-
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      setDropdownVisible(false);
       navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
@@ -35,17 +43,16 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg custom-navbar">
-      <div className="container">
-        <a
+    <nav className="navbar custom-navbar">
+      <div className="container d-flex justify-content-between align-items-center">
+        <div
           className="navbar-brand text-white fw-bold fs-2"
-          style={{ cursor: 'pointer' }}
           onClick={() => navigate('/')}
         >
           EduGrow
-        </a>
+        </div>
 
-        <div className="d-flex ms-auto align-items-center gap-3">
+        <div className="d-flex align-items-center gap-3">
           <form className="position-relative">
             <input
               type="search"
@@ -56,24 +63,25 @@ const Header = () => {
           </form>
 
           {user ? (
-            <div className="dropdown">
+            <div className="profile-container" ref={dropdownRef}>
               <img
                 src={user.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
                 alt="avatar"
                 className="rounded-circle"
-                style={{ width: '50px', height: '50px', cursor: 'pointer' }}
-                id="profileDropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                onClick={() => setDropdownVisible((prev) => !prev)}
               />
-              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                <li>
-                  <button className="dropdown-item text-danger" onClick={handleLogout}>
+              <span className="text-white fw-medium ms-2">{user.name}</span>
+
+              {dropdownVisible && (
+                <div className="custom-dropdown-menu">
+                  <button
+                    className="custom-dropdown-item logout-btn"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
-                </li>
-              </ul>
-              <span className="text-white fw-medium ms-2">{user.name}</span>
+                </div>
+              )}
             </div>
           ) : (
             <span className="text-white fw-medium">Guest</span>
@@ -85,4 +93,3 @@ const Header = () => {
 };
 
 export default Header;
-

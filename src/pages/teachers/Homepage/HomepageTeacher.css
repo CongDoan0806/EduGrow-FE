@@ -3,7 +3,7 @@
   font-family: "Quicksand", sans-serif;
 }
 
-.main-content {
+.main-content-homepage {
   flex: 1;
   padding: 20px 40px;
 }
@@ -24,8 +24,7 @@
 
 .overview-grid {
   display: flex;
-  gap: 50px;
-  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .overview-box {
