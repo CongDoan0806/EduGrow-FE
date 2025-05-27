@@ -4,6 +4,7 @@ import CourseList from "../../../components/students/CourseList"
 import HeroSection from "../../../components/students/HeroSection"
 import TeacherList from '../../../components/students/TeacherList';
 import TodayGoals from '../../../components/students/TodayGoals';
+import Footer from '../../../components/students/Footer';
 import './Homepage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,6 +29,10 @@ const Homepage = () => {
       
       <section className="my-5">
         <TeacherList />
+      </section>
+
+      <section className="my-5">
+        <Footer />
       </section>
     </div>
   );

@@ -65,7 +65,7 @@ body {
 
 .certificate-img {
   width: 100%;
-  height: auto;
+  height: 300px;
   max-height: 140px;
   object-fit: contain;
   border-radius: 6px;

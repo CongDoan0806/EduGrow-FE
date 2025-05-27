@@ -35,6 +35,8 @@ function LearningJournal() {
     const [learningJournalId, setLearningJournalId] = useState(null);
     const [message, setMessage] = useState('');
 
+// 
+
     const inClassRef = useRef();
     const selfStudyRef = useRef();
     const navigate = useNavigate();
@@ -100,12 +102,13 @@ function LearningJournal() {
     }
     }, [selectedSubjectId, subjects, learningJournals, weekNumber]);
 
+
     const fetchStartAndEndDate = async () => {
-        console.log(`Fetching week dates for week ${weekNumber}`); 
-        try {
-            const response = await axios.get(`/api/learning-journal/week/${weekNumber}`, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-            });
+    console.log(`Fetching week dates for week ${weekNumber}`); 
+    try {
+        const response = await axios.get(`/api/learning-journal/week/${weekNumber}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        });
 
 
             setStartDateFromWeekApi(response.data.start_date || null);
@@ -502,29 +505,29 @@ function LearningJournal() {
                             />
                         </MentionsInput>
 
-                        <button
-                            className="send-btn"
-                            onClick={handleSendMessage}
-                            disabled={!selectedSubjectId || message.trim() === ""}
-                            title={
-                            !selectedSubjectId
-                                ? "Select a subject first"
-                                : message.trim() === ""
-                                ? "Write a message"
-                                : ""
-                            }
-                        >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#000" />
-                            </svg>
-                        </button>
-                        </div>
-                    </div>
+                    <button
+                        className="send-btn"
+                        onClick={handleSendMessage}
+                        disabled={!selectedSubjectId || message.trim() === ""}
+                        title={
+                        !selectedSubjectId
+                            ? "Select a subject first"
+                            : message.trim() === ""
+                            ? "Write a message"
+                            : ""
+                        }
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#000" />
+                        </svg>
+                    </button>
                     </div>
                 </div>
-            )}
-        </div>
-    );
+                </div>
+            </div>
+        )}
+    </div>
+);
 }
 
 export default LearningJournal;

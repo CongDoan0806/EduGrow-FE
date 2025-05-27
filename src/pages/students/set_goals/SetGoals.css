@@ -16,8 +16,8 @@
   
   .semester-header h2 {
     color: #7B6ADA;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 700;
     text-align: center;
   }
   
@@ -38,6 +38,13 @@
   .add-goal-button:hover {
     background-color: #6952c7;
   }
+
+  .subject-selector-dropdown select {
+    padding: 0;
+    color: #6952c7;
+    font-size: 18px;
+    font-weight: 600;
+  }
   
   .subject-selector {
     display: flex;
@@ -46,23 +53,16 @@
     margin-bottom: 20px;
   }
   
-  .subject-selector h3 {
-    margin: 0;
-    color: #7B6ADA;
-    font-size: 24px;
-    font-weight: 700;
-  }
-  
   .deadline {
     margin: 0;
     color: #7B6ADA;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
   }
 
   .date-deadline {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .goals-table {
@@ -314,3 +314,48 @@
       font-size: 12px;
     }
   }
+  
+  .footer-container {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+  }
+
+.edit-goal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-goal-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+  background-color: white;
+  color: #7B6ADA;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+  color: #595c59;
+}
+
+.col-actions {
+  width: 80px;
+  text-align: center;
+}

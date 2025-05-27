@@ -8,6 +8,8 @@ import LearningJounal from "./pages/students/learning_journal/LearningJournal.js
 import SetGoals from "./pages/students/set_goals/SetGoals.jsx";
 import { Route, Routes } from "react-router-dom";
 import StudentLayout from "./layouts/StudentLayout.jsx";
+import TeacherHomePage from "./pages/teachers/Homepage/HomepageTeacher.jsx";
+import TeacherClassManagement from './pages/teachers/class_management/Teacher_class_management';
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import StudentJournal from "./pages/teachers/view_student_journal/StudentJournal.jsx";
 import ListStudent from "./pages/admins/listManager/ListManager.jsx";
@@ -48,6 +50,8 @@ function AppRoutes() {
        {/*teacher layout  */}
       <Route element={<TeacherLayout/>}>
         <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
+        <Route path="/teacher/homePage" element={<TeacherHomePage />} />
+        <Route path="/teacher/classes" element={<TeacherClassManagement />} />
       </Route>
       
     </Routes>

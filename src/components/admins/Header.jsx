@@ -32,8 +32,8 @@ const Header = () => {
   };
 
   return (
-    <div className="d-flex">
-      <div className="header_admin flex-grow-1 d-flex justify-content-between align-items-center px-2">
+
+      <div className="header_admin d-flex justify-content-between align-items-center ">
         <form className="position-relative form-search-admin">
           <input
             type="search"
@@ -63,7 +63,6 @@ const Header = () => {
           <i className="bi bi-bell-fill" style={{ width: '50px' }}></i>
         </div>
       </div>
-    </div>
   );
 };
 
