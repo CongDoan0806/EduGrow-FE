@@ -1,325 +1,332 @@
 .set-goals-container {
-    font-family: 'Quicksand', sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-  }
-  
-  .semester-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    gap: 10px;
-  }
-  
-  .semester-header h2 {
-    color: #7B6ADA;
-    font-size: 30px;
-    font-weight: 700;
-    text-align: center;
-  }
-  
-  .add-goal-button {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: #7B6ADA;
-    color: white;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .add-goal-button:hover {
-    background-color: #6952c7;
-  }
+  font-family: "Quicksand", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+}
 
-  .subject-selector-dropdown select {
-    padding: 0;
-    color: #6952c7;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .subject-selector {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .deadline {
-    margin: 0;
-    color: #7B6ADA;
-    font-size: 18px;
-    font-weight: 700;
-  }
+.semester-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}
 
-  .date-deadline {
-    font-weight: 500;
-    font-size: 16px;
-  }
+.semester-header h2 {
+  color: #7b6ada;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+}
 
-  .goals-table {
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  }
-  
-  .goals-table-content {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0;
-    border: 1px solid #ddd;
-  }
-  
-  .table-header th {
-    background-color: #7B6ADA;
-    color: white;
-    padding: 15px 10px;
-    font-weight: 600;
-    font-size: 16px;
-    text-align: center;
-    border: 1px solid #6952c7;
-  }
-  
-  .table-row td {
-    padding: 15px 10px;
-    border: 1px solid #ddd;
-  }
-  
-  .table-row:last-child td {
-    border-bottom: none;
-  }
-  
+.add-goal-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #7b6ada;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-goal-button:hover {
+  background-color: #6952c7;
+}
+
+.subject-selector-dropdown select {
+  padding: 0;
+  color: #6952c7;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.subject-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.deadline {
+  margin: 0;
+  color: #7b6ada;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.no-deadline {
+  color: #7b6ada;
+  font-size: 18px;
+  font-weight: 700;
+  /* margin-left: 10px; */
+  cursor: pointer;
+}
+.date-deadline {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.goals-table {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.goals-table-content {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  border: 1px solid #ddd;
+}
+
+.table-header th {
+  background-color: #7b6ada;
+  color: white;
+  padding: 15px 10px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #6952c7;
+}
+
+.table-row td {
+  padding: 15px 10px;
+  border: 1px solid #ddd;
+}
+
+.table-row:last-child td {
+  border-bottom: none;
+}
+
+.col-stt {
+  width: 5%;
+  text-align: center;
+}
+
+.col-goal {
+  width: 35%;
+}
+
+.col-reward {
+  width: 15%;
+}
+
+.col-status {
+  width: 15%;
+  text-align: center;
+}
+
+.col-reflect {
+  width: 30%;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-done {
+  background-color: #d1f7c4;
+  color: #2e7d32;
+}
+
+.status-progress {
+  background-color: #d0d1f7;
+  color: #303f9f;
+}
+
+.status-not-started {
+  background-color: #f7d1d1;
+  color: #c62828;
+}
+
+.add-goal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.add-goal-form {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  width: 500px;
+  max-width: 90%;
+}
+
+.add-goal-form h3 {
+  color: #7b6ada;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: "Quicksand", sans-serif;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.save-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.save-button {
+  background-color: #7b6ada;
+  border: none;
+  color: white;
+}
+
+.add-goal-button-mobile {
+  display: none;
+}
+
+.add-goal-corner-button {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #7b6ada;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.add-goal-corner-button:hover {
+  background-color: #6952c7;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: "Quicksand", sans-serif;
+}
+
+@media (max-width: 768px) {
   .col-stt {
-    width: 5%;
-    text-align: center;
+    width: 10%;
   }
-  
+
   .col-goal {
-    width: 35%;
+    width: 30%;
   }
-  
+
   .col-reward {
     width: 15%;
   }
-  
+
   .col-status {
     width: 15%;
-    text-align: center;
   }
-  
+
   .col-reflect {
     width: 30%;
   }
-  
-  .status-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .status-done {
-    background-color: #d1f7c4;
-    color: #2e7d32;
-  }
-  
-  .status-progress {
-    background-color: #d0d1f7;
-    color: #303f9f;
-  }
-  
-  .status-not-started {
-    background-color: #f7d1d1;
-    color: #c62828;
-  }
-  
-  .add-goal-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .add-goal-form {
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    width: 500px;
-    max-width: 90%;
-  }
-  
-  .add-goal-form h3 {
-    color: #7B6ADA;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: 500;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: 'Quicksand', sans-serif;
-  }
-  
-  .form-group textarea {
-    height: 100px;
-    resize: vertical;
-  }
-  
-  .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .cancel-button,
-  .save-button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .cancel-button {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    color: #333;
-  }
-  
-  .save-button {
-    background-color: #7B6ADA;
-    border: none;
-    color: white;
-  }
-  
-  .add-goal-button-mobile {
+
+  .add-goal-button {
     display: none;
   }
 
-  .add-goal-corner-button {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 25px;
-    height: 25px;
+  .add-goal-button-mobile {
+    display: flex;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background-color: #7B6ADA;
+    background-color: #7b6ada;
     color: white;
     border: none;
-    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
   }
-  
-  .add-goal-corner-button:hover {
-    background-color: #6952c7;
+}
+
+@media (max-width: 576px) {
+  .table-header,
+  .table-row {
+    font-size: 14px;
   }
 
-  .form-group input,
-    .form-group textarea,
-    .form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: 'Quicksand', sans-serif;
-    }
-  
-  @media (max-width: 768px) {
-    .col-stt {
-        width: 10%;
-      }
-      
-      .col-goal {
-        width: 30%;
-      }
-      
-      .col-reward {
-        width: 15%;
-      }
-      
-      .col-status {
-        width: 15%;
-      }
-      
-      .col-reflect {
-        width: 30%;
-      }
-    
-    .add-goal-button {
-      display: none;
-    }
-    
-    .add-goal-button-mobile {
-      display: flex;
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #7B6ADA;
-      color: white;
-      border: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-    }
+  .status-badge {
+    padding: 4px 8px;
+    font-size: 12px;
   }
-  
-  @media (max-width: 576px) {
-    .table-header,
-    .table-row {
-      font-size: 14px;
-    }
-    
-    .status-badge {
-      padding: 4px 8px;
-      font-size: 12px;
-    }
-  }
-  
-  .footer-container {
-    width: 100vw;
-    position: fixed;
-    bottom: 0;
-  }
+}
+
+.footer-container {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+}
 
 .edit-goal-modal {
   position: fixed;
@@ -345,7 +352,7 @@
 
 .edit-button {
   background-color: white;
-  color: #7B6ADA;
+  color: #7b6ada;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -358,4 +365,274 @@
 .col-actions {
   width: 80px;
   text-align: center;
+}
+
+.goal-subject-st {
+  font-weight: bold;
+  color: #7b6ada;
+  margin: 0 !important;
+}
+
+.deadline-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.deadline-modal {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 480px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 32px 24px;
+}
+
+.datetime-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.date-input-group,
+.time-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modern-date-input,
+.modern-time-input {
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.modern-date-input:focus,
+.modern-time-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.preview-deadline {
+  margin-top: 20px;
+}
+
+.preview-card {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #0ea5e9;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: slideIn 0.3s ease;
+}
+
+.preview-card i {
+  color: #0ea5e9;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.preview-text {
+  color: #0c4a6e;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  background: #f9fafb;
+  padding: 20px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .deadline-modal {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .datetime-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.student-name-goal{
+  font-weight: bold;
+  color: #7b6ada;
+  margin: 0 !important;
+  font-size: 18px;
+}
+
+.student-email-goal{
+  color: #7b6ada;
+  margin: 0 !important;
+  font-size: 16px;
+}
+.no-feedback{
+   color: #7b6ada;
+   cursor: pointer;
 }

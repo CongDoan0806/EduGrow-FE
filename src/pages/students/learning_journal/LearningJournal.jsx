@@ -435,7 +435,7 @@ function LearningJournal() {
                     className="modal-frm-content"
                     onClick={(e) => e.stopPropagation()}
                     >
-                    <div className="modal-header">
+                    <div className="modal_header">
                         <h2 className="modal-title">Comment</h2>
                         <select
                         className="subject-select"

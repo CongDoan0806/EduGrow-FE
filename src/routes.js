@@ -3,7 +3,6 @@ import Homepage from "./pages/students/homepage/Homepage";
 import Login from "./pages/login/Login";
 import StudentProfile from "./pages/students/profile/StudentProfile.jsx";
 import Achievement from "./pages/students/achievement/Achievement.jsx";
-import UploadAchievement from "./pages/students/achievement/UploadAchievementPage.jsx";
 import LearningJounal from "./pages/students/learning_journal/LearningJournal.jsx";
 import SetGoals from "./pages/students/set_goals/SetGoals.jsx";
 import { Route, Routes } from "react-router-dom";
@@ -20,6 +19,7 @@ import Calendar from "./pages/students/calendar/Calendar.jsx";
 import Dashboard from "./pages/admins/dashboard/Dashboard.jsx";
 import ClassManagement from "./pages/admins/class_management/class_management.jsx"
 import UploadAchievementPage from "./pages/students/achievement/UploadAchievementPage.jsx";
+import StudentGoal from "./pages/teachers/student_goal/StudentGoal.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -51,6 +51,7 @@ function AppRoutes() {
       <Route element={<TeacherLayout/>}>
         <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
         <Route path="/teacher/homePage" element={<TeacherHomePage />} />
+        <Route path="/teacher/student-goal/:studentId" element={<StudentGoal />} />
         <Route path="/teacher/classes" element={<TeacherClassManagement />} />
       </Route>
       
