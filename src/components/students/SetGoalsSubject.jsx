@@ -3,6 +3,7 @@ import { FaPlus, FaEdit } from 'react-icons/fa';
 import GoalForm from './GoalForm';
 import GoalEditForm from './GoalEditForm';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const SetGoalsSubject = () => {
   const [goals, setGoals] = useState([]);
@@ -109,7 +110,7 @@ const SetGoalsSubject = () => {
 
 const handleAddGoal = async () => {
   if (newGoal.content.trim() === '' || newGoal.reward.trim() === '') {
-    alert('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng');
+    toast.error('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng'); 
     return;
   }
 
@@ -129,6 +130,7 @@ const handleAddGoal = async () => {
       });
 
       if (response.data.success) {
+        toast.success('Thêm mục tiêu thành công!');
         // Cập nhật lại danh sách mục tiêu
         fetchSemesterGoals();
         // Reset form và đóng form
@@ -160,6 +162,7 @@ const handleAddGoal = async () => {
       });
 
       if (response.data.success) {
+        toast.success('Thêm mục tiêu thành công!'); 
         // Cập nhật lại danh sách mục tiêu
         fetchSemesterGoals();
         // Reset form và đóng form
@@ -174,7 +177,7 @@ const handleAddGoal = async () => {
     }
   } catch (error) {
     console.error('Lỗi khi thêm mục tiêu:', error);
-    alert('Có lỗi xảy ra khi thêm mục tiêu. Vui lòng thử lại sau.');
+    toast.error('Có lỗi xảy ra khi thêm mục tiêu. Vui lòng thử lại sau.');
   }
 };
 
@@ -256,16 +259,16 @@ const handleAddGoal = async () => {
 
   const handleUpdateGoal = async () => {
     if (editingGoal.content.trim() === '' || editingGoal.reward.trim() === '') {
-      alert('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng');
+      toast.error('Vui lòng điền đầy đủ thông tin mục tiêu và phần thưởng');
       return;
     }
 
     // Kiểm tra nếu status là completed hoặc failed thì reflect không được để trống
-  if ((editingGoal.status === 'completed' || editingGoal.status === 'failed') && 
+    if ((editingGoal.status === 'completed' || editingGoal.status === 'failed') && 
       (!editingGoal.reflect || editingGoal.reflect.trim() === '')) {
-    const statusText = editingGoal.status === 'completed' ? 'hoàn thành' : 'thất bại';
-    alert(`Vui lòng điền phản hồi khi mục tiêu đã ${statusText}`);
-    return;
+      const statusText = editingGoal.status === 'completed' ? 'hoàn thành' : 'thất bại';
+      toast.warn(`Vui lòng điền phản hồi khi mục tiêu đã ${statusText}`); // Thay thế alert
+      return;
     }
 
     try {
@@ -279,8 +282,9 @@ const handleAddGoal = async () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-  
+    
       if (response.data.success) {
+        toast.success('Cập nhật mục tiêu thành công!');
         // Cập nhật lại danh sách mục tiêu
         fetchSemesterGoals();
         // Đóng form
@@ -288,7 +292,7 @@ const handleAddGoal = async () => {
       }
     } catch (error) {
       console.error('Lỗi khi cập nhật mục tiêu:', error);
-      alert('Có lỗi xảy ra khi cập nhật mục tiêu. Vui lòng thử lại sau.');
+      toast.error('Có lỗi xảy ra khi cập nhật mục tiêu. Vui lòng thử lại sau.');
     }
   };
 
