@@ -12,27 +12,41 @@ const GoalForm = ({
     showAddForm && (
       <div className="add-goal-modal">
         <div className="add-goal-form">
-          <h3>Thêm mục tiêu mới cho {selectedSubject}</h3>
+          <h3>Add new goal for {selectedSubject}</h3>
           
           <div className="form-group">
-            <label>Mục tiêu:</label>
+            <label>Goal:</label>
             <textarea 
               name="content" 
               value={newGoal.content}
               onChange={handleInputChange}
-              placeholder="Nhập mục tiêu của bạn"
+              placeholder="Enter your goal"
             />
           </div>
           
           <div className="form-group">
-            <label>Phần thưởng:</label>
+            <label>Reward:</label>
             <input 
               type="text" 
               name="reward" 
               value={newGoal.reward}
               onChange={handleInputChange}
-              placeholder="Phần thưởng khi đạt được mục tiêu"
+              placeholder="Reward for achieving the goal"
             />
+          </div>
+          
+          <div className="form-group">
+            <label>Status:</label>
+            <select
+              name="status"
+              value={newGoal.status}
+              onChange={handleInputChange}
+              disabled
+            >
+              <option value="pending">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="failed">Failed</option>
+            </select>
           </div>
           
           <div className="form-actions">
@@ -40,13 +54,13 @@ const GoalForm = ({
               className="cancel-button"
               onClick={() => setShowAddForm(false)}
             >
-              Hủy
+              Cancel
             </button>
             <button 
               className="save-button"
               onClick={handleAddGoal}
             >
-              Lưu
+              Save
             </button>
           </div>
         </div>

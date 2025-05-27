@@ -2,8 +2,9 @@ import './Header.css';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Notifications from '../../pages/teachers/view_student_journal/Notification';
 
-const Header = () => {
+const Header = ({ teacherId }) => {
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
@@ -43,16 +44,10 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar custom-navbar">
-      <div className="container d-flex justify-content-between align-items-center">
-        <div
-          className="navbar-brand text-white fw-bold fs-2"
-          onClick={() => navigate('/')}
-        >
-          EduGrow
-        </div>
-
-        <div className="d-flex align-items-center gap-3">
+    <nav className="navbar navbar-expand-lg custom-navbar">
+      <div className="container">
+        <a className="navbar-brand text-white fw-bold fs-2">EduGrow</a>
+        <div className="d-flex ms-auto align-items-center gap-2">
           <form className="position-relative">
             <input
               type="search"
@@ -60,6 +55,7 @@ const Header = () => {
               placeholder="Search"
               aria-label="Search"
             />
+            <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
           </form>
 
           {user ? (
@@ -86,6 +82,19 @@ const Header = () => {
           ) : (
             <span className="text-white fw-medium">Guest</span>
           )}
+          <div className="d-flex align-items-center profile">
+            <img
+              src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
+              alt="avatar"
+              className="rounded-circle me-2"
+              style={{ width: '50px', height: '50px' }}
+            />
+            <span className="text-white fw-medium">{user?.name || 'Guest'}</span>
+          </div>
+          <div className="notification">
+            <Notifications teacherId={teacherId} />
+          </div>
+
         </div>
       </div>
     </nav>

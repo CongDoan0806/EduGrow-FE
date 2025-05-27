@@ -1,0 +1,70 @@
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+.upload-achievement-container {
+  background-color: #f9f9f9;
+  padding: 30px 30px 85px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.upload-achievement-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.achievement-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.achievement-form label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.achievement-form input[type="text"],
+.achievement-form textarea,
+.achievement-form input[type="date"],
+.achievement-form input[type="file"] {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.achievement-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.achievement-form button {
+  background-color: #7A5EE0;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s ease;
+  margin-top: 25px;
+}
+
+.achievement-form button:hover {
+  background-color: #6346c5;
+}

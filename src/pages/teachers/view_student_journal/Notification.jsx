@@ -58,7 +58,7 @@ const Notifications = ({ teacherId }) => {
     <div className="notification-container" style={{ position: 'relative', display: 'inline-block' }}>
       <i
         className="bi bi-bell-fill fs-4 custom-bell"
-        style={{ cursor: 'pointer', color: '#333' }}
+        style={{ cursor: 'pointer', color: 'white' }}
         onClick={toggleNotification}
       ></i>
       {isOpen && (
@@ -79,7 +79,7 @@ const Notifications = ({ teacherId }) => {
             overflowY: 'auto',
           }}
         >
-          <h4>Thông báo</h4>
+          <h4>Notification</h4>
           {notifications.length === 0 ? (
             <p>Chưa có thông báo</p>
           ) : (
@@ -113,7 +113,7 @@ const Notifications = ({ teacherId }) => {
               borderRadius: '3px',
             }}
           >
-            Đóng
+            Close
           </button>
         </div>
       )}

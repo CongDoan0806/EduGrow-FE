@@ -1,4 +1,5 @@
   import { useEffect, useState } from 'react';
+  import { useNavigate } from 'react-router-dom';
   import axios from 'axios';
   import './StudentSidebar.css';
 
@@ -7,6 +8,9 @@
     const [activeIndex, setActiveIndex] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [apiError, setApiError] = useState(null);
+
+    const navigate = useNavigate();
+
 
     const getAuthHeader = () => ({
       Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -39,10 +43,10 @@
     }, []);
 
     const menuItems = [
-      { icon: 'fas fa-user', label: 'My Profile' },
-      { icon: 'fas fa-trophy', label: 'Achievement' },
-      { icon: 'fas fa-bell', label: 'Notification' },
-    ];
+      { icon: 'fas fa-user', label: 'My Profile', path: '/student/profile'},
+      { icon: 'fas fa-trophy', label: 'Achievement', path: '/student/achievement'},
+      { icon: 'fas fa-bell', label: 'Notification', path: '/student/notification' },
+    ]; 
 
     if (isLoading) {
       return <div className="profile-card">Loading...</div>;
@@ -71,7 +75,10 @@
             <button
               key={index}
               className={`menu-item ${activeIndex === index ? 'active' : ''}`}
-              onClick={() => setActiveIndex(index)}
+               onClick={() => {
+                setActiveIndex(index);
+                navigate(item.path); 
+              }}
             >
               <i className={item.icon}></i> {item.label}
             </button>
