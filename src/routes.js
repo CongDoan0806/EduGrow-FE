@@ -17,6 +17,7 @@ import TeacherLayout from "./layouts/TeacherLayout.jsx";
 import Calendar from "./pages/students/calendar/Calendar.jsx";
 import Dashboard from "./pages/admins/dashboard/Dashboard.jsx";
 import ClassManagement from "./pages/admins/class_management/class_management.jsx"
+import StudentGoal from "./pages/teachers/student_goal/StudentGoal.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -46,6 +47,7 @@ function AppRoutes() {
       <Route element={<TeacherLayout/>}>
         <Route path="/teacher/journals/:studentId" element={<StudentJournal />} />
         <Route path="/teacher/homePage" element={<TeacherHomePage />} />
+        <Route path="/teacher/student-goal/:studentId" element={<StudentGoal />} />
         <Route path="/teacher/classes" element={<TeacherClassManagement />} />
       </Route>
       
