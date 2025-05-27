@@ -75,17 +75,17 @@ font-size: 20px;
 font-family: 'Quicksand' ;  
 }
 
-.close-btn {
+.close-button {
 background-color: #F1F0FE;
 color:#7B6ADA;
 }
 
-.save-btn {
+.save-button {
 background-color: #7B6ADA;
 color: #fff;
 }
 
-.review-btn {
+.review-button {
 background-color: #7B6ADA;
 color: #fff;
 }
@@ -259,7 +259,7 @@ flex-direction: column;
 }
 
 /* Giữ header cố định khi scroll */
-.modal-header {
+.modal_header {
 display: flex;
 justify-content: space-between;
 align-items: center;
