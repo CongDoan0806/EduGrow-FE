@@ -16,3 +16,8 @@ input{
 .form-search-admin{
     width:500px;
 }
+
+/* Nếu muốn custom thêm */
+.custom-dropdown-menu button.dropdown-item:hover {
+  background-color: #f0f0f0;
+}

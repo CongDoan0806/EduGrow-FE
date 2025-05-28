@@ -36,7 +36,6 @@ function LearningJournal() {
     const [message, setMessage] = useState('');
 
 // 
-
     const inClassRef = useRef();
     const selfStudyRef = useRef();
     const navigate = useNavigate();

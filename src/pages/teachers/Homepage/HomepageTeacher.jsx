@@ -9,7 +9,7 @@ export default function HomepageTeacher() {
   return (
     <div className="homepage">
       {/* <TeacherSidebar /> */}
-      <div className="main-content">
+      <div className="main-content-homepage">
         <TeacherDashboard />
         <div className="bottom-section">
           <TeacherNotify />

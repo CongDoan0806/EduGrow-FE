@@ -1,17 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Header = () => {
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   const [user] = useState(() => {
     const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : null;
   });
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const getAuthHeader = () => ({
     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -31,6 +33,17 @@ const Header = () => {
     }
   };
 
+  // Đóng dropdown khi click ngoài
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
 
       <div className="header_admin d-flex justify-content-between align-items-center ">
@@ -44,23 +57,44 @@ const Header = () => {
           <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-4 text-secondary"></i>
         </form>
 
-        <div className="d-flex align-items-center dropdown">
+        <div className="d-flex align-items-center" ref={dropdownRef} style={{ position: 'relative' }}>
           <img
             src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
             alt="avatar"
-            className="rounded-circle me-2 dropdown-toggle"
+            className="rounded-circle"
             style={{ width: '40px', height: '40px', cursor: 'pointer' }}
-            id="adminProfileDropdown"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+            onClick={() => setDropdownVisible(!dropdownVisible)}
           />
-          <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="adminProfileDropdown">
-            <li><button className="dropdown-item text-danger" onClick={handleLogout}>Logout</button></li>
-          </ul>
-          <span className="me-2" style={{ color: 'gray' }}>
+          <span className="me-2" style={{ color: 'gray', userSelect: 'none' }}>
             {user?.name || 'Admin'} <i className="bi bi-chevron-compact-down"></i>
           </span>
           <i className="bi bi-bell-fill" style={{ width: '50px' }}></i>
+
+          {/* Dropdown logout */}
+          {dropdownVisible && (
+            <div
+              className="custom-dropdown-menu"
+              style={{
+                position: 'absolute',
+                top: '50px',
+                right: 40,
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                minWidth: '120px',
+                zIndex: 1000,
+              }}
+            >
+              <button
+                type="button"
+                className="dropdown-item text-danger"
+                onClick={handleLogout}
+                style={{ width: '100%', padding: '10px 16px', border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer' }}
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
   );

@@ -1,0 +1,67 @@
+.container {
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.weekly-goals {
+  background-color: #F1F0FE;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 30px 50px;
+  gap: 30px;
+}
+
+.goals-title {
+  color: #7B6ADA;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.divider {
+  width: 1px;
+  height: 100px;
+  background-color: #7B6ADA;
+}
+
+.goals-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.goal-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.goal-item img {
+  width: 24px;
+  height: 24px;
+  margin-top: 4px;
+}
+
+.goal-item p {
+  margin: 0;
+  color: #7B6ADA;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.panda-image {
+  margin-left: auto;
+}
+
+.panda-image img {
+  width: 100px;
+  border-radius: 50%;
+}
