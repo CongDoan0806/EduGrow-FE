@@ -6,19 +6,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaEdit } from 'react-icons/fa';
+
 const StudentGoal = () => {
-  const [semesterGoal, setSemesterGoal] = useState({});
+  const [allGoalsData, setAllGoalsData] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [selectedSubject, setSelectedSubject] = useState('');
+  const [currentSubjectGoals, setCurrentSubjectGoals] = useState([]);
   const [showDeadlineModal, setShowDeadlineModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [goalId, setGoalId] = useState(null);
-  // const [isEditing, setIsEditing] = useState(false);
-  // const [inputValue, setInputValue] = useState('');
+  const [currentSgId, setCurrentSgId] = useState(null);
   const [editingId, setEditingId] = useState(null);
-const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const { studentId } = useParams();
+
   const handleKeyDown = async (e, goalId) => {
     if (e.key === 'Enter') {
       if (!inputValue.trim()) return;
@@ -34,11 +37,17 @@ const [inputValue, setInputValue] = useState('');
         });
 
         if (response.ok) {
-          const updatedGoals = semesterGoal.map((goal) =>
+          // Update both allGoalsData and currentSubjectGoals
+          const updatedAllGoals = allGoalsData.map((goal) =>
             goal.goal_id === goalId ? { ...goal, teacher_feedback: inputValue } : goal
           );
-          setSemesterGoal(updatedGoals);
-          console.log('asdasdasd:  ', updatedGoals);
+          setAllGoalsData(updatedAllGoals);
+          
+          const updatedCurrentGoals = currentSubjectGoals.map((goal) =>
+            goal.goal_id === goalId ? { ...goal, teacher_feedback: inputValue } : goal
+          );
+          setCurrentSubjectGoals(updatedCurrentGoals);
+          
           toast.success('Gửi phản hồi thành công!');
         } else {
           toast.error('Lỗi khi gửi phản hồi lên server.');
@@ -54,6 +63,29 @@ const [inputValue, setInputValue] = useState('');
     }
   };
 
+  const processGoalsData = (data) => {
+    const uniqueSubjects = [...new Set(data.map(goal => goal.name))];
+    setSubjects(uniqueSubjects);
+    
+    if (uniqueSubjects.length > 0 && !selectedSubject) {
+      setSelectedSubject(uniqueSubjects[0]);
+    }
+  };
+
+  const filterGoalsBySubject = (subjectName) => {
+    const filteredGoals = allGoalsData.filter(goal => goal.name === subjectName);
+    setCurrentSubjectGoals(filteredGoals);
+    
+    if (filteredGoals.length > 0) {
+      setCurrentSgId(filteredGoals[0].sg_id);
+    }
+  };
+
+  const handleSubjectChange = (e) => {
+    const selectedSubjectName = e.target.value;
+    setSelectedSubject(selectedSubjectName);
+    filterGoalsBySubject(selectedSubjectName);
+  };
 
   useEffect(() => {
     const fetchSemesterGoal = async () => {
@@ -71,8 +103,8 @@ const [inputValue, setInputValue] = useState('');
         }
 
         const data = await response.json();
-        setSemesterGoal(data.data);
-        setGoalId(data.data[1]?.sg_id || null); 
+        setAllGoalsData(data.data);
+        processGoalsData(data.data);
       } catch (error) {
         console.error('Error fetching semester goal:', error);
       }
@@ -81,7 +113,11 @@ const [inputValue, setInputValue] = useState('');
     fetchSemesterGoal();
   }, [studentId]);
 
-  console.log('Fetched semester goal:', goalId);
+  useEffect(() => {
+    if (selectedSubject && allGoalsData.length > 0) {
+      filterGoalsBySubject(selectedSubject);
+    }
+  }, [selectedSubject, allGoalsData]);
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -135,7 +171,7 @@ const [inputValue, setInputValue] = useState('');
     try {
       const deadlineDateTime = `${selectedDate}T${selectedTime}:00`;
       
-      const response = await fetch(`http://127.0.0.1:8000/api/teachers/student-goal/${goalId}/deadline`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/teachers/student-goal/${currentSgId}/deadline`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -150,16 +186,20 @@ const [inputValue, setInputValue] = useState('');
         throw new Error('Failed to update deadline');
       }
 
-      const data = await response.json();
+      // Update deadline in both allGoalsData and currentSubjectGoals
+      const updatedAllGoals = allGoalsData.map(goal =>
+        goal.sg_id === currentSgId
+          ? { ...goal, deadline: deadlineDateTime }
+          : goal
+      );
+      setAllGoalsData(updatedAllGoals);
       
-      setSemesterGoal(prevGoals =>
-          prevGoals.map(goal =>
-            goal.sg_id === goalId
-              ? { ...goal, deadline: deadlineDateTime }
-              : goal
-          )
-        );
-
+      const updatedCurrentGoals = currentSubjectGoals.map(goal =>
+        goal.sg_id === currentSgId
+          ? { ...goal, deadline: deadlineDateTime }
+          : goal
+      );
+      setCurrentSubjectGoals(updatedCurrentGoals);
 
       handleCloseDeadlineModal();
       toast.success('Deadline đã được cập nhật thành công!');
@@ -170,13 +210,30 @@ const [inputValue, setInputValue] = useState('');
       setIsSubmitting(false);
     }
   };
-  console.log('Semester Goal:', semesterGoal );
-  console.log('Semester Goal deadline:', semesterGoal?.[1]?.deadline );
+
+  // Get current deadline for selected subject
+  const getCurrentDeadline = () => {
+    return currentSubjectGoals.length > 0 ? currentSubjectGoals[0].deadline : null;
+  };
+
+  // Get student info
+  const getStudentInfo = () => {
+    if (allGoalsData.length > 0) {
+      return {
+        name: allGoalsData[0].student_name,
+        email: allGoalsData[0].student_email
+      };
+    }
+    return { name: '', email: '' };
+  };
+
+  const studentInfo = getStudentInfo();
+
   return (
     <div className="setgoal-page-container">
       <main className="content-wrapper">
-        <p className='student-name-goal'>Student: {semesterGoal?.[1]?.student_name}</p>
-        <p className='student-email-goal'>Email: {semesterGoal?.[1]?.student_email}</p>
+        <p className='student-name-goal'>Student: {studentInfo.name}</p>
+        <p className='student-email-goal'>Email: {studentInfo.email}</p>
         <section className="">
           <div className="set-goals-container">
             <div className="semester-header">
@@ -185,12 +242,30 @@ const [inputValue, setInputValue] = useState('');
 
             <div className="subject-selector">
               <div className="subject-selector-dropdown">
-                <p className='goal-subject-st'>{semesterGoal?.[1]?.name}</p>
+                <select 
+                  value={selectedSubject} 
+                  onChange={handleSubjectChange}
+                  className="form-select subject-select"
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '6px',
+                    border: '1px solid #ddd',
+                    backgroundColor: '#fff',
+                    fontSize: '16px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {subjects.map((subject, index) => (
+                    <option key={index} value={subject}>
+                      {subject}
+                    </option>
+                  ))}
+                </select>
               </div>
-              {semesterGoal?.[1]?.deadline ? (
+              {getCurrentDeadline() ? (
                 <p className="deadline">
                   Deadline: <span className="date-deadline">
-                    {new Date(semesterGoal?.[1]?.deadline).toLocaleDateString('vi-VN')}
+                    {new Date(getCurrentDeadline()).toLocaleDateString('vi-VN')}
                   </span>
                 </p>
               ) : (
@@ -214,8 +289,8 @@ const [inputValue, setInputValue] = useState('');
                   </tr>
                 </thead>
                 <tbody>
-                  {semesterGoal.length > 0 ? (
-                    semesterGoal.map((goal, index) => (
+                  {currentSubjectGoals.length > 0 ? (
+                    currentSubjectGoals.map((goal, index) => (
                       <tr className="table-row" key={goal.goal_id}>
                         <td className="col-stt">{index + 1}</td>
                         <td className="col-goal">{goal.content}</td>
@@ -264,7 +339,6 @@ const [inputValue, setInputValue] = useState('');
                             </>
                           )}
                         </td>
-
                       </tr>
                     ))
                   ) : (
@@ -287,7 +361,7 @@ const [inputValue, setInputValue] = useState('');
             <div className="modal-header">
               <h3 className="modal-title">
                 <i className="bi bi-calendar-event"></i>
-                Đặt Deadline
+                Đặt Deadline cho {selectedSubject}
               </h3>
               <button className="close-btn" onClick={handleCloseDeadlineModal}>
                 <i className="bi bi-x-lg"></i>
