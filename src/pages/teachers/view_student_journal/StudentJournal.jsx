@@ -207,7 +207,7 @@ function StudentJournal () {
     const formatTime = (timeStr) => {
         if (!timeStr) return '';
         try {
-            return format(new Date(timeStr), 'HH:mm'); // hoặc 'dd MMM' nếu cần ngày
+            return format(new Date(timeStr), 'HH:mm');
         } catch (e) {
             return '';
         }
@@ -321,7 +321,6 @@ function StudentJournal () {
                                             </p>
                                         </div>
 
-                                        {/* List of replies */}
                                         <div className="reply-list">
                                             {tag.replies.map(reply => (
                                                 <div key={reply.reply_id} className="reply-item">
@@ -340,7 +339,6 @@ function StudentJournal () {
                                             ))}
                                         </div>
 
-                                        {/* Input for new reply */}
                                         <div className="comment-input-container">
                                             <div className="comment-input-wrapper">
                                                 <img src="/assets/images/avta.png" alt="Avatar" className="comment-avatar" />

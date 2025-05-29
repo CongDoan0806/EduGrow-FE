@@ -1,0 +1,28 @@
+.notification-container{
+    position: 'relative';
+    display: 'inline-block';
+}
+.notification{
+    position: 'absolute';
+    top: '50px';
+    right: '0';
+    width: '300px';
+    backgroundColor: '#F1F0FE';
+    border: '1px solid #ddd';
+    borderRadius: '5px';
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)';
+    zIndex: 1000;
+    padding: '10px';
+    maxHeight: '400px';
+    overflowY: 'auto';
+}
+.hover-button{
+    marginTop: '10px';
+    padding: '5px 10px';
+    cursor: 'pointer';
+    color:'white';
+    width: '100%';
+    backgroundColor: 'gray';
+    border: 'none';
+    borderRadius: '3px';
+}

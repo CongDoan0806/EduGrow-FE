@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import echo from '../../../echo';
 import './Notification.css';
-
-// Tạo axios instance, tự động gắn token vào header Authorization
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
 });
@@ -20,7 +18,7 @@ axiosInstance.interceptors.request.use(
 );
 
 const Notifications = ({ teacherId }) => {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState([]); 
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -30,7 +28,7 @@ const Notifications = ({ teacherId }) => {
         setNotifications(response.data);
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          alert('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại.');
+          alert('Your session has expired, please log in again.');
           localStorage.removeItem('token');
           window.location.href = '/';
         } else {
@@ -79,9 +77,9 @@ const Notifications = ({ teacherId }) => {
             overflowY: 'auto',
           }}
         >
-          <h4>Thông báo</h4>
+          <h4>Notification</h4>
           {notifications.length === 0 ? (
-            <p>Chưa có thông báo</p>
+            <p>No announcement yet</p>
           ) : (
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {notifications.map((notif, index) => (
@@ -113,7 +111,7 @@ const Notifications = ({ teacherId }) => {
               borderRadius: '3px',
             }}
           >
-            Đóng
+            Close
           </button>
         </div>
       )}
