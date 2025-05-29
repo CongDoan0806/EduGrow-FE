@@ -1,15 +1,47 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Notifications from '../../pages/teachers/view_student_journal/Notification';
 
 const Header = ({ teacherId }) => {
   const [user, setUser] = useState(null);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     setUser(storedUser);
+
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const getAuthHeader = () => ({
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  });
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8000/api/logout', {}, {
+        headers: getAuthHeader(),
+        withCredentials: true,
+      });
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setDropdownVisible(false);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg custom-navbar">
@@ -25,18 +57,35 @@ const Header = ({ teacherId }) => {
             />
             <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"></i>
           </form>
-          <div className="d-flex align-items-center profile">
-            <img
-              src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
-              alt="avatar"
-              className="rounded-circle me-2"
-              style={{ width: '50px', height: '50px' }}
-            />
-            <span className="text-white fw-medium">{user?.name || 'Guest'}</span>
-          </div>
+
+          {user ? (
+            <div className="profile-container" ref={dropdownRef}>
+              <img
+                src={user.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
+                alt="avatar"
+                className="rounded-circle"
+                onClick={() => setDropdownVisible((prev) => !prev)}
+              />
+              <span className="text-white fw-medium ms-2">{user.name}</span>
+
+              {dropdownVisible && (
+                <div className="custom-dropdown-menu">
+                  <button
+                    className="custom-dropdown-item logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <span className="text-white fw-medium">Guest</span>
+          )}
           <div className="notification">
             <Notifications teacherId={teacherId} />
           </div>
+
         </div>
       </div>
     </nav>
