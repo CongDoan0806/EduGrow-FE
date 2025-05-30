@@ -8,7 +8,8 @@ import "react-calendar/dist/Calendar.css";
 export default function HomepageTeacher() {
   return (
     <div className="homepage">
-      <div className="main-content">
+      {/* <TeacherSidebar /> */}
+      <div className="main-content-homepage">
         <TeacherDashboard />
         <div className="bottom-section">
           <TeacherNotify />

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap');
+
 .calendar-wrapper {
   display: flex;
 }
@@ -29,7 +31,7 @@
 
 .calendar-main {
   flex: 1;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 /* =================== FULLCALENDAR GLOBAL =================== */
@@ -268,4 +270,76 @@
 .custom-button:hover {
   background-color: #5e51c4;
   opacity: 0.9;
+}
+
+.fade-in {
+  animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.custom-calendar-header {
+  text-align: center;
+  margin: 20px 0 10px;
+
+}
+
+.month-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  color: #7b6ada;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.month-text {
+  font-size: 42px;
+  font-weight: bold;
+  color: #7b6ada;
+
+}
+
+.slogan {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  color: #e91e63;
+  margin-top: 5px;
+}
+
+.icon {
+  width: 90px;
+  height: 90px;
+}
+.calendar-controls {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.calendar-controls button {
+  padding: 4px 10px;
+  background-color: #e7a5f9;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.calendar-controls button:hover {
+  background-color: #eabfff;
 }

@@ -1,41 +1,94 @@
-.header-container{
-    background-color: #7B6ADA;
-    cursor: pointer;
+.header-container {
+  background-color: #7b6ada;
+  cursor: pointer;
 }
+.navbar-nav .nav-link,
+.navbar-brand {
+  cursor: pointer;
+}
+
 .custom-navbar {
-    background-color: #7B6ADA;
-    padding: 0.8rem 1.5rem;
+  background-color: #7b6ada;
+  padding: 0.8rem 1.5rem;
 }
 
 .navbar-brand {
-    font-family: 'Calistoga', cursive;
-    color: #FFFFFF;
+  font-family: "Calistoga", cursive;
+  color: #ffffff;
 }
+
 .custom-navbar .nav-link {
-    color: red;
-    transition: 0.3s;
+  color: red;
+  transition: 0.3s;
 }
-.nav-link{
-    font-size: 18px;
-    font-family: 'Quicksand', sans-serif;
+
+.nav-link {
+  font-size: 18px;
+  font-family: "Quicksand", sans-serif;
 }
+
 .custom-navbar .nav-link:hover {
-    color: #dfff;
-}
-.rounded-circle{
-    border: 3px solid green;
-    object-fit:cover;
-}
-.profile{
-    padding-left: 50px;
+  color: #dfff;
 }
 
-.dropdown-menu {
+.rounded-circle {
+  border: 3px solid green;
+  object-fit: cover;
+}
+
+.profile {
+  padding-left: 50px;
+}
+
+.profile-container {
+  position: relative;
+  user-select: none;
+}
+.custom-dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
   min-width: 150px;
- 
+  padding: 10px 0;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.custom-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-.dropdown-item:hover {
-  background-color: #f8f9fa;
+.custom-dropdown-item {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
 }
 
+.custom-dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.logout-btn {
+  color: red;
+  font-weight: bold;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #e0e0e0;
+  margin: 5px 0;
+}

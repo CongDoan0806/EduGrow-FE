@@ -43,9 +43,9 @@ function JournalInfoPanel({
         </p>
 
         <div className="button-group">
-          <button className="button close-btn">Close</button>
-          <button className="button save-btn" onClick={onSave}>Save</button>
-          <button className="button review-btn" onClick={onNeedReviewClick}>Need review</button>
+          <button className="button close-button">Close</button>
+          <button className="button save-button" onClick={onSave}>Save</button>
+          <button className="button review-button" onClick={onNeedReviewClick}>Need review</button>
         </div>
       </div>
     </div>

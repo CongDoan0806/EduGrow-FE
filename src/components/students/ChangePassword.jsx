@@ -128,7 +128,7 @@ const ChangePassword = () => {
       <button
         onClick={handleChangePassword}
         disabled={isLoading}
-        className="btn submit-btn"
+        className="btn submitPassword-btn"
       >
         {isLoading ? 'Processing...' : 'Change Password'}
       </button>
