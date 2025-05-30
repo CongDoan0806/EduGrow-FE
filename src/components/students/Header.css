@@ -16,31 +16,37 @@
   font-family: "Calistoga", cursive;
   color: #ffffff;
 }
+
 .custom-navbar .nav-link {
   color: red;
   transition: 0.3s;
 }
+
 .nav-link {
   font-size: 18px;
   font-family: "Quicksand", sans-serif;
 }
+
 .custom-navbar .nav-link:hover {
   color: #dfff;
 }
+
 .rounded-circle {
   border: 3px solid green;
   object-fit: cover;
 }
+
 .profile {
   padding-left: 50px;
 }
 
 .profile-container {
   position: relative;
+  user-select: none;
 }
 
+/* Dropdown mặc định ẩn bằng opacity và pointer-events để animation mượt */
 .custom-dropdown-menu {
-  display: none;
   position: absolute;
   top: 60px;
   right: 0;
@@ -51,6 +57,18 @@
   z-index: 1000;
   min-width: 150px;
   padding: 10px 0;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Khi hiện dropdown */
+.custom-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .custom-dropdown-item {

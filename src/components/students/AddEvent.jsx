@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const presetColors = [
   { name: 'Blue', value: '#cfe9ff' },
@@ -13,18 +13,25 @@ const AddEvent = ({ datetime, onAdd, onCancel }) => {
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState(presetColors[0].value);
   const initialized = useRef(false);
+  const modalRef = useRef(null);
 
   useEffect(() => {
-    // Chỉ khởi tạo màu mặc định 1 lần
+    if (!datetime) return;
+
+    const el = modalRef.current;
+    if (el) {
+      el.classList.remove('fade-in');
+      void el.offsetWidth; // Trigger reflow
+      el.classList.add('fade-in');
+    }
+  }, [datetime]);
+
+  useEffect(() => {
     if (!initialized.current) {
       setSelectedColor(presetColors[0].value);
       initialized.current = true;
     }
   }, []);
-
-  useEffect(() => {
-    console.log('🔍 Current selected color:', selectedColor);
-  }, [selectedColor]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,15 +44,16 @@ const AddEvent = ({ datetime, onAdd, onCancel }) => {
       color: selectedColor,
     };
 
-    console.log('📤 Submitting new event:', newEvent);
     onAdd(newEvent);
   };
+
+  if (!datetime) return null;
 
   const startDate = new Date(datetime.start);
   const endDate = new Date(datetime.end);
 
   return (
-    <div className="event-form">
+    <div ref={modalRef} className="event-form fade-in">
       <h3>Add Event</h3>
       <p><strong>From:</strong> {startDate.toLocaleString()}</p>
       <p><strong>To:</strong> {endDate.toLocaleString()}</p>
@@ -67,9 +75,7 @@ const AddEvent = ({ datetime, onAdd, onCancel }) => {
             {presetColors.map((color) => (
               <div
                 key={color.value}
-                onClick={() => {
-                  setSelectedColor(color.value);
-                }}
+                onClick={() => setSelectedColor(color.value)}
                 title={color.name}
                 style={{
                   backgroundColor: color.value,

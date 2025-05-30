@@ -41,7 +41,6 @@
   z-index: 1000;
 }
 
-/* Dropdown menu cho Logout */
 .custom-dropdown-menu {
   position: absolute;
   top: 60px; /* cách avatar 60px xuống dưới */
@@ -52,9 +51,21 @@
   padding: 8px 0;
   min-width: 120px;
   z-index: 9999;
-  display: block;
-  color: black;
+
+  /* Ẩn mặc định */
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: block; /* giữ block để giữ layout vị trí, dùng opacity+pointer-events để ẩn */
 }
+
+.custom-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 
 .custom-dropdown-item {
   display: block;
