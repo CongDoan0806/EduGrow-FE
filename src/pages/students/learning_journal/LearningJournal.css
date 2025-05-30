@@ -297,6 +297,9 @@ font-size: 40px;
 font-weight: bold;
 color: #fff;
 }
+.close-button-modal{
+  position: static !important;
+}
 
 .comment-list {
 flex: 1;

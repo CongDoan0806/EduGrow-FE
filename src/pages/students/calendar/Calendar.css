@@ -2,6 +2,7 @@
 
 .calendar-wrapper {
   display: flex;
+  padding-top: 80px;
 }
 
 .calendar-sidebar {
@@ -9,6 +10,7 @@
   padding: 20px;
   border-right: 1px solid #e0e0e0;
   background-color: #fafafa;
+  
 }
 
 .create-btn {

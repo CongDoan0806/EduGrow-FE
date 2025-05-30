@@ -2,7 +2,7 @@
   font-family: "Quicksand", sans-serif;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 70px 20px 20px;
   position: relative;
 }
 
@@ -399,7 +399,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.modal-header {
+.modal-header-goal {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 24px;
