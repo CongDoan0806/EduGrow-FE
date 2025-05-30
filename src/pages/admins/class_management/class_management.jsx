@@ -80,7 +80,7 @@ export default function ClassManagement() {
                                             height={30}
                                         />
                                         <div className="class-teacher-name">{item.teacher_name}</div>
-                                        <div className="dropdown ms-auto">
+                                        <div className="dropdown ms-auto drop_down">
                                             <i
                                             className="bi bi-three-dots dropdown-toggle"
                                             role="button"

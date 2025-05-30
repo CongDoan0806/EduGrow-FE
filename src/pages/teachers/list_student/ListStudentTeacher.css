@@ -225,6 +225,11 @@
   width: 200px;
 }
 
+.drop_down{
+  all: unset;
+  display: block;
+}
+
 /* Header với tiêu đề và nút X */
 .dropdown-header {
   display: flex;
