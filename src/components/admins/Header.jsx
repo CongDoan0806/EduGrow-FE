@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-const Header = () => {
+const HeaderAdmin = () => {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -33,7 +33,7 @@ const Header = () => {
     }
   };
 
-  // Đóng dropdown khi click ngoài
+  // Ẩn dropdown khi click ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -45,59 +45,56 @@ const Header = () => {
   }, []);
 
   return (
+    <div className="header_admin d-flex justify-content-between align-items-center px-3 py-2">
+      <form className="position-relative form-search-admin">
+        <input
+          type="search"
+          className="form-control ps-3 form-input"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-4 text-secondary"></i>
+      </form>
 
-      <div className="header_admin d-flex justify-content-between align-items-center ">
-        <form className="position-relative form-search-admin">
-          <input
-            type="search"
-            className="form-control ps-3 form-input"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-4 text-secondary"></i>
-        </form>
+      <div
+        className="d-flex align-items-center position-relative"
+        ref={dropdownRef}
+        style={{ userSelect: 'none' }}
+      >
+        <img
+          src={
+            user?.avatar ||
+            'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'
+          }
+          alt="avatar"
+          className="rounded-circle"
+          style={{ width: 40, height: 40, cursor: 'pointer', border: '2px solid #7b6ada' }}
+          onClick={() => setDropdownVisible((v) => !v)}
+        />
+        <span
+          className="ms-2 me-3"
+          style={{ color: 'gray', fontWeight: 600, cursor: 'pointer' }}
+          onClick={() => setDropdownVisible((v) => !v)}
+        >
+          {user?.name || 'Admin'} <i className="bi bi-chevron-compact-down"></i>
+        </span>
+        <i
+          className="bi bi-bell-fill"
+          style={{ fontSize: 22, color: 'gray', cursor: 'pointer' }}
+        ></i>
 
-        <div className="d-flex align-items-center" ref={dropdownRef} style={{ position: 'relative' }}>
-          <img
-            src={user?.avatar || 'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}
-            alt="avatar"
-            className="rounded-circle"
-            style={{ width: '40px', height: '40px', cursor: 'pointer' }}
-            onClick={() => setDropdownVisible(!dropdownVisible)}
-          />
-          <span className="me-2" style={{ color: 'gray', userSelect: 'none' }}>
-            {user?.name || 'Admin'} <i className="bi bi-chevron-compact-down"></i>
-          </span>
-          <i className="bi bi-bell-fill" style={{ width: '50px' }}></i>
-
-          {/* Dropdown logout */}
-          {dropdownVisible && (
-            <div
-              className="custom-dropdown-menu"
-              style={{
-                position: 'absolute',
-                top: '50px',
-                right: 40,
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                minWidth: '120px',
-                zIndex: 1000,
-              }}
-            >
-              <button
-                type="button"
-                className="dropdown-item text-danger"
-                onClick={handleLogout}
-                style={{ width: '100%', padding: '10px 16px', border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer' }}
-              >
-                Logout
-              </button>
-            </div>
-          )}
+        <div className={`custom-dropdown-menu${dropdownVisible ? ' show' : ''}`}>
+          <button
+            type="button"
+            className="dropdown-item text-danger"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </div>
+    </div>
   );
 };
 
-export default Header;
+export default HeaderAdmin;
