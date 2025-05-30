@@ -6,6 +6,7 @@
   margin-bottom: 20px;
   gap: 15px;
   flex-wrap: wrap;
+  padding-top: 90px;
 }
 
 .page-title {
@@ -186,4 +187,102 @@
 .select-subject:focus {
   border-color: #7b6ada;
   outline: none;
+}
+
+.more-button {
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.more-button:hover {
+  transform: scale(1.1);
+}
+
+
+.tag-journal-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 200px;
+}
+
+.drop_down{
+  all: unset;
+  display: block;
+}
+
+/* Header với tiêu đề và nút X */
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.close-button-icon {
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+/* Nút đánh giá */
+.dropdown button {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+/* Các màu pastel */
+.dropdown button:nth-child(2) {
+  background-color: #d4f8d4; /* Good - green */
+  color: #206a5d;
+}
+
+.dropdown button:nth-child(3) {
+  background-color: #fff4cc; /* Ok - yellow */
+  color: #665c00;
+}
+
+.dropdown button:nth-child(4) {
+  background-color: #ffd6d6; /* Bad - red */
+  color: #990000;
+}
+
+.dropdown button:hover {
+  filter: brightness(0.95);
 }

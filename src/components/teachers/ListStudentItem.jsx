@@ -7,6 +7,8 @@ export default function ListStudentItem() {
   const [subjects, setSubjects] = useState([]);
   const [subject, setSubject] = useState("");
   const [loading, setLoading] = useState(false);
+  const [studentRating, setStudentRating] = useState({});
+  const [openDropdown, setOpenDropdown] = useState(null); // student_id đang mở menu
 
   const token = localStorage.getItem("token");
 
@@ -58,6 +60,27 @@ export default function ListStudentItem() {
     fetchStudentsBySubject(subject);
   }, [subject]);
 
+  const handleRatingChange = (studentId, rating) => {
+    setStudentRating((prev) => ({
+      ...prev,
+      [studentId]: rating,
+    }));
+    setOpenDropdown(null); // đóng menu
+  };
+
+  const getButtonColor = (rating) => {
+    switch (rating) {
+      case "good":
+        return "#137547";
+      case "ok":
+        return "orange";
+      case "bad":
+        return "#b91c1c";
+      default:
+        return "#7b6ada";
+    }
+  };
+
   return (
     <div className="container" role="main">
       <div className="main-content">
@@ -67,7 +90,6 @@ export default function ListStudentItem() {
             <button className="btn-filter" type="button">
               Total: {students.length}
             </button>
-
             <select
               className="select-subject"
               name="subject"
@@ -92,7 +114,7 @@ export default function ListStudentItem() {
             <p>No students found</p>
           ) : (
             students.map((student) => (
-              <article key={student.id} className="student-card">
+              <article key={student.student_id} className="student-card">
                 <img
                   src={
                     student.avatar && student.avatar.trim() !== ""
@@ -103,26 +125,95 @@ export default function ListStudentItem() {
                   className="student-avatar"
                   loading="lazy"
                 />
-
                 <h2 className="student-name">{student.name}</h2>
                 <nav className="tag-list" aria-label="Student tags">
-                  <a href="/goal" className="tag tag-goal">
-                    goal
-                  </a>
                   <Link
-                    to={`/teacher/journals/${student.student_id}`}
-                    className="tag tag-journal"
+                    to={`/teacher/student-goal/${student.student_id}`}
+                    className="tag tag-goal"
                   >
-                    learning journal
+                    goal
                   </Link>
+
+                  <div className="tag-journal-wrapper">
+                    <Link
+                      to={`/teacher/journals/${student.student_id}`}
+                      className="tag tag-journal"
+                      style={{
+                        backgroundColor: getButtonColor(
+                          studentRating[student.student_id]
+                        ),
+                        color: "#fff",
+                      }}
+                    >
+                      learning journal
+                    </Link>
+
+                    <div className="dropdown-container">
+                      <img
+                        src="/assets/images/listStudent/review.png"
+                        alt="More options"
+                        className="more-button"
+                        onClick={() =>
+                          setOpenDropdown(
+                            openDropdown === student.student_id
+                              ? null
+                              : student.student_id
+                          )
+                        }
+                      />
+                      {openDropdown === student.student_id && (
+                        <div className="dropdown animated-dropdown">
+                          <div className="dropdown-header">
+                            <span className="dropdown-title">
+                              Select Rating
+                            </span>
+                            <span
+                              className="close-button-icon"
+                              onClick={() => setOpenDropdown(null)}
+                            >
+                              ×
+                            </span>
+                          </div>
+
+                          <button
+                            onClick={() =>
+                              handleRatingChange(student.student_id, "good")
+                            }
+                          >
+                            Good
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleRatingChange(student.student_id, "ok")
+                            }
+                          >
+                            Ok
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleRatingChange(student.student_id, "bad")
+                            }
+                          >
+                            Improvements Need
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </nav>
                 <div className="student-info">
                   <p className="info-line">
-                    <i className="fas fa-envelope" style={{ color: "#7b6ada" }}></i>
+                    <i
+                      className="fas fa-envelope"
+                      style={{ color: "#7b6ada" }}
+                    ></i>
                     <a href={`mailto:${student.email}`}>{student.email}</a>
                   </p>
                   <p>
-                    <i className="fas fa-phone" style={{ color: "#7b6ada" }}></i>
+                    <i
+                      className="fas fa-phone"
+                      style={{ color: "#7b6ada" }}
+                    ></i>
                     {student.phone}
                   </p>
                 </div>

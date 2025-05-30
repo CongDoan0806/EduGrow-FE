@@ -407,7 +407,7 @@ function LearningJournal() {
     if (error) return <div>{error}</div>;
 
     return (
-        <div>
+        <div className='learning-journal-container' style={{ paddingTop: '88px' }}>
             <div className='content'>
                 <ToastContainer />
                 <section className='journal-info-panel'>
