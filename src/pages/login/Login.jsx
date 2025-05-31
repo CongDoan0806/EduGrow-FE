@@ -27,7 +27,7 @@ export default function Login() {
       // Lấy CSRF cookie trước khi POST
       await axios.get(`${API_URL}/sanctum/csrf-cookie`, { withCredentials: true });
   
-      const response = await axios.post('/api/login', {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password
       }, {
