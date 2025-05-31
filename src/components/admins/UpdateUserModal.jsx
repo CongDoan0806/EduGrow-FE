@@ -13,7 +13,7 @@ const UpdateUserModal = ({ isOpen, onClose, userData, userId, role }) => {
     class_name: "",
     subject: "",
   });
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const UpdateUserModal = ({ isOpen, onClose, userData, userId, role }) => {
       }
 
       const response = await fetch(
-        `http://localhost:8000/api/update-user/${userId}`,
+        `${API_URL}/api/admin/users/${userId}`,
         {
           method: "PUT",
           headers: {

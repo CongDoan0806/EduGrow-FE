@@ -27,12 +27,12 @@ const SetGoalsSubject = () => {
     status: 'pending',
     reflect: null
   });
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   // Lấy danh sách môn học khi component được mount
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get('/api/subjects', {
+        const response = await axios.get(`${API_URL}/api/students/semester/subjects`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
@@ -62,7 +62,7 @@ const SetGoalsSubject = () => {
   const fetchSemesterGoals = async () => {
   setLoading(true);
   try {
-    const response = await axios.get(`/api/semester-goals?subject_id=${selectedSubject}`, {
+    const response = await axios.get(`${API_URL}/api/students/semester-goals?subject_id=${selectedSubject}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -118,7 +118,7 @@ const handleAddGoal = async () => {
     // Nếu đã có semester goal cho môn học này
     if (semesterGoal) {
       // Thêm nội dung mục tiêu mới
-      const response = await axios.post('/api/semester-goals/content', {
+      const response = await axios.post(`${API_URL}/api/students/semester-goals/content`, {
         content: newGoal.content,
         reward: newGoal.reward,
         status: 'pending', // Mặc định là "To do"
@@ -144,7 +144,7 @@ const handleAddGoal = async () => {
       }
     } else {
       // Tạo semester goal mới nếu chưa có
-      const response = await axios.post('/api/semester-goals', {
+      const response = await axios.post(`${API_URL}/api/students/semester-goals`, {
         subject_id: selectedSubject,
         semester: 'Học kỳ 1 2024-2025', // Có thể thay đổi theo nhu cầu
         deadline: new Date().toISOString().split('T')[0], // Ngày hiện tại
@@ -272,7 +272,7 @@ const handleAddGoal = async () => {
     }
 
     try {
-      const response = await axios.put(`/api/semester-goals/content/${editingGoal.goal_id}`, {
+      const response = await axios.put(`${API_URL}/api/students/semester-goals/content/${editingGoal.goal_id}`, {
         content: editingGoal.content,
         reward: editingGoal.reward,
         status: editingGoal.status,

@@ -7,7 +7,7 @@ const UpdateProfile = () => {
   const [profile, setProfile] = useState({ name: '', phone: '', avatar: null });
   const [imageFile, setImageFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const getAuthHeader = () => ({
     Authorization: `Bearer ${localStorage.getItem('token')}`,
   });
@@ -18,7 +18,7 @@ const UpdateProfile = () => {
     const fetchProfile = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get('http://localhost:8000/api/profile', {
+        const response = await axios.get(`${API_URL}/api/students/profile`, {
           headers: getAuthHeader(),
           signal: controller.signal,
         });
@@ -63,7 +63,7 @@ const UpdateProfile = () => {
         name: profile.name.trim(),
         phone: profile.phone.trim(),
       };
-      await axios.put('http://localhost:8000/api/profile/text', payload, {
+      await axios.put(`${API_URL}/api/students/profile/info`, payload, {
         headers: getAuthHeader(),
       });
       toast.success('Profile information updated!');
@@ -85,7 +85,7 @@ const UpdateProfile = () => {
       const formData = new FormData();
       formData.append('avatar', imageFile);
 
-      const response = await axios.post('http://localhost:8000/api/profile/avatar', formData, {
+      const response = await axios.post(`${API_URL}/api/students/profile/avatar`, formData, {
         headers: {
           ...getAuthHeader(),
           'Content-Type': 'multipart/form-data',

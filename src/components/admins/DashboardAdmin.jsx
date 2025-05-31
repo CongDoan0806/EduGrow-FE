@@ -4,8 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pi
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
+const API_URL = process.env.REACT_APP_BE_URL;
+axios.defaults.baseURL = `${API_URL}`;
 
 const DashboardAdmin = () => {
   const [stats, setStats] = useState(null);

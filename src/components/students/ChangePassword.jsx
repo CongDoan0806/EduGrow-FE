@@ -7,7 +7,7 @@ const ChangePassword = () => {
   const [apiError, setApiError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const getAuthHeader = () => ({
     Authorization: `Bearer ${localStorage.getItem('token')}`,
   });
@@ -59,7 +59,7 @@ const ChangePassword = () => {
     };
 
     try {
-      const data = await apiPut('http://localhost:8000/api/changePassword', payload);
+      const data = await apiPut(`${API_URL}/api/students/profile/password`, payload);
       setSuccessMessage("Password changed successfully!");
       setPasswords({ current: '', new: '', confirm: '' });
     } catch (error) {

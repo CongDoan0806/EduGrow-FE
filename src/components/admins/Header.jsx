@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 const HeaderAdmin = () => {
+  const API_URL = process.env.REACT_APP_BE_URL;
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -21,7 +22,7 @@ const HeaderAdmin = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8000/api/logout', {}, {
+      await axios.post(`${API_URL}/api/logout`, {}, {
         headers: getAuthHeader(),
         withCredentials: true,
       });

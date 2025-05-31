@@ -19,6 +19,7 @@ function StudentJournal () {
         setIsModalOpen(false);
         }
     };
+    const API_URL = process.env.REACT_APP_BE_URL;
     // Lấy data learning journal
     const { studentId } = useParams();
     const [weekNumber, setWeekNumber] = useState(1);
@@ -31,7 +32,7 @@ function StudentJournal () {
     const fetchJournalData = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(`/api/teachers/learning-journal/${studentId}`, {
+            const res = await axios.get(`${API_URL}/api/teacher/students/${studentId}/learning-journals`, {
                 headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -54,7 +55,7 @@ function StudentJournal () {
     const fetchJournalDataByWeek = async (weekNumber) => {
         setLoading(true);
         try {
-        const res = await axios.get(`/api/teachers/learning-journal/${studentId}`, {
+        const res = await axios.get(`${API_URL}/api/teacher/students/${studentId}/learning-journals`, {
             params: { week_number: weekNumber },
             headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -106,7 +107,7 @@ function StudentJournal () {
     const fetchTagData = async (id) => {
         try {
             console.log("id:", id);
-            const res = await axios.get(`/api/teachers/learning-journals/${id}/tags`, {
+            const res = await axios.get(`${API_URL}/api/teacher/learning-journals/${id}/tags`, {
                 headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -178,7 +179,7 @@ function StudentJournal () {
             tag_id: tag_id,
         };
 
-        const endpoint = '/api/teachers/feedback';
+        const endpoint = `${API_URL}/api/teacher/feedback`;
 
         try {
             const response = await axios.post(endpoint, payload, {

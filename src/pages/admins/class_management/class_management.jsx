@@ -5,10 +5,11 @@ import MultiStepForm from '../../../components/admins/MultiStepForm';
 export default function ClassManagement() {
     const [classes, setClasses] = useState([])
     const [showForm, setShowForm] = useState(false);
+    const API_URL = process.env.REACT_APP_BE_URL;
     const fetchClasses = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get("http://127.0.0.1:8000/api/admin/class", {
+            const res = await axios.get(`${API_URL}/api/admin/classes`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 export default function CourseList() {
   const [courses, setCourses] = useState([]);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/student/subjects")
+    axios.get(`${API_URL}/api/student/subjects`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
       .then((res) => {
         if (res.data && Array.isArray(res.data.subjects)) {
           setCourses(res.data.subjects); 

@@ -10,7 +10,7 @@
     const [apiError, setApiError] = useState(null);
 
     const navigate = useNavigate();
-
+    const API_URL = process.env.REACT_APP_BE_URL;
 
     const getAuthHeader = () => ({
       Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -20,7 +20,7 @@
       const fetchProfile = async () => {
         setIsLoading(true);
         try {
-          const response = await axios.get('http://localhost:8000/api/profile', {
+          const response = await axios.get(`${API_URL}/api/students/profile`, {
             headers: getAuthHeader(),
             withCredentials: true,
           });
