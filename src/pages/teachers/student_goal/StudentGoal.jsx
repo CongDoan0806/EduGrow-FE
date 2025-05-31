@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaEdit } from 'react-icons/fa';
 
 const StudentGoal = () => {
+  const API_URL = process.env.REACT_APP_BE_URL;
   const [allGoalsData, setAllGoalsData] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState('');
@@ -27,7 +28,7 @@ const StudentGoal = () => {
       if (!inputValue.trim()) return;
 
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/teachers/student-goal/${goalId}/feedback`, {
+        const response = await fetch(`${API_URL}/api/teacher/semester-goals/${goalId}/feedback`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ const StudentGoal = () => {
   useEffect(() => {
     const fetchSemesterGoal = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/teachers/student-goal/${studentId}`, {
+        const response = await fetch(`${API_URL}/api/teacher/students/${studentId}/semester-goals`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -171,7 +172,7 @@ const StudentGoal = () => {
     try {
       const deadlineDateTime = `${selectedDate}T${selectedTime}:00`;
       
-      const response = await fetch(`http://127.0.0.1:8000/api/teachers/student-goal/${currentSgId}/deadline`, {
+      const response = await fetch(`${API_URL}/api/teacher/semester-goals/${currentSgId}/deadline`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

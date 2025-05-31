@@ -5,12 +5,12 @@ import axios from 'axios';
 export default function Achievements() {
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('/api/achievements/showAchievement', {
+        const res = await axios.get(`${API_URL}/api/students/achievements`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setAchievements(res.data.achievements || []);

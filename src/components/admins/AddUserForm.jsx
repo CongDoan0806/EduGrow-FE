@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AddUserModal.css';
 
 const AddUserModal = ({ isOpen, onClose, role }) => {
+    const API_URL = process.env.REACT_APP_BE_URL;
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -35,7 +36,7 @@ const AddUserModal = ({ isOpen, onClose, role }) => {
 
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch('http://localhost:8000/api/Add-user', {
+            const response = await fetch(`${API_URL}/api/admin/users`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ const UploadAchievement = () => {
     date_achieved: '',
     file: null
   });
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -58,7 +58,7 @@ const UploadAchievement = () => {
 
     try {
       const res = await axios.post(
-        '/api/achievements/uploadAchievement',
+        `${API_URL}/api/students/achievements`,
         data,
         {
           headers: {

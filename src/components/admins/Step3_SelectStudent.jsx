@@ -5,7 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 export default function Step3_SelectStudent({ formData, updateFormData }) {
     const [students, setStudent] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const API_URL = process.env.REACT_APP_BE_URL;
     const toggleStudent = (id) => {
         const updatedIds = formData.studentIds.includes(id)
             ? formData.studentIds.filter(sid => sid !== id)
@@ -15,7 +15,7 @@ export default function Step3_SelectStudent({ formData, updateFormData }) {
     useEffect(() => {
         const token = localStorage.getItem('token'); 
 
-        axios.get("http://127.0.0.1:8000/api/admin/student", {
+        axios.get(`${API_URL}/api/admin/students`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

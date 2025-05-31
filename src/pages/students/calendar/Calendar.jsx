@@ -16,14 +16,14 @@ const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState("FEBRUARY"); // 👉 tháng hiển thị tiêu đề
   const calendarRef = useRef(null);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const getAuthHeader = () => ({
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   });
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/study-plans", {
+      const res = await axios.get(`${API_URL}/api/students/study-plans`, {
         headers: getAuthHeader(),
         withCredentials: true,
       });
@@ -107,7 +107,7 @@ const Calendar = () => {
         color: newEvent.color,
       };
 
-      await axios.post("http://localhost:8000/api/study-plans", payload, {
+      await axios.post(`${API_URL}/api/students/study-plans`, payload, {
         headers: {
           ...getAuthHeader(),
           "Content-Type": "application/json",
@@ -137,7 +137,7 @@ const Calendar = () => {
   const confirmDelete = async (eventInfo) => {
     const id = String(eventInfo.id);
     try {
-      await axios.delete(`http://localhost:8000/api/study-plans/${id}`, {
+      await axios.delete(`${API_URL}/api/students/study-plans/${id}`, {
         headers: getAuthHeader(),
         withCredentials: true,
       });

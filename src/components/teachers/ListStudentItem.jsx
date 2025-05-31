@@ -9,13 +9,13 @@ export default function ListStudentItem() {
   const [loading, setLoading] = useState(false);
   const [studentRating, setStudentRating] = useState({});
   const [openDropdown, setOpenDropdown] = useState(null); // student_id đang mở menu
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const token = localStorage.getItem("token");
 
   const fetchSubjects = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/teacher/subjects", {
+      const response = await axios.get(`${API_URL}/api/teacher/subjects`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSubjects(response.data.data || []);
@@ -30,7 +30,7 @@ export default function ListStudentItem() {
   const fetchStudentsBySubject = async (subjectId) => {
     try {
       setLoading(true);
-      let url = "/api/teacher/students-by-subject";
+      let url = `${API_URL}/api/teacher/students-by-subject`;
       if (subjectId) {
         url += `?subject_id=${subjectId}`;
       }

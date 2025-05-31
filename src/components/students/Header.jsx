@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 const Header = () => {
+  const API_URL = process.env.REACT_APP_BE_URL;
   const navigate = useNavigate();
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
@@ -20,7 +21,7 @@ const Header = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/profile', {
+        const response = await axios.get(`${API_URL}/api/students/profile`, {
           headers: getAuthHeader(),
           withCredentials: true,
         });
@@ -63,7 +64,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'http://localhost:8000/api/logout',
+        `${API_URL}/api/logout`,
         {},
         {
           headers: getAuthHeader(),
