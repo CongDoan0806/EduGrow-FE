@@ -403,6 +403,29 @@ function LearningJournal() {
         }
     };
 
+    const handleCellUpdate = async (type, date, field, value) => {
+        try {
+            const response = await axios.patch('/api/students/learning-journals/update-cell', {
+                week_number: weekNumber,
+                type: type,
+                date: date,
+                field: field,
+                value: value
+            }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
+
+            toast.success('Cập nhật thành công');
+            
+            // Refresh data to show updated content
+            await fetchLearningJournal();
+            
+        } catch (error) {
+            console.error('Error updating cell:', error);
+            toast.error(error.response?.data?.message || 'Cập nhật thất bại');
+        }
+    };
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
 
@@ -420,11 +443,21 @@ function LearningJournal() {
                         onSave={handleSave}
                     />
                 </section>
+
                 <section className='in-class-table'>
-                    <InClassTable data={inClassData} ref={inClassRef} />
+                    <InClassTable 
+                        data={inClassData} 
+                        ref={inClassRef}
+                        onCellUpdate={handleCellUpdate}
+                    />
                 </section>
+
                 <section className='self-study-table'>
-                    <SelfStudyTable data={selfStudyData} ref={selfStudyRef} />
+                    <SelfStudyTable 
+                        data={selfStudyData} 
+                        ref={selfStudyRef}
+                        onCellUpdate={handleCellUpdate}
+                    />
                 </section>
             </div>
 
