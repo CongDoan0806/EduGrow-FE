@@ -1,8 +1,10 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
 
-const SelfStudyTable = forwardRef(({ data = [] }, ref) => {
+const SelfStudyTable = forwardRef(({ data = [], onCellUpdate }, ref) => {
   const [newRows, setNewRows] = useState([]);
   const [errors, setErrors] = useState({});
+  const [editingCell, setEditingCell] = useState(null);
+  const [tempValue, setTempValue] = useState('');
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -51,6 +53,129 @@ const SelfStudyTable = forwardRef(({ data = [] }, ref) => {
     setErrors(newErrors);
   };
 
+  const handleCellClick = (rowIndex, field, currentValue) => {
+    if (field === 'date') return; 
+    
+    setEditingCell({ rowIndex, field });
+    setTempValue(currentValue);
+  };
+
+  const fieldMapping = {
+    'skills_module': 'skills_module', 
+    'my_lesson': 'my_lesson',
+    'time_allocation': 'time_allocation', 
+    'learning_resources': 'learning_resources',
+    'learning_activities': 'learning_activities',
+    'concentration': 'isConcentration',
+    'plan_follow': 'isFollowPlan', 
+    'evaluation': 'evaluation',
+    'reinforcing': 'reinforcing',
+    'notes': 'note'
+  };
+
+  const transformValue = (field, value) => {
+    if (field === 'concentration' || field === 'plan_follow') {
+      return value === 'Yes' ? 1 : 0; 
+    }
+    return value;
+  };
+
+  const handleCellKeyPress = async (e, rowIndex, field) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const rowData = data[rowIndex];
+      
+      if (onCellUpdate) {
+        const backendField = fieldMapping[field] || field;
+        const transformedValue = transformValue(field, tempValue);
+        
+        console.log('Updating cell:', {
+          table: 'self_study',
+          date: rowData.date,
+          frontendField: field,
+          backendField: backendField,
+          originalValue: tempValue,
+          transformedValue: transformedValue
+        });
+        
+        try {
+          await onCellUpdate('self_study', rowData.date, backendField, transformedValue);
+          console.log('Update successful');
+        } catch (error) {
+          console.error('Update failed:', error);
+          console.error('Error details:', error.response?.data);
+        }
+      }
+      
+      setEditingCell(null);
+      setTempValue('');
+    } else if (e.key === 'Escape') {
+      setEditingCell(null);
+      setTempValue('');
+    }
+  };
+
+  const handleCellBlur = () => {
+    setEditingCell(null);
+    setTempValue('');
+  };
+
+  const renderCell = (item, rowIndex, field) => {
+    const isEditing = editingCell?.rowIndex === rowIndex && editingCell?.field === field;
+    
+    if (field === 'date') {
+      return formatDate(item[field]);
+    }
+    
+    if (field === 'concentration' || field === 'plan_follow') {
+      if (isEditing) {
+        return (
+          <select
+            value={tempValue}
+            onChange={(e) => setTempValue(e.target.value)}
+            onKeyDown={(e) => handleCellKeyPress(e, rowIndex, field)}
+            onBlur={handleCellBlur}
+            autoFocus
+          >
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        );
+      }
+      return (
+        <span
+          onClick={() => handleCellClick(rowIndex, field, item[field])}
+          style={{ cursor: 'pointer', padding: '4px', display: 'block' }}
+        >
+          {item[field]}
+        </span>
+      );
+    }
+    
+    if (isEditing) {
+      return (
+        <input
+          type="text"
+          value={tempValue}
+          onChange={(e) => setTempValue(e.target.value)}
+          onKeyDown={(e) => handleCellKeyPress(e, rowIndex, field)}
+          onBlur={handleCellBlur}
+          autoFocus
+          style={{ width: '100%', border: '1px solid #ccc', padding: '4px' }}
+        />
+      );
+    }
+    
+    return (
+      <span
+        onClick={() => handleCellClick(rowIndex, field, item[field])}
+        style={{ cursor: 'pointer', padding: '4px', display: 'block' }}
+      >
+        {item[field]}
+      </span>
+    );
+  };
+
   useImperativeHandle(ref, () => ({
     getNewRows: () => newRows,
     clearNewRows: () => setNewRows([]),
@@ -81,17 +206,17 @@ const SelfStudyTable = forwardRef(({ data = [] }, ref) => {
               <>
                 {data.map((item, index) => (
                   <tr key={index}>
-                    <td>{formatDate(item.date)}</td>
-                    <td>{item.skills_module}</td>
-                    <td>{item.my_lesson}</td>
-                    <td>{item.time_allocation}</td>
-                    <td>{item.learning_resources}</td>
-                    <td>{item.learning_activities}</td>
-                    <td>{item.concentration}</td>
-                    <td>{item.plan_follow}</td>
-                    <td>{item.evaluation}</td>
-                    <td>{item.reinforcing}</td>
-                    <td>{item.notes}</td>
+                    <td>{renderCell(item, index, 'date')}</td>
+                    <td>{renderCell(item, index, 'skills_module')}</td>
+                    <td>{renderCell(item, index, 'my_lesson')}</td>
+                    <td>{renderCell(item, index, 'time_allocation')}</td>
+                    <td>{renderCell(item, index, 'learning_resources')}</td>
+                    <td>{renderCell(item, index, 'learning_activities')}</td>
+                    <td>{renderCell(item, index, 'concentration')}</td>
+                    <td>{renderCell(item, index, 'plan_follow')}</td>
+                    <td>{renderCell(item, index, 'evaluation')}</td>
+                    <td>{renderCell(item, index, 'reinforcing')}</td>
+                    <td>{renderCell(item, index, 'notes')}</td>
                   </tr>
                 ))}
                 {newRows.map((row, index) => (
