@@ -14,6 +14,7 @@ const ListStudent = () => {
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [studentToDelete, setStudentToDelete] = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
+  const API_URL = process.env.REACT_APP_BE_URL;
 
   const itemsPerPage = 5;
 
@@ -35,7 +36,7 @@ const ListStudent = () => {
         setLoading(false);
         return;
       }
-      const response = await axios.get("http://localhost:8000/api/admin/student", {
+      const response = await axios.get(`${API_URL}/api/admin/students`, {
         headers: getAuthHeader(),
       });
       if (Array.isArray(response.data.data)) {
@@ -94,7 +95,7 @@ const ListStudent = () => {
         return;
       }
 
-      await axios.delete(`http://localhost:8000/api/delete-user/${studentToDelete.student_id}`, {
+      await axios.delete(`${API_URL}/api/admin/users/${studentToDelete.student_id}`, {
         headers: getAuthHeader(),
         data: {
           role: "student",

@@ -3,9 +3,9 @@ import axios from "axios";
 
 export default function HeroSection() {
   const [userName, setUserName] = useState('');
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
-    axios.get("http://localhost:8000/api/profile", {
+    axios.get(`${API_URL}/api/students/profile`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       },

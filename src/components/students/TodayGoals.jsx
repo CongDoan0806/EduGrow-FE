@@ -4,7 +4,7 @@ import axios from 'axios';
 const TodaysGoal = () => {
   const [goals, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
     const token = localStorage.getItem('token');
     
@@ -14,7 +14,7 @@ const TodaysGoal = () => {
       return;
     }
   
-    axios.get('http://localhost:8000/api/goals', {
+    axios.get(`${API_URL}/api/students/goals/today`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

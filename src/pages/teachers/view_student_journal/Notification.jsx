@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import echo from '../../../echo';
 import './Notification.css';
-
+const API_URL = process.env.REACT_APP_BE_URL;
 // Tạo axios instance, tự động gắn token vào header Authorization
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: `${API_URL}/api`,
 });
 
 axiosInstance.interceptors.request.use(

@@ -1,8 +1,10 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
 
-const InClassTable = forwardRef(({ data = [] }, ref) => {
+const InClassTable = forwardRef(({ data = [], onCellUpdate }, ref) => {
   const [newRows, setNewRows] = useState([]);
   const [errors, setErrors] = useState({});
+  const [editingCell, setEditingCell] = useState(null);
+  const [tempValue, setTempValue] = useState('');
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -47,8 +49,125 @@ const InClassTable = forwardRef(({ data = [] }, ref) => {
     setErrors(newErrors);
   };
 
+  const handleCellClick = (rowIndex, field, currentValue) => {
+    if (field === 'date') return;
+    setEditingCell({ rowIndex, field });
+    setTempValue(currentValue);
+  };
+
+  const fieldMapping = {
+  skills_module: 'skills_module',
+  my_lesson: 'my_lesson',
+  self_assessment: 'self_assessment',
+  my_difficulties: 'difficulties',
+  my_plan: 'plan',
+  problem_solved: 'isSolved'
+};
+
+const transformValue = (field, value) => {
+  if (field === 'problem_solved') {
+    return value === 'Yes' ? 1 : 0;
+  }
+  return value;
+};
+
+  const handleCellKeyPress = async (e, rowIndex, field) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const rowData = data[rowIndex];
+      if (onCellUpdate) {
+        const backendField = fieldMapping[field] || field;
+        const transformedValue = transformValue(field, tempValue);
+        try {
+          await onCellUpdate('in_class', rowData.date, backendField, transformedValue);
+        } catch (error) {
+          console.error('Update failed:', error);
+        }
+      }
+      setEditingCell(null);
+      setTempValue('');
+    } else if (e.key === 'Escape') {
+      setEditingCell(null);
+      setTempValue('');
+    }
+  };
+
+  const handleCellBlur = () => {
+    setEditingCell(null);
+    setTempValue('');
+  };
+
+  const renderCell = (item, rowIndex, field) => {
+    const isEditing = editingCell?.rowIndex === rowIndex && editingCell?.field === field;
+
+    if (field === 'date') {
+      return formatDate(item[field]);
+    }
+
+    if (field === 'problem_solved') {
+      const displayValue = item[field] === 1 ? 'Yes' : item[field] === 0 ? 'No' : item[field];
+
+      if (isEditing) {
+        return (
+          <select
+            value={tempValue}
+            onChange={(e) => setTempValue(e.target.value)}
+            onKeyDown={(e) => handleCellKeyPress(e, rowIndex, field)}
+            onBlur={handleCellBlur}
+            autoFocus
+          >
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        );
+      }
+
+      return (
+        <span
+          onClick={() => handleCellClick(rowIndex, field, displayValue)}
+          style={{ cursor: 'pointer', padding: '4px', display: 'block' }}
+        >
+          {displayValue}
+        </span>
+      );
+    }
+
+    if (isEditing) {
+      return (
+        <input
+          type="text"
+          value={tempValue}
+          onChange={(e) => setTempValue(e.target.value)}
+          onKeyDown={(e) => handleCellKeyPress(e, rowIndex, field)}
+          onBlur={handleCellBlur}
+          autoFocus
+          style={{ width: '100%', border: '1px solid #ccc', padding: '4px' }}
+        />
+      );
+    }
+
+    return (
+      <span
+        onClick={() => handleCellClick(rowIndex, field, item[field])}
+        style={{ cursor: 'pointer', padding: '4px', display: 'block' }}
+      >
+        {item[field]}
+      </span>
+    );
+  };
+
   useImperativeHandle(ref, () => ({
-    getNewRows: () => newRows,
+    getNewRows: () => {
+      return newRows.map((row) => {
+        const transformedRow = {};
+        Object.keys(row).forEach((key) => {
+          if (key === 'isNew') return;
+          const backendField = fieldMapping[key] || key;
+          transformedRow[backendField] = transformValue(key, row[key]);
+        });
+        return transformedRow;
+      });
+    },
     clearNewRows: () => setNewRows([]),
   }));
 
@@ -73,13 +192,13 @@ const InClassTable = forwardRef(({ data = [] }, ref) => {
               <>
                 {data.map((item, index) => (
                   <tr key={index}>
-                    <td>{formatDate(item.date)}</td>
-                    <td>{item.skills_module}</td>
-                    <td>{item.my_lesson}</td>
-                    <td>{item.self_assessment}</td>
-                    <td>{item.my_difficulties}</td>
-                    <td>{item.my_plan}</td>
-                    <td>{item.problem_solved}</td>
+                    <td>{renderCell(item, index, 'date')}</td>
+                    <td>{renderCell(item, index, 'skills_module')}</td>
+                    <td>{renderCell(item, index, 'my_lesson')}</td>
+                    <td>{renderCell(item, index, 'self_assessment')}</td>
+                    <td>{renderCell(item, index, 'my_difficulties')}</td>
+                    <td>{renderCell(item, index, 'my_plan')}</td>
+                    <td>{renderCell(item, index, 'problem_solved')}</td>
                   </tr>
                 ))}
                 {newRows.map((row, index) => (

@@ -9,7 +9,7 @@ const Header = ({ teacherId }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     setUser(storedUser);
@@ -31,7 +31,7 @@ const Header = ({ teacherId }) => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'http://localhost:8000/api/logout',
+        `${API_URL}/api/logout`,
         {},
         {
           headers: getAuthHeader(),

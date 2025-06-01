@@ -19,6 +19,7 @@ export default function MultiStepForm({ onClose, onSubmit }) {
         studentIds: [],
         classImage: ''
     });
+    const API_URL = process.env.REACT_APP_BE_URL;
     const updateFormData = (newData) => {
         setFormData(prevData => ({ ...prevData, ...newData }));
     };
@@ -56,7 +57,7 @@ export default function MultiStepForm({ onClose, onSubmit }) {
 
             const token = localStorage.getItem("token");
 
-            await axios.post("http://127.0.0.1:8000/api/admin/add-class", form, {
+            await axios.post(`${API_URL}/api/admin/classes`, form, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",

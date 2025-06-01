@@ -9,8 +9,8 @@ import SelfStudyTable from '../../../components/students/SelfStudyTable';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MentionsInput, Mention } from 'react-mentions';
-
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
+const API_URL = process.env.REACT_APP_BE_URL;
+axios.defaults.baseURL = `${API_URL}`;
 
 function LearningJournal() {
     const [inClassData, setInClassData] = useState([]);
@@ -105,7 +105,7 @@ function LearningJournal() {
     const fetchStartAndEndDate = async () => {
     console.log(`Fetching week dates for week ${weekNumber}`); 
     try {
-        const response = await axios.get(`/api/learning-journal/week/${weekNumber}`, {
+        const response = await axios.get(`/api/students/learning-journal/week/${weekNumber}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
 
@@ -121,7 +121,7 @@ function LearningJournal() {
     const fetchLearningJournal = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('/api/learning-journal', {
+            const response = await axios.get('/api/students/learning-journals', {
                 params: { week_number: weekNumber },
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
                 
@@ -253,7 +253,7 @@ function LearningJournal() {
 
         try {
             const response = await axios.post(
-            `/api/learning-journal?week_number=${weekNumber}`,
+            `/api/students/learning-journals?week_number=${weekNumber}`,
                 {
                     week_number: weekNumber,
                     in_class: formattedInClassData.length > 0 ? formattedInClassData : [],
@@ -300,7 +300,7 @@ function LearningJournal() {
 
     const fetchSubjectsAndComments = async () => {
     try {
-        const res = await axios.get(`/api/tag/subjects-comments?week_number=${weekNumber}`, {
+        const res = await axios.get(`/api/students/tag/subjects-comments?week_number=${weekNumber}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
 
@@ -337,7 +337,7 @@ function LearningJournal() {
 
         if (subjectId) {
             try {
-                const res = await axios.get(`/api/tag/teachers?subject_id=${subjectId}`, {
+                const res = await axios.get(`/api/students/tag/teachers?subject_id=${subjectId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
 
@@ -384,7 +384,7 @@ function LearningJournal() {
 
         try {
             const res = await axios.post(
-            `/api/tags?week_number=${weekNumber}`,
+            `/api/students/tags?week_number=${weekNumber}`,
             {
                 learning_journal_id: learningJournalId,
                 teacher_id: selectedTeacherId,
@@ -400,6 +400,29 @@ function LearningJournal() {
             toast.success('Comment sent');
         } catch (err) {
             toast.error('Failed to send comment');
+        }
+    };
+
+    const handleCellUpdate = async (type, date, field, value) => {
+        try {
+            const response = await axios.patch('/api/students/learning-journals/update-cell', {
+                week_number: weekNumber,
+                type: type,
+                date: date,
+                field: field,
+                value: value
+            }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
+
+            toast.success('Cập nhật thành công');
+            
+            // Refresh data to show updated content
+            await fetchLearningJournal();
+            
+        } catch (error) {
+            console.error('Error updating cell:', error);
+            toast.error(error.response?.data?.message || 'Cập nhật thất bại');
         }
     };
 
@@ -420,11 +443,21 @@ function LearningJournal() {
                         onSave={handleSave}
                     />
                 </section>
+
                 <section className='in-class-table'>
-                    <InClassTable data={inClassData} ref={inClassRef} />
+                    <InClassTable 
+                        data={inClassData} 
+                        ref={inClassRef}
+                        onCellUpdate={handleCellUpdate}
+                    />
                 </section>
+
                 <section className='self-study-table'>
-                    <SelfStudyTable data={selfStudyData} ref={selfStudyRef} />
+                    <SelfStudyTable 
+                        data={selfStudyData} 
+                        ref={selfStudyRef}
+                        onCellUpdate={handleCellUpdate}
+                    />
                 </section>
             </div>
 

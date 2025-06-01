@@ -6,10 +6,14 @@ const TeacherList = () => {
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:8000/api/teachers')
+    axios.get(`${API_URL}/api/teacher`, {
+       headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, 
+      },
+    })
       .then(response => {
         setTeachers(response.data);
         setLoading(false);

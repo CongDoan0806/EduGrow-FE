@@ -5,7 +5,7 @@ const TeacherDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
     const token = localStorage.getItem('token'); // Lấy token từ localStorage
 
@@ -15,7 +15,7 @@ const TeacherDashboard = () => {
       return;
     }
 
-    axios.get('/api/teacher/dashboard', {
+    axios.get(`${API_URL}/api/teacher/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`, // Thêm header Authorization
       }

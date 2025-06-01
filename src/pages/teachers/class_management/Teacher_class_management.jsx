@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 
 export default function TeacherClassManagement() {
     const [classes, setClasses] = useState([])
-
+    const API_URL = process.env.REACT_APP_BE_URL;
     const fetchTeacherClasses = async () => {
         try {
             const token = localStorage.getItem('token');
             console.log('Fetching classes with token:', token);
             
-            const res = await axios.get("http://127.0.0.1:8000/api/teacher/classes", {
+            const res = await axios.get(`${API_URL}/api/teacher/classes`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

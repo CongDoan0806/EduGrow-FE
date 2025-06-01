@@ -17,7 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const API_URL = process.env.REACT_APP_BE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -25,9 +25,9 @@ export default function Login() {
       setIsLoading(true); // Bắt đầu loading
       
       // Lấy CSRF cookie trước khi POST
-      await axios.get('/sanctum/csrf-cookie', { withCredentials: true });
+      await axios.get(`${API_URL}/sanctum/csrf-cookie`, { withCredentials: true });
   
-      const response = await axios.post('/api/login', {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password
       }, {
