@@ -57,6 +57,8 @@
     }
 
     return (
+      <div className="sidebar-container" style={{ paddingTop: '88px' }}>
+        
       <div className="profile-card">
         <div className="user-info">
           <img
@@ -84,6 +86,7 @@
             </button>
           ))}
         </div>
+      </div>
       </div>
     );
   }

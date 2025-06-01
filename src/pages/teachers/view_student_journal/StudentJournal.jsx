@@ -221,7 +221,7 @@ function StudentJournal () {
       );
     }
     return (
-        <div>
+      <div className="learning-journal" style={{ paddingTop: '70px' }}>
             <div className='content'>
                 <section className='journal-info-panel'>
                    <JournalInfoPanelTeacher 
@@ -295,7 +295,7 @@ function StudentJournal () {
                     <div className="modal-frm-content">
                         <div className="modal-header">
                             <h2 className='modal-title'>Comment</h2>
-                            <span className="close-modal-btn" onClick={() => setIsModalOpen(false)}>×</span>
+                            <span className="close-modal-btn close-button-modal" onClick={() => setIsModalOpen(false)}>×</span>
                         </div>
                         <div className="comment-list">
                             {tagData.length === 0 ? (

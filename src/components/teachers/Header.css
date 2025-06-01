@@ -1,14 +1,19 @@
 .container-fluid {
   background-color: #7B6ADA;
   cursor: pointer;
+ 
 }
 
 .custom-navbar {
   background-color: #7B6ADA;
   padding: 0.8rem 1.5rem;
-  position: relative;
-  z-index: 10;
+  position: fixed;         /* ← Thay đổi từ 'relative' sang 'fixed' */
+  top: 0;                  /* ← Gắn sát đỉnh trang */
+  left: 0;
+  width: 100%;             /* ← Đảm bảo header rộng bằng trang */
+  z-index: 1000;           /* ← Giữ header nằm trên các phần tử khác */
 }
+
 
 .navbar-brand {
   font-family: 'Calistoga', cursive;

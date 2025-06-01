@@ -358,7 +358,7 @@ const StudentGoal = () => {
       {showDeadlineModal && (
         <div className="deadline-modal-overlay" onClick={handleCloseDeadlineModal}>
           <div className="deadline-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
+            <div className="modal-header-goal">
               <h3 className="modal-title">
                 <i className="bi bi-calendar-event"></i>
                 Đặt Deadline cho {selectedSubject}

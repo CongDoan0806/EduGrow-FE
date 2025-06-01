@@ -15,12 +15,15 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     try {
+      setIsLoading(true); // Bắt đầu loading
+      
       // Lấy CSRF cookie trước khi POST
       await axios.get('/sanctum/csrf-cookie', { withCredentials: true });
   
@@ -37,15 +40,19 @@ export default function Login() {
       localStorage.setItem('user', JSON.stringify(user));
       console.log('Login successful:', response.data);
 
-      if (role === 'student') {
-        navigate('/student/homePage');
-      } else if (role === 'teacher') {
-        navigate('/teacher/homePage');
-      } else if (role === 'admin') {
-        navigate('/admin/dashboard');
-      }
+      // Delay 1 giây để hiển thị loading screen rồi mới navigate
+      setTimeout(() => {
+        if (role === 'student') {
+          navigate('/student/homePage');
+        } else if (role === 'teacher') {
+          navigate('/teacher/homePage');
+        } else if (role === 'admin') {
+          navigate('/admin/dashboard');
+        }
+      }, 1000);
   
     } catch (error) {
+      setIsLoading(false); // Tắt loading khi có lỗi
       if (error.response?.data?.errors?.email) {
         toast.error('Login failed. Please check your information again.');
       } else {
@@ -53,6 +60,24 @@ export default function Login() {
       }
     }
   };
+
+  // Loading Screen Component
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-content">
+          <div className="logo-container">
+            <div className="logo-text">EduGrow</div>
+          </div>
+          <div className="spinner-dots">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+          </div>  
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="login-container">
