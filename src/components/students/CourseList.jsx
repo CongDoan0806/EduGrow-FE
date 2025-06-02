@@ -4,7 +4,7 @@ export default function CourseList() {
   const [courses, setCourses] = useState([]);
   const API_URL = process.env.REACT_APP_BE_URL;
   useEffect(() => {
-    axios.get(`${API_URL}/api/student/subjects`,{
+    axios.get(`${API_URL}/api/students/subjects`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
