@@ -85,7 +85,6 @@ const Header = ({ teacherId }) => {
           ) : (
             <span className="text-white fw-medium">Guest</span>
           )}
-
           <div className="notification">
             <Notifications teacherId={teacherId} />
           </div>
