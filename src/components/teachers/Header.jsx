@@ -31,7 +31,7 @@ const Header = ({ teacherId }) => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        `${API_URL}/api/logout`,
+        `${API_URL}/api/auth/logout`,
         {},
         {
           headers: getAuthHeader(),
@@ -85,7 +85,6 @@ const Header = ({ teacherId }) => {
           ) : (
             <span className="text-white fw-medium">Guest</span>
           )}
-
           <div className="notification">
             <Notifications teacherId={teacherId} />
           </div>

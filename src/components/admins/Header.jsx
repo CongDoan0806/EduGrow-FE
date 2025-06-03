@@ -22,7 +22,7 @@ const HeaderAdmin = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${API_URL}/api/logout`, {}, {
+      await axios.post(`${API_URL}/api/auth/logout`, {}, {
         headers: getAuthHeader(),
         withCredentials: true,
       });

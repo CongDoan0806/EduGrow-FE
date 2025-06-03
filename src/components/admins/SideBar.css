@@ -9,12 +9,12 @@
     color: #7B6ADA;
     font-family: 'Calistoga', cursive;
 }
-.nav-item:hover{
-    background-color: #707FDD;
+.nav-item-admin:hover{
     border-radius: 10px;
+    font-weight: 600;
     color:#7B6ADA;
 }
-.nav-item {
+.nav-item-admin {
     display: flex;
     align-items: center;
     padding: 2px;
