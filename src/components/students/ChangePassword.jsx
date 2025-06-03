@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ChangePassword = () => {
   const [passwords, setPasswords] = useState({ current: '', new: '', confirm: '' });
   const [isLoading, setIsLoading] = useState(false);
-  const [apiError, setApiError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const API_URL = process.env.REACT_APP_BE_URL;
   const getAuthHeader = () => ({
@@ -34,23 +34,21 @@ const ChangePassword = () => {
 
   const handleChangePassword = async () => {
     if (!passwords.current || !passwords.new || !passwords.confirm) {
-      alert("Please fill in all fields.");
+      toast.warn("Please fill in all fields.");
       return;
     }
 
     if (passwords.new.length < 8) {
-      alert("New password must be at least 8 characters.");
+      toast.warn("New password must be at least 8 characters.");
       return;
     }
 
     if (passwords.new !== passwords.confirm) {
-      alert("Password confirmation does not match.");
+      toast.warn("Password confirmation does not match.");
       return;
     }
 
     setIsLoading(true);
-    setApiError(null);
-    setSuccessMessage(null);
 
     const payload = {
       current_password: passwords.current,
@@ -59,12 +57,12 @@ const ChangePassword = () => {
     };
 
     try {
-      const data = await apiPut(`${API_URL}/api/students/profile/password`, payload);
-      setSuccessMessage("Password changed successfully!");
+      await apiPut(`${API_URL}/api/students/profile/password`, payload);
+      toast.success("Password changed successfully!");
       setPasswords({ current: '', new: '', confirm: '' });
     } catch (error) {
       const message = error.response?.data?.message || 'Failed to change password.';
-      setApiError(message);
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -77,9 +75,6 @@ const ChangePassword = () => {
   return (
     <section className="password-section">
       <h2 className="section-title">Change Password</h2>
-
-      {apiError && <p className="error-message">{apiError}</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}
 
       <div className="form-group">
         <label className="form-label">Current Password</label>
@@ -132,6 +127,19 @@ const ChangePassword = () => {
       >
         {isLoading ? 'Processing...' : 'Change Password'}
       </button>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </section>
   );
 };

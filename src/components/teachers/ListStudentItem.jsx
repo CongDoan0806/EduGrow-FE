@@ -8,64 +8,124 @@ export default function ListStudentItem() {
   const [subject, setSubject] = useState("");
   const [loading, setLoading] = useState(false);
   const [studentRating, setStudentRating] = useState({});
-  const [openDropdown, setOpenDropdown] = useState(null); // student_id đang mở menu
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   const API_URL = process.env.REACT_APP_BE_URL;
   const token = localStorage.getItem("token");
 
-  const fetchSubjects = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`${API_URL}/api/teacher/subjects`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setSubjects(response.data.data || []);
-    } catch (error) {
-      console.error("Failed to fetch subjects:", error);
-      setSubjects([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchStudentsBySubject = async (subjectId) => {
-    try {
-      setLoading(true);
-      let url = `${API_URL}/api/teacher/students-by-subject`;
-      if (subjectId) {
-        url += `?subject_id=${subjectId}`;
-      }
-      const response = await axios.get(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (response.data.success) {
-        setStudents(response.data.data || []);
-      } else {
-        setStudents([]);
-        console.warn("API returned success: false", response.data.message);
-      }
-    } catch (error) {
-      console.error("Error fetching students:", error);
-      setStudents([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchSubjects = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${API_URL}/api/teacher/subjects`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setSubjects(res.data.data || []);
+      } catch (error) {
+        console.error("Fetch subjects error:", error);
+        setSubjects([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchSubjects();
   }, []);
 
   useEffect(() => {
+    const fetchStudentsBySubject = async (subjectId) => {
+      try {
+        setLoading(true);
+        let url = `${API_URL}/api/teacher/students-by-subject`;
+        if (subjectId) url += `?subject_id=${subjectId}`;
+        const res = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setStudents(res.data.success ? res.data.data || [] : []);
+      } catch (error) {
+        console.error("Fetch students error:", error);
+        setStudents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchStudentsBySubject(subject);
   }, [subject]);
 
-  const handleRatingChange = (studentId, rating) => {
-    setStudentRating((prev) => ({
-      ...prev,
-      [studentId]: rating,
-    }));
-    setOpenDropdown(null); // đóng menu
+  useEffect(() => {
+    const fetchRatingForStudent = async (studentId, subjectId) => {
+      try {
+        if (!subjectId || !studentId) return null;
+        const res = await axios.get(
+          `${API_URL}/api/teacher/student-rating?student_id=${studentId}&subject_id=${subjectId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (res.data.success) return res.data.data.rating;
+        return null;
+      } catch (error) {
+        console.error(
+          `Error fetching rating for student ${studentId}, subject ${subjectId}:`,
+          error
+        );
+        return null;
+      }
+    };
+
+    const fetchAllRatings = async () => {
+      if (!subject || students.length === 0) {
+        setStudentRating({});
+        return;
+      }
+      const newRatings = {};
+      for (const student of students) {
+        const rating = await fetchRatingForStudent(student.student_id, subject);
+        if (rating) newRatings[student.student_id] = rating;
+      }
+      setStudentRating(newRatings);
+    };
+
+    fetchAllRatings();
+  }, [subject, students]);
+
+  const handleRatingChange = async (studentId, rating) => {
+    if (!subject) {
+      alert("Please select a subject first.");
+      return;
+    }
+
+    console.log("Rating data:", {
+      student_id: studentId,
+      subject_id: subject,
+      rating,
+    });
+
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/teacher/rate-student`,
+        {
+          student_id: studentId,
+          subject_id: subject,
+          rating,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (res.data.success) {
+        setStudentRating((prev) => ({
+          ...prev,
+          [studentId]: rating,
+        }));
+        setOpenDropdown(null);
+      } else {
+        alert("Failed to save rating: " + res.data.message);
+      }
+    } catch (error) {
+      console.error("Error saving rating:", error);
+    }
   };
 
   const getButtonColor = (rating) => {
@@ -117,7 +177,7 @@ export default function ListStudentItem() {
               <article key={student.student_id} className="student-card">
                 <img
                   src={
-                    student.avatar && student.avatar.trim() !== ""
+                    student.avatar?.trim()
                       ? student.avatar
                       : "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
                   }
@@ -148,57 +208,58 @@ export default function ListStudentItem() {
                       learning journal
                     </Link>
 
-                    <div className="dropdown-container">
-                      <img
-                        src="/assets/images/listStudent/review.png"
-                        alt="More options"
-                        className="more-button"
-                        onClick={() =>
-                          setOpenDropdown(
-                            openDropdown === student.student_id
-                              ? null
-                              : student.student_id
-                          )
-                        }
-                      />
-                      {openDropdown === student.student_id && (
-                        <div className="dropdown animated-dropdown">
-                          <div className="dropdown-header">
-                            <span className="dropdown-title">
-                              Select Rating
-                            </span>
-                            <span
-                              className="close-button-icon"
-                              onClick={() => setOpenDropdown(null)}
+                    {subject && (
+                      <div className="dropdown-container">
+                        <img
+                          src="/assets/images/listStudent/review.png"
+                          alt="More options"
+                          className="more-button"
+                          onClick={() =>
+                            setOpenDropdown(
+                              openDropdown === student.student_id
+                                ? null
+                                : student.student_id
+                            )
+                          }
+                        />
+                        {openDropdown === student.student_id && (
+                          <div className="dropdown animated-dropdown">
+                            <div className="dropdown-header">
+                              <span className="dropdown-title">
+                                Select Rating
+                              </span>
+                              <span
+                                className="close-button-icon"
+                                onClick={() => setOpenDropdown(null)}
+                              >
+                                ×
+                              </span>
+                            </div>
+                            <button
+                              onClick={() =>
+                                handleRatingChange(student.student_id, "good")
+                              }
                             >
-                              ×
-                            </span>
+                              Good
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleRatingChange(student.student_id, "ok")
+                              }
+                            >
+                              Ok
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleRatingChange(student.student_id, "bad")
+                              }
+                            >
+                              Improvements Need
+                            </button>
                           </div>
-
-                          <button
-                            onClick={() =>
-                              handleRatingChange(student.student_id, "good")
-                            }
-                          >
-                            Good
-                          </button>
-                          <button
-                            onClick={() =>
-                              handleRatingChange(student.student_id, "ok")
-                            }
-                          >
-                            Ok
-                          </button>
-                          <button
-                            onClick={() =>
-                              handleRatingChange(student.student_id, "bad")
-                            }
-                          >
-                            Improvements Need
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </nav>
                 <div className="student-info">
