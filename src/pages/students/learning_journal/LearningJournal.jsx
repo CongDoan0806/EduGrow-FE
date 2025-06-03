@@ -488,35 +488,65 @@ function LearningJournal() {
 
                     {/* COMMENT LIST */}
                     <div className="comment-list">
-                        {comments.map((comment) => (
-                        <div key={comment.id || comment.created_at} className="comment-item">
-                            <div className="comment-container">
+                    {comments.map((tag) => (
+                        <div key={tag.tag_id} className="comment-item">
+                        <div className="comment-container">
+                            {/* Header của comment */}
                             <div className="comment-header">
-                                <img
-                                src={comment.student?.avatar || "/assets/images/avta.png"}
+                            <img
+                                src={tag.student?.avatar || "/assets/images/avta.png"}
                                 alt="Avatar"
                                 className="comment-avatar"
-                                />
-                                <div className="comment-title">
+                            />
+                            <div className="comment-title">
                                 <div className="comment-info">
-                                    <span className="comment-user">
-                                    {comment.student?.name || "Unknown Student"}
-                                    </span>
-                                    <span className="comment-role">student</span>
+                                <span className="comment-user">{tag.student?.name || "Unknown Student"}</span>
+                                <span className="comment-role">student</span>
                                 </div>
                                 <span className="comment-time">
-                                    {new Date(comment.created_at).toLocaleDateString()} {" "}
-                                    {new Date(comment.created_at).toLocaleTimeString()}
+                                {new Date(tag.created_at).toLocaleDateString()}{" "}
+                                {new Date(tag.created_at).toLocaleTimeString()}
                                 </span>
-                                </div>
                             </div>
-                            <p className="comment-text">
-                                <span className="tag">{comment.teacher?.name}</span> {comment.message}
+                            </div>
+
+                            {/* Nội dung Tag */}
+                            <p className="comment-text tag-content-journal mb-4">
+                            <span className="tag">@{tag.teachers?.name}</span> {tag.message}
                             </p>
-                            </div>
                         </div>
-                        ))}
+
+                        {/* Các Replies */}
+                        {tag.tag_replies && tag.tag_replies.length > 0 && (
+                            <div className="reply-list">
+                            {tag.tag_replies.map((reply) => (
+                                <div key={reply.reply_id} className="reply-item">
+                                <div className="comment-header">
+                                    <img
+                                    src={tag.teachers?.image || "/assets/images/avta.png"}
+                                    alt="Avatar"
+                                    className="comment-avatar"
+                                    />
+                                    <div className="comment-title">
+                                    <div className="comment-info">
+                                        <span className="comment-user">{tag.teachers?.name || "Teacher"}</span>
+                                        <span className="comment-role">teacher</span>
+                                    </div>
+                                    <span className="comment-time">
+                                        {new Date(reply.created_at).toLocaleDateString()}{" "}
+                                        {new Date(reply.created_at).toLocaleTimeString()}
+                                    </span>
+                                    </div>
+                                </div>
+                                <p className="comment-text tag-content-journal mb-4">{reply.content}</p>
+                                </div>
+                            ))}
+                            </div>
+                        )}
+                        </div>
+                    ))}
                     </div>
+
 
                     {/* COMMENT INPUT (REACT-MENTIONS) */}
                     <div className="comment-input-container">
